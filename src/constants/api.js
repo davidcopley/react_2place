@@ -13,6 +13,8 @@ export const oauthShit = {
     grant_type,
 }
 
+export const headerShit = {headers: {"Accept": "application/vnd.rex.v1+json","Authorization": "Bearer " + localStorage.getItem('1p_token')}}
+
 export const api = "//d3v-ap1.1place.hk/"
 export const chatHost = "d3v-cha7.1place.hk:3000"
 export const chatApi = "//d3v-cha7.1place.hk:3000"

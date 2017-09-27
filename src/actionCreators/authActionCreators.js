@@ -12,6 +12,7 @@ export const signin = (username, password) => (dispatch, getState) => {
         .then(res=>{
             console.log(res)
             const {access_token} = res.data
+            localStorage.setItem('1p_token', access_token);
             dispatch(setAccessToken(access_token))
         })
         .catch(err=>{
@@ -19,5 +20,6 @@ export const signin = (username, password) => (dispatch, getState) => {
         })
 }
 export const signout = () => (dispatch, getState) => {
+    localStorage.setItem('1p_token', "");
     dispatch(setAccessToken(null))
 }

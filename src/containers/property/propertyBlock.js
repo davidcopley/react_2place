@@ -1,5 +1,6 @@
 import React from "react"
 import {compose} from "redux"
+import {connect} from "react-redux"
 import {FlatButton} from "material-ui"
 import emptyPropertyImagePlaceholder from "../../images/emptyPropertyImagePlaceholder.jpg"
 import {
@@ -27,7 +28,7 @@ class PropertyBlock extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            stuffToShow: "location"
+            stuffToShow: "detail"
         }
     }
     changeStuffToShow = stuffToShow => {
@@ -35,9 +36,12 @@ class PropertyBlock extends React.Component {
     }
     renderStuffToShow = () => {
         const {stuffToShow} = this.state
+        const {short_title} = this.props.propertyBasic
         switch (stuffToShow) {
             case("detail"):
-                return "detail"
+                return(
+                    short_title
+                )
             case("features"):
                 return "features"
             case("location"):
@@ -55,10 +59,13 @@ class PropertyBlock extends React.Component {
     }
 
     render() {
+        const {propertyBasic} = this.props
+        const {building_name,building_phase_no,building_region,building_street_name} = propertyBasic
+        console.log(this.props)
         return (
             <div style={{marginTop: 10, height: 400, width: "100%", border: "1px solid #777777"}}>
                 <div style={{display: "flex", width: "100%", height: "100%"}}>
-                    <div style={{flex: 1, height: "100%",display:"flex",flexDirection:"column"}}>
+                    <div style={{flex: 1,flexShrink:0, height: "100%",display:"flex",flexDirection:"column",maxWidth:"50%"}}>
                         <div style={{flex:1,background: "#888888",backgroundImage:`url(${emptyPropertyImagePlaceholder})`,backgroundPosition:"center",backgroundSize:"contain",backgroundRepeat:"no-repeat"}}/>
                         <div style={{height:"auto"}}>
                             <div>
@@ -67,13 +74,14 @@ class PropertyBlock extends React.Component {
                             <div>
                                 111/111 ft², 5 Rooms, 6 Bathrooms
                             </div>
-                            <div>
-                                CHEONG FAT FACTORY BUILDING FLATS A, Cheung Sha Wan
+                            <div style={{padding:5}}>
+                                {`${building_name}, ${building_phase_no} ${building_street_name}, ${building_region}`}
                             </div>
                         </div>
                     </div>
                     <div style={{
                         flex: 1,
+                        flexShrink:0,
                         height: "100%",
                         background: "#eeeeee",
                         display: "flex",
@@ -103,4 +111,10 @@ class PropertyBlock extends React.Component {
     }
 }
 
-export default PropertyBlock
+const mapStateToProps = (state,props) => {
+    return {
+        propertyBasic:state.propertiesDBReducer.propertiesBasic[props.property_id]
+    }
+}
+
+export default connect(mapStateToProps)(PropertyBlock)

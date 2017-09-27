@@ -1,14 +1,21 @@
 import React from "react"
 import {connect} from "react-redux"
-import {signin,signout} from "../actionCreators/authActionCreators"
+import {signin,signout,setAccessToken} from "../actionCreators/authActionCreators"
+import {getPropertiesBasic} from "../actionCreators/propertiesDBActionCreators"
 import {FlatButton,TextField} from "material-ui"
-import PropertyBlock from "./property/propertyBlock"
+import PropertiesList from "./property/propertiesList"
 class Main extends React.Component{
     constructor(props){
         super(props)
     }
+    componentDidMount(){
+        if(localStorage.getItem('1p_token')!==""){
+            const {setAccessToken} = this.props
+            setAccessToken(localStorage.getItem('1p_token'))
+        }
+    }
     render(){
-        const {signin,signout,accessToken} = this.props
+        const {signin,signout,accessToken,getPropertiesBasic} = this.props
         return(
             <div style={{minHeight:"100vh",display:"flex",flexDirection:"column"}}>
                 <div style={{position:"fixed",height:60,width:"100%",background:"#eeeeee",display:"flex",flexDirection:"column",alignItems:"center"}}>
@@ -40,8 +47,8 @@ class Main extends React.Component{
                 <div style={{height:60}}/>
                 <div style={{flex:"auto",width:"100%",display:"flex",justifyContent:"center"}}>
                     <div style={{display:"flex",flexDirection:"column",maxWidth:1000,width:"100%"}}>
-                        <PropertyBlock/>
-                        <PropertyBlock/>
+                        <FlatButton label={"get props"} onClick={()=>getPropertiesBasic()}/>
+                        <PropertiesList/>
                     </div>
                 </div>
             </div>
@@ -53,4 +60,4 @@ const mapStateToProps=state=>{
         accessToken:state.authReducer.accessToken
     }
 }
-export default connect(mapStateToProps,{signin,signout})(Main)
+export default connect(mapStateToProps,{signin,signout,getPropertiesBasic,setAccessToken})(Main)
