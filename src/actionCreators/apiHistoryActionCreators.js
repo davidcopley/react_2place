@@ -1,0 +1,1 @@
+export const addCalledApi = calledApi => ({type:"addCalledApi",calledApi})

@@ -1,6 +1,7 @@
 import React from "react"
 import {compose} from "redux"
 import {FlatButton} from "material-ui"
+import emptyPropertyImagePlaceholder from "../../images/emptyPropertyImagePlaceholder.jpg"
 import {
     withScriptjs,
     withGoogleMap,
@@ -29,7 +30,6 @@ class PropertyBlock extends React.Component {
             stuffToShow: "location"
         }
     }
-
     changeStuffToShow = stuffToShow => {
         this.setState({stuffToShow})
     }
@@ -56,10 +56,21 @@ class PropertyBlock extends React.Component {
 
     render() {
         return (
-            <div style={{marginTop: 10, height: 400, width: "100%", border: "#777777"}}>
+            <div style={{marginTop: 10, height: 400, width: "100%", border: "1px solid #777777"}}>
                 <div style={{display: "flex", width: "100%", height: "100%"}}>
-                    <div style={{flex: 1, height: "100%", background: "#888888"}}>
-                        Image Here
+                    <div style={{flex: 1, height: "100%",display:"flex",flexDirection:"column"}}>
+                        <div style={{flex:1,background: "#888888",backgroundImage:`url(${emptyPropertyImagePlaceholder})`,backgroundPosition:"center",backgroundSize:"contain",backgroundRepeat:"no-repeat"}}/>
+                        <div style={{height:"auto"}}>
+                            <div>
+                                $8,323 per month
+                            </div>
+                            <div>
+                                111/111 ft², 5 Rooms, 6 Bathrooms
+                            </div>
+                            <div>
+                                CHEONG FAT FACTORY BUILDING FLATS A, Cheung Sha Wan
+                            </div>
+                        </div>
                     </div>
                     <div style={{
                         flex: 1,

@@ -1,11 +1,11 @@
 const defaultState = {
-    authToken:null
+    accessToken:null
 }
 
 export default (state=defaultState,action) => {
-    switch(action){
-        case("setAuthToken"):
-            return {...state,authToken:action.authToken}
+    switch(action.type){
+        case("setAccessToken"):
+            return {...state,accessToken:action.accessToken}
         default:
             return state
     }

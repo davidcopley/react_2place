@@ -1,11 +1,11 @@
 const defaultState = {
-    calledAPIs:{}
+    calledApis:{}
 }
 
 export default (state=defaultState,action) => {
-    switch(action){
+    switch(action.type){
         case("addCalledApi"):
-            return {...state,calledAPIs:{...state.calledAPIs,[action.calledAPI]:true}}
+            return {...state,calledApis:{...state.calledApis,[action.calledApi]:true}}
         default:
             return state
     }
