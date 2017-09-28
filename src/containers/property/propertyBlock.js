@@ -94,18 +94,18 @@ class PropertyBlock extends React.Component {
                 height: 300,
                 width: 300,
                 maxWidth: 300,
-                border: "1px solid #777777",
-                position: "relative"
+                border: "1px solid rgb(221, 223, 226)",
+                position: "relative",
+                borderRadius:3
             }}>
                 <Chip style={{
-                    color:"#1e717f",
                     position: "absolute",
                     top: 10,
                     left: 10,
                     height: 20,
                     display: "flex",
                     alignItems: "center"
-                }}>{lease_type}</Chip>
+                }} labelStyle={{color:"#1e717f",}}>{lease_type}</Chip>
                 <div style={{display: "flex", width: "100%", height: "100%"}}>
                     <div style={{
                         flex: 1,

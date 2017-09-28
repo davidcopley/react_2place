@@ -118,8 +118,8 @@ class PropertyPage extends React.Component {
                     <MapWithAMarker
                         googleMapURL="https://maps.googleapis.com/maps/api/js?libraries=visualization&key=AIzaSyDUey-ysXXRD1vnY2abVyxa86CKjhIa3Fw"
                         loadingElement={<div style={{height: `100%`}}/>}
-                        containerElement={<div style={{height: `100%`}}/>}
-                        mapElement={<div style={{height: `100%`}}/>}
+                        containerElement={<div style={{height: `100%`,width:"100%"}}/>}
+                        mapElement={<div style={{height: `100%`,width:"100%"}}/>}
                         propertyCoordinates={this.props.propertyCoordinates}
                     />
                 )

@@ -17,7 +17,7 @@ export const signin = (username, password) => (dispatch, getState) => {
             localStorage.setItem('1p_token', access_token);
             dispatch(setAccessToken(access_token))
             dispatch(setCalledApis({}))
-            dispatch(getPropertiesBasic())
+            window.location.reload(true)
             dispatch(push("/"))
         })
         .catch(err=>{
@@ -31,5 +31,6 @@ export const signout = () => (dispatch, getState) => {
     dispatch(setAccessToken(null))
     dispatch(setCalledApis({}))
     dispatch(setPropertiesCoordinates({}))
+    window.location.reload(true)
     dispatch(push("/"))
 }

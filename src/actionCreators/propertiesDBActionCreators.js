@@ -1,11 +1,14 @@
 import axios from "axios"
-import {api,headerShit} from "../constants/api"
+import {api} from "../constants/api"
 import {addCalledApi} from "./apiHistoryActionCreators"
 export const setPropertiesBasic = propertiesBasic => ({type:"setPropertiesBasic",propertiesBasic})
 export const setPropertiesDetail = propertiesDetail => ({type:"setPropertiesDetail",propertiesDetail})
 export const setPropertiesCoordinates = propertiesCoordinates => ({type:"setPropertiesCoordinates",propertiesCoordinates})
 export const addPropertyDetail = (propertyId,propertyDetail) => ({type:"addPropertyDetail",propertyId,propertyDetail})
 export const addPropertyCoordinates = (propertyId,propertyCoordinates) => ({type:"addPropertyCoordinates",propertyId,propertyCoordinates})
+
+const headerShit = {headers: {"Accept": "application/vnd.rex.v1+json","Authorization": "Bearer " + localStorage.getItem('1p_token')}}
+
 export const getPropertiesBasic = () => (dispatch, getState) => {
     const url = `${api}agents/self/properties`
     if(!getState().apiHistoryReducer.calledApis[url]){
