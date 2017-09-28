@@ -220,17 +220,17 @@ class PropertyPage extends React.Component {
                             height:"100%"
                         }}>
                             <div style={{padding:10}}>
-                                <div style={{fontSize: 40,paddingTop:10}}>
+                                <div style={{fontSize: 25,paddingTop:10}}>
                                     {short_title}
                                 </div>
-                                <div style={{fontSize: 30,paddingTop:10}}>
+                                <div style={{fontSize: 20,paddingTop:10}}>
                                     ${commaNumber(unit_price)} {lease_type === "rent" && <span>per month</span>}
                                 </div>
-                                <div style={{fontSize: 25,paddingTop:10}}>
+                                <div style={{fontSize: 15,paddingTop:10}}>
                                     {building_name}
                                 </div>
                                 <div style={{
-                                    fontSize: 18,
+                                    fontSize: 14,
                                     display: "flex",
                                     alignItems: "center",
                                     paddingTop:10,
