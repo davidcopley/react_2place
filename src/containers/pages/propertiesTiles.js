@@ -1,26 +1,57 @@
 import React from "react"
+import {TextField,Checkbox} from "material-ui"
 import {getPropertiesBasic} from "../../actionCreators/propertiesDBActionCreators"
 import {connect} from "react-redux"
 import PropertyBlock from "../property/propertyBlock"
 import {withRouter} from "react-router-dom"
+import fuzzy from "fuzzy"
 class PropertiesTiles extends React.Component{
+    constructor(props){
+        super(props)
+        this.state={
+            filterText:"",
+            showSell:true,
+            showRent:true
+        }
+    }
     componentDidMount(){
         this.props.getPropertiesBasic()
     }
     renderProperties = () => {
         const {propertiesBasic} = this.props
+        const fuzzyOptions = {
+            extract:el=>`${propertiesBasic[el].short_title} ${propertiesBasic[el].remark} ${propertiesBasic[el].building_name} ${propertiesBasic[el].building_street_name}`
+        }
         if(propertiesBasic) {
-            return Object.keys(propertiesBasic).reverse().map(property_id => {
-                return <PropertyBlock key={`property${property_id}`} property_id={property_id}/>
+            const {showSell,showRent} = this.state
+            let propertiesKeys = Object.keys(propertiesBasic)
+            if(!showSell){
+                propertiesKeys=propertiesKeys.filter(key=>propertiesBasic[key].lease_type!=="sell")
+            }
+            if(!showRent){
+                propertiesKeys=propertiesKeys.filter(key=>propertiesBasic[key].lease_type!=="rent")
+            }
+            return fuzzy.filter(this.state.filterText,propertiesKeys.reverse(),fuzzyOptions).map(property_id => {
+                return <PropertyBlock key={`property${property_id.original}`} property_id={property_id.original}/>
             })
         }
         return <span>"No properties loaded"</span>
     }
     render(){
+        const {showSell,showRent} = this.state
         return(
-            <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-evenly"}}>
-                {this.renderProperties()}
-            </div>
+            <span style={{width:"100%"}}>
+                <div style={{height:50,width:"100%",background:"#ffffff",position:"fixed",top:60,zIndex:2,padding:10,display:"flex",flexWrap:"wrap",alignItems:"center"}}>
+                    <TextField hintText={"filter text"} style={{width:200,marginRight:10}} onChange={e=>this.setState({filterText:e.target.value})}/>
+                    <div>
+                        <Checkbox checked={showSell} onCheck={()=>this.setState({showSell:!showSell})} style={{width:90}} label="sell"/>
+                        <Checkbox checked={showRent} onCheck={()=>this.setState({showRent:!showRent})} style={{width:90}} label="rent"/>
+                    </div>
+                </div>
+                <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-evenly",top:60,position:"relative"}}>
+                    {this.renderProperties()}
+                </div>
+            </span>
         )
     }
 }

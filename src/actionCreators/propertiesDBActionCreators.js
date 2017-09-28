@@ -20,7 +20,6 @@ export const getPropertiesBasic = () => (dispatch, getState) => {
                     propertiesBasicSet[property_id] = propertyBasic
                 })
                 dispatch(setPropertiesBasic(propertiesBasicSet))
-                console.log(res)
             })
             .catch(err=>{
                 console.log(err)
@@ -31,7 +30,6 @@ export const getPropertyDetail = id => (dispatch,getState) => new Promise((resol
     const url = `${api}properties/${id}`
     axios.get(url,headerShit)
         .then(res=>{
-            console.log(res)
             const {data} = res.data
             dispatch(addPropertyDetail(id,data))
             resolve(data)
@@ -46,7 +44,7 @@ export const getPropertyCoordinatesByAddress = (propertyId,address) => (dispatch
     if(!getState().apiHistoryReducer.calledApis[url]){
         axios.get(url)
             .then(res=>{
-                console.log(res)
+                dispatch(addCalledApi(url))
                 const {data} =res
                 if(data.results&&data.results[0]){
                     const coordinates = data.results[0].geometry.location

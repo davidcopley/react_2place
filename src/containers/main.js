@@ -1,6 +1,7 @@
 import React from "react"
 import {connect} from "react-redux"
 import {Route} from "react-router"
+import {push} from "react-router-redux"
 import {withRouter} from "react-router-dom"
 import {signin,signout,setAccessToken} from "../actionCreators/authActionCreators"
 import {getPropertiesBasic} from "../actionCreators/propertiesDBActionCreators"
@@ -19,12 +20,12 @@ class Main extends React.Component{
         }
     }
     render(){
-        const {signin,signout,accessToken,getPropertiesBasic} = this.props
+        const {signin,signout,accessToken,push} = this.props
         return(
             <div style={{minHeight:"100vh",display:"flex",flexDirection:"column"}}>
                 <div style={{position:"fixed",height:60,width:"100%",background:"#eeeeee",display:"flex",flexDirection:"column",alignItems:"center",zIndex:2}}>
                     <div style={{display:"flex",height:"100%",maxWidth:1000,width:"100%",justifyContent:"start",alignItems:"center"}}>
-                        <span style={{fontSize:50}}>1PLACE</span>
+                        <span style={{fontSize:50,color:"#1e717f"}} className="clickable" onClick={()=>push("/")}>1PLACE</span>
                         <span style={{marginLeft:"auto"}}>
                             {accessToken ?
                                 <span>
@@ -66,4 +67,4 @@ const mapStateToProps=state=>{
         accessToken:state.authReducer.accessToken
     }
 }
-export default withRouter(connect(mapStateToProps,{signin,signout,getPropertiesBasic,setAccessToken})(Main))
+export default withRouter(connect(mapStateToProps,{signin,signout,getPropertiesBasic,setAccessToken,push})(Main))

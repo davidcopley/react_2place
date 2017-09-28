@@ -11,6 +11,7 @@ import Tick from "material-ui/svg-icons/action/done"
 import Cross from "material-ui/svg-icons/navigation/close"
 import propertyPageImages from "../../images/propertyPage"
 import featuresImages from "../../images/features"
+import commaNumber from "comma-number"
 import {
     withScriptjs,
     withGoogleMap,
@@ -22,7 +23,6 @@ const MapWithAMarker = compose(
     withScriptjs,
     withGoogleMap
 )(props => {
-    console.log(props)
     const {propertyCoordinates} = props
     return (
         <GoogleMap
@@ -70,7 +70,6 @@ class PropertyPage extends React.Component {
                 )
             case("otherInfo"):
                 const {property_building_features,property_unit_features} = propertyDetail
-                console.log(property_building_features)
                 return (
                     <span>
                         {property_building_features&&<div>Property building features</div>}
@@ -161,8 +160,8 @@ class PropertyPage extends React.Component {
         }
         return (
             <div style={{width: "100%", height: "100%"}}>
-                <div style={{width: "100%", border: "1px solid #000000", display: "flex", flexWrap: "wrap"}}>
-                    <div style={{flex: 1, height: 500, border: "1px solid #000000", minWidth:300}}>
+                <div style={{width: "100%", border: "1px solid rgb(221, 223, 226)", borderRadius:3,display: "flex", flexWrap: "wrap"}}>
+                    <div style={{flex: 1, height: 500, minWidth:300}}>
                         <div style={{
                             flex: 1,
                             flexShrink: 0,
@@ -213,7 +212,7 @@ class PropertyPage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div style={{flex: 1, border: "1px solid red"}}>
+                    <div style={{flex: 1}}>
                         <div style={{
                             display: "flex",
                             flexDirection: "column",
@@ -225,7 +224,7 @@ class PropertyPage extends React.Component {
                                     {short_title}
                                 </div>
                                 <div style={{fontSize: 30,paddingTop:10}}>
-                                    ${unit_price} {lease_type === "rent" && <span>per month</span>}
+                                    ${commaNumber(unit_price)} {lease_type === "rent" && <span>per month</span>}
                                 </div>
                                 <div style={{fontSize: 25,paddingTop:10}}>
                                     {building_name}
@@ -243,7 +242,7 @@ class PropertyPage extends React.Component {
                                 style={{
                                     display: "flex",
                                     justifyContent: "space-evenly",
-                                    borderBottom:"1px solid #000000"
+                                    borderBottom:"1px solid rgb(221, 223, 226)"
                                 }}
                             >
                                 <div style={{textAlign: "center",display:"flex",flexDirection:"column",alignItems:"center"}}>
@@ -300,20 +299,23 @@ class PropertyPage extends React.Component {
                 </div>
                 <div style={{display: "flex", width: "100%"}}>
                     <FlatButton
-                        style={{flex: 1,borderBottom:stuffToShow==="location"?"2px solid #000000":undefined}}
+                        style={{flex: 1,border:"1px solid rgb(221, 223, 226)",color:stuffToShow==="location"?"#ffffff":"#1e717f"}}
                         label={"Location"}
                         onClick={() => this.changeStuffToShow("location")}
+                        backgroundColor={stuffToShow==="location"?"#1e717f":"#ffffff"}
                     />
                     {lease_type === "rent" &&
                     <FlatButton
-                        style={{flex: 1,borderBottom:stuffToShow==="rentInfo"?"2px solid #000000":undefined}}
+                        style={{flex: 1,border:"1px solid rgb(221, 223, 226)",color:stuffToShow==="rentInfo"?"#ffffff":"#1e717f"}}
                         label={"Rent Info"}
                         onClick={() => this.changeStuffToShow("rentInfo")}
+                        backgroundColor={stuffToShow==="rentInfo"?"#1e717f":"#ffffff"}
                     />}
                     <FlatButton
-                        style={{flex: 1,borderBottom:stuffToShow==="otherInfo"?"2px solid #000000":undefined}}
+                        style={{flex: 1,border:"1px solid rgb(221, 223, 226)",color:stuffToShow==="otherInfo"?"#ffffff":"#1e717f"}}
                         label={"Other Info"}
                         onClick={() => this.changeStuffToShow("otherInfo")}
+                        backgroundColor={stuffToShow==="otherInfo"?"#1e717f":"#ffffff"}
                     />
                 </div>
                 {this.renderStuffToShow()}

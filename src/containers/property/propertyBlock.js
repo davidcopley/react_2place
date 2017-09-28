@@ -6,6 +6,7 @@ import {Chip, IconButton} from "material-ui"
 import Left from "material-ui/svg-icons/hardware/keyboard-arrow-left"
 import Right from "material-ui/svg-icons/hardware/keyboard-arrow-right"
 import emptyPropertyImagePlaceholder from "../../images/emptyPropertyImagePlaceholder.jpg"
+import commaNumber from "comma-number"
 import {
     withScriptjs,
     withGoogleMap,
@@ -82,7 +83,7 @@ class PropertyBlock extends React.Component {
         const buildingNameMatchUrl = building_name.match(this.urlRegex)
         const buildingStreetNameMatchUrl = building_street_name.match(this.urlRegex)
         if (buildingNameMatchUrl && buildingNameMatchUrl[0].length>0) {
-            building_name = <a href={buildingNameMatchUrl[0]}>link</a>
+            building_name = <a href={buildingNameMatchUrl[0]}>Link</a>
         }
         if (buildingStreetNameMatchUrl&&buildingStreetNameMatchUrl[0].length>0) {
             building_street_name = <a href={buildingStreetNameMatchUrl[0]}>Link</a>
@@ -97,6 +98,7 @@ class PropertyBlock extends React.Component {
                 position: "relative"
             }}>
                 <Chip style={{
+                    color:"#1e717f",
                     position: "absolute",
                     top: 10,
                     left: 10,
@@ -114,7 +116,7 @@ class PropertyBlock extends React.Component {
                     }}>
                         <div style={{
                             flex: 1,
-                            background: "#888888",
+                            background: "#1e717f",
                             backgroundImage: `url(${currentImage || emptyPropertyImagePlaceholder})`,
                             backgroundPosition: "center",
                             backgroundSize: "contain",
@@ -132,7 +134,7 @@ class PropertyBlock extends React.Component {
                         </div>
                         <div style={{height: "auto"}} className="clickable" onClick={()=>push(`/propertyPage/${property_id}`)}>
                             <div style={{padding: 5, textOverflow: "ellipsis", overflow: "hidden", maxWidth: 300}}>
-                                ${unit_price} {lease_type === "rent" && <span>per month</span>}
+                                ${commaNumber(unit_price)} {lease_type === "rent" && <span>per month</span>}
                             </div>
                             <div style={{
                                 padding: 5,
