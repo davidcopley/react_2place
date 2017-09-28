@@ -1,5 +1,4 @@
 import React from "react"
-import {compose} from "redux"
 import {connect} from "react-redux"
 import {push} from "react-router-redux"
 import {Chip, IconButton} from "material-ui"
@@ -7,26 +6,6 @@ import Left from "material-ui/svg-icons/hardware/keyboard-arrow-left"
 import Right from "material-ui/svg-icons/hardware/keyboard-arrow-right"
 import emptyPropertyImagePlaceholder from "../../images/emptyPropertyImagePlaceholder.jpg"
 import commaNumber from "comma-number"
-import {
-    withScriptjs,
-    withGoogleMap,
-    GoogleMap,
-    Marker,
-} from "react-google-maps";
-
-const MapWithAMarker = compose(
-    withScriptjs,
-    withGoogleMap
-)(props =>
-    <GoogleMap
-        defaultZoom={8}
-        defaultCenter={{lat: -34.397, lng: 150.644}}
-    >
-        <Marker
-            position={{lat: -34.397, lng: 150.644}}
-        />
-    </GoogleMap>
-);
 
 class PropertyBlock extends React.Component {
     constructor(props) {
