@@ -76,7 +76,7 @@ class PropertyPage extends React.Component {
                         <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
                             {Object.keys(property_building_features).map(feature=>{
                                 return(
-                                    <div style={{textAlign: "center",display:"flex",flexDirection:"column",alignItems:"center"}}>
+                                    <div style={{textAlign: "center",display:"flex",flexDirection:"column",alignItems:"center",padding:5}}>
                                         <div style={{
                                             backgroundImage: `url(${featuresImages[feature]})`,
                                             backgroundPosition: "center",
@@ -94,7 +94,7 @@ class PropertyPage extends React.Component {
                         <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
                             {Object.keys(property_unit_features).map(feature=>{
                                 return(
-                                    <div style={{textAlign: "center",display:"flex",flexDirection:"column",alignItems:"center"}}>
+                                    <div style={{textAlign: "center",display:"flex",flexDirection:"column",alignItems:"center",padding:5}}>
                                         <div style={{
                                             backgroundImage: `url(${featuresImages[feature]})`,
                                             backgroundPosition: "center",
@@ -160,8 +160,8 @@ class PropertyPage extends React.Component {
         }
         return (
             <div style={{width: "100%", height: "100%"}}>
-                <div style={{width: "100%", border: "1px solid rgb(221, 223, 226)", borderRadius:3,display: "flex", flexWrap: "wrap"}}>
-                    <div style={{flex: 1, height: 500, minWidth:300}}>
+                <div style={{width: "100%",display: "flex", flexWrap: "wrap"}}>
+                    <div style={{flex: 1, height: 500, minWidth:300,border: "1px solid rgb(221, 223, 226)", borderRadius:3,}}>
                         <div style={{
                             flex: 1,
                             flexShrink: 0,
@@ -212,7 +212,7 @@ class PropertyPage extends React.Component {
                             </div>
                         </div>
                     </div>
-                    <div style={{flex: 1}}>
+                    <div style={{flex: 1,border: "1px solid rgb(221, 223, 226)", borderRadius:3,}}>
                         <div style={{
                             display: "flex",
                             flexDirection: "column",
