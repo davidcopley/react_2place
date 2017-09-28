@@ -8,7 +8,9 @@ import {getPropertiesBasic} from "../actionCreators/propertiesDBActionCreators"
 import {FlatButton,TextField} from "material-ui"
 import PropertiesTiles from "./pages/propertiesTiles"
 import PropertyPage from "./pages/propertyPage"
+import SignupPage from "./pages/signup"
 import Home from "./pages/home"
+import Logo from "../images/1placeLogo.png"
 class Main extends React.Component{
     constructor(props){
         super(props)
@@ -25,6 +27,9 @@ class Main extends React.Component{
             <div style={{minHeight:"100vh",display:"flex",flexDirection:"column"}}>
                 <div style={{position:"fixed",height:60,width:"100%",background:"#eeeeee",display:"flex",flexDirection:"column",alignItems:"center",zIndex:2}}>
                     <div style={{display:"flex",height:"100%",maxWidth:1000,width:"100%",justifyContent:"start",alignItems:"center"}}>
+                        <div style={{height:40,width:40,backgroundImage:`url(${Logo})`,backgroundPosition: "center",
+                            backgroundSize: "contain",
+                            backgroundRepeat: "no-repeat",}}/>
                         <span style={{fontSize:50,color:"#1e717f"}} className="clickable" onClick={()=>push("/")}>1PLACE</span>
                         <span style={{marginLeft:"auto"}}>
                             {accessToken ?
@@ -45,6 +50,9 @@ class Main extends React.Component{
                                     <FlatButton onClick={()=>signin(this.email.input.value,this.password.input.value)}>
                                         Signin
                                     </FlatButton>
+                                    <FlatButton onClick={()=>push("/signup")}>
+                                        Signup
+                                    </FlatButton>
                                 </span>
                             }
                         </span>
@@ -56,6 +64,7 @@ class Main extends React.Component{
                         <Route exact path="/" component={Home}/>
                         <Route path="/propertiesTiles" component={PropertiesTiles}/>
                         <Route path="/propertyPage/:propertyId" component={PropertyPage}/>
+                        <Route path="/signup" component={SignupPage}/>
                     </div>
                 </div>
             </div>

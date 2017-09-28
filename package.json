@@ -9,6 +9,7 @@
     "history": "^4.7.2",
     "material-ui": "^0.19.2",
     "react": "^16.0.0",
+    "react-avatar-editor": "^10.2.1",
     "react-dom": "^16.0.0",
     "react-google-maps": "^8.3.0",
     "react-redux": "^5.0.6",
