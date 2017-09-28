@@ -13,3 +13,9 @@ export default {
     size,
     village_house
 }
+
+export const propertyTypes = {
+    apartment,
+    house,
+    village_house
+}

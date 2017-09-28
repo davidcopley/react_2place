@@ -12,7 +12,6 @@ export const signin = (username, password) => (dispatch, getState) => {
             ...oauthShit
         })
         .then(res=>{
-            console.log(res)
             const {access_token} = res.data
             localStorage.setItem('1p_token', access_token);
             dispatch(setAccessToken(access_token))

@@ -6,10 +6,11 @@ import {withRouter} from "react-router-dom"
 import {signin,signout,setAccessToken} from "../actionCreators/authActionCreators"
 import {getPropertiesBasic} from "../actionCreators/propertiesDBActionCreators"
 import {FlatButton,TextField} from "material-ui"
-import PropertiesTiles from "./pages/propertiesTiles"
+import PropertiesTiles from "./pages/propertiesTilesPage"
 import PropertyPage from "./pages/propertyPage"
-import SignupPage from "./pages/signup"
-import Home from "./pages/home"
+import SignupPage from "./pages/signupPage"
+import AddPropertyPage from "./pages/addPropertyPage"
+import Home from "./pages/homePage"
 import Logo from "../images/1placeLogo.png"
 class Main extends React.Component{
     constructor(props){
@@ -65,6 +66,7 @@ class Main extends React.Component{
                         <Route path="/propertiesTiles" component={PropertiesTiles}/>
                         <Route path="/propertyPage/:propertyId" component={PropertyPage}/>
                         <Route path="/signup" component={SignupPage}/>
+                        <Route path="/addProperty" component={AddPropertyPage}/>
                     </div>
                 </div>
             </div>
