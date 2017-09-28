@@ -6,6 +6,7 @@ import {signin,signout,setAccessToken} from "../actionCreators/authActionCreator
 import {getPropertiesBasic} from "../actionCreators/propertiesDBActionCreators"
 import {FlatButton,TextField} from "material-ui"
 import PropertiesTiles from "./pages/propertiesTiles"
+import PropertyPage from "./pages/propertyPage"
 import Home from "./pages/home"
 class Main extends React.Component{
     constructor(props){
@@ -53,6 +54,7 @@ class Main extends React.Component{
                     <div style={{display:"flex",flexDirection:"column",maxWidth:1000,width:"100%"}}>
                         <Route exact path="/" component={Home}/>
                         <Route path="/propertiesTiles" component={PropertiesTiles}/>
+                        <Route path="/propertyPage/:propertyId" component={PropertyPage}/>
                     </div>
                 </div>
             </div>

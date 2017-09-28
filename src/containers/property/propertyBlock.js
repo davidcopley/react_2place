@@ -1,11 +1,11 @@
 import React from "react"
 import {compose} from "redux"
 import {connect} from "react-redux"
+import {push} from "react-router-redux"
 import {Chip, IconButton} from "material-ui"
 import Left from "material-ui/svg-icons/hardware/keyboard-arrow-left"
 import Right from "material-ui/svg-icons/hardware/keyboard-arrow-right"
 import emptyPropertyImagePlaceholder from "../../images/emptyPropertyImagePlaceholder.jpg"
-import {getPropertyDetail} from "../../actionCreators/propertiesDBActionCreators"
 import {
     withScriptjs,
     withGoogleMap,
@@ -72,18 +72,20 @@ class PropertyBlock extends React.Component {
     urlRegex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
 
     render() {
-        const {propertyBasic,property_id,getPropertyDetail} = this.props
+        const {propertyBasic,property_id,push} = this.props
         const {currentImageIndex} = this.state
         let {building_name, building_phase_no, building_region, building_street_name} = propertyBasic
         const {images} = propertyBasic
         const {lease_type, net_unit_size, gross_unit_size, number_of_room, number_of_bathroom, unit_price} = propertyBasic
         const imageUrls = images.map(image => image.image_path)
         const currentImage = imageUrls[currentImageIndex]
-        if (building_name.match(this.urlRegex)) {
-            building_name = <a href={building_name.match(this.urlRegex)[0]}>Link</a>
+        const buildingNameMatchUrl = building_name.match(this.urlRegex)
+        const buildingStreetNameMatchUrl = building_street_name.match(this.urlRegex)
+        if (buildingNameMatchUrl && buildingNameMatchUrl[0].length>0) {
+            building_name = <a href={buildingNameMatchUrl[0]}>link</a>
         }
-        if (building_street_name.match(this.urlRegex)) {
-            building_street_name = <a href={building_street_name.match(this.urlRegex)}>Link</a>
+        if (buildingStreetNameMatchUrl&&buildingStreetNameMatchUrl[0].length>0) {
+            building_street_name = <a href={buildingStreetNameMatchUrl[0]}>Link</a>
         }
         return (
             <div style={{
@@ -128,7 +130,7 @@ class PropertyBlock extends React.Component {
                                         iconStyle={{fill: "white"}}><Right/></IconButton>
                             </span>}
                         </div>
-                        <div style={{height: "auto"}} className="clickable" onClick={()=>getPropertyDetail(property_id)}>
+                        <div style={{height: "auto"}} className="clickable" onClick={()=>push(`/propertyPage/${property_id}`)}>
                             <div style={{padding: 5, textOverflow: "ellipsis", overflow: "hidden", maxWidth: 300}}>
                                 ${unit_price} {lease_type === "rent" && <span>per month</span>}
                             </div>
@@ -163,4 +165,4 @@ const mapStateToProps = (state, props) => ({
     propertyBasic: state.propertiesDBReducer.propertiesBasic[props.property_id]
 })
 
-export default connect(mapStateToProps, {getPropertyDetail})(PropertyBlock)
+export default connect(mapStateToProps, {push})(PropertyBlock)
