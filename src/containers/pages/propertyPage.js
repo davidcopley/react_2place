@@ -145,7 +145,6 @@ class PropertyPage extends React.Component {
         if (!propertyDetail) {
             return <div>Loading</div>
         }
-        console.log(propertyDetail)
         let {building_name, building_phase_no, building_region, building_street_name} = propertyDetail
         const {short_title,remark} = propertyDetail
         const {images} = propertyDetail
@@ -171,7 +170,7 @@ class PropertyPage extends React.Component {
                         }}>
                             <div style={{
                                 flex: 1,
-                                background: "#888888",
+                                background: "#dddddd",
                                 backgroundImage: `url(${currentImage || emptyPropertyImagePlaceholder})`,
                                 backgroundPosition: "center",
                                 backgroundSize: "contain",
@@ -204,7 +203,7 @@ class PropertyPage extends React.Component {
                                             backgroundPosition: "center",
                                             backgroundSize: "contain",
                                             backgroundRepeat: "no-repeat",
-                                            border: currentImageIndex === index ? "1px solid red" : "1px solid #ffffff"
+                                            border: currentImageIndex === index ? "1px solid #1e717f" : "1px solid #ffffff"
                                         }}
                                         onClick={() => this.changeImageIndex(index - currentImageIndex)}
                                     />
@@ -220,24 +219,28 @@ class PropertyPage extends React.Component {
                             height:"100%"
                         }}>
                             <div style={{padding:10}}>
-                                <div style={{fontSize: 25,paddingTop:10}}>
+                                <div style={{fontSize: 20,borderBottom:"1px solid rgb(221, 223, 226)"}}>
+                                    <span style={{fontSize:12}}>Short title</span><br/>
                                     {short_title}
                                 </div>
-                                <div style={{fontSize: 20,paddingTop:10}}>
+                                <div style={{fontSize: 15,paddingTop:10,borderBottom:"1px solid rgb(221, 223, 226)"}}>
+                                    <span style={{fontSize:12}}>Unit price</span><br/>
                                     ${commaNumber(unit_price)} {lease_type === "rent" && <span>per month</span>}
                                 </div>
-                                <div style={{fontSize: 15,paddingTop:10}}>
-                                    {building_name}
+                                <div style={{fontSize: 15,paddingTop:10,borderBottom:"1px solid rgb(221, 223, 226)"}}>
+                                    <span style={{fontSize:12}}>Building name</span><br/>
+                                    {building_name} {building_phase_no}
                                 </div>
                                 <div style={{
                                     fontSize: 14,
-                                    display: "flex",
-                                    alignItems: "center",
                                     paddingTop:10,
+                                    borderBottom:"1px solid rgb(221, 223, 226)"
                                 }}>
-                                    <Location/>{building_phase_no}<br/>{building_street_name}<br/>{building_region.replace(/_/g, ' ')}<br/>
+                                    <span style={{fontSize:12}}>Address</span><br/>
+                                    {building_street_name}<br/>{building_region.replace(/_/g, ' ')}<br/>
                                 </div>
                             </div>
+                            <br/>
                             <div
                                 style={{
                                     display: "flex",
@@ -291,6 +294,7 @@ class PropertyPage extends React.Component {
                                 </div>
                             </div>
                             <div style={{padding:10}}>
+                                <span style={{fontSize:12}}>Description</span><br/>
                                 {remark}
                             </div>
                         </div>

@@ -1,10 +1,9 @@
 import React from "react"
 import {connect} from "react-redux"
 import {push} from "react-router-redux"
-import {List, ListItem, IconButton} from "material-ui"
+import {IconButton} from "material-ui"
 import Add from "material-ui/svg-icons/content/add"
 import Tiles from "material-ui/svg-icons/image/view-comfy"
-import App from "../../App";
 const Home = props => {
     const {push} = props
     return (

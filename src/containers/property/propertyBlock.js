@@ -36,40 +36,6 @@ class PropertyBlock extends React.Component {
             currentImageIndex: 0
         }
     }
-
-    changeStuffToShow = stuffToShow => {
-        this.setState({stuffToShow})
-    }
-    changeImageIndex = n => {
-        const {currentImageIndex} = this.state
-        const {images} = this.props.propertyBasic
-        if (images.length > 1) {
-            this.setState({currentImageIndex: (currentImageIndex + n) % images.length})
-        }
-    }
-    renderStuffToShow = () => {
-        const {stuffToShow} = this.state
-        const {short_title} = this.props.propertyBasic
-        switch (stuffToShow) {
-            case("detail"):
-                return (
-                    short_title
-                )
-            case("features"):
-                return "features"
-            case("location"):
-                return (
-                    <MapWithAMarker
-                        googleMapURL="https://maps.googleapis.com/maps/api/js?v=3.exp&libraries=geometry,drawing,places"
-                        loadingElement={<div style={{height: `100%`}}/>}
-                        containerElement={<div style={{height: `100%`}}/>}
-                        mapElement={<div style={{height: `100%`}}/>}
-                    />
-                )
-            default:
-                return "stuff"
-        }
-    }
     urlRegex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
 
     render() {

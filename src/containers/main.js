@@ -36,7 +36,7 @@ class Main extends React.Component{
                             {accessToken ?
                                 <span>
                                     <FlatButton onClick={()=>signout()}>
-                                        Signout
+                                        sign-out
                                     </FlatButton>
                                 </span>:
                                 <span>
@@ -49,10 +49,10 @@ class Main extends React.Component{
                                     />
                                     <TextField key={"passwordTextfield"} style = {{width: 150}} hinttext={"password"} type={"password"} ref={password=>this.password=password}/>
                                     <FlatButton onClick={()=>signin(this.email.input.value,this.password.input.value)}>
-                                        Signin
+                                        sign-in
                                     </FlatButton>
                                     <FlatButton onClick={()=>push("/signup")}>
-                                        Signup
+                                        sign-up
                                     </FlatButton>
                                 </span>
                             }
