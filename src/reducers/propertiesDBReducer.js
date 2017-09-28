@@ -1,14 +1,16 @@
 const defaultState = {
     propertiesBasic:{},
-    propertiesDetailedInfo:{}
+    propertiesDetail:{}
 }
 
 export default (state=defaultState,action) => {
     switch(action.type){
         case("setPropertiesBasic"):
             return {...state,propertiesBasic:action.propertiesBasic}
-        case("addPropertyDetailedInfo"):
-            return {...state,proeprtiesDetailedInfo:{...state.propertiesDetailedInfo,[action.propertyId]:action.propertyDetailedInfo}}
+        case("setPropertiesDetail"):
+            return {...state,propertiesDetail:action.propertiesDetail}
+        case("addPropertyDetail"):
+            return {...state,propertiesDetail:{...state.propertiesDetail,[action.propertyId]:action.propertyDetail}}
         default:
             return state
     }
