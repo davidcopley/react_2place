@@ -1,7 +1,7 @@
 import React from "react"
 import {connect} from "react-redux"
 import {compose} from "redux"
-import {getPropertyDetail} from "../../actionCreators/propertiesDBActionCreators"
+import {getPropertyDetail, getPropertyCoordinatesByAddress} from "../../actionCreators/propertiesDBActionCreators"
 import emptyPropertyImagePlaceholder from "../../images/emptyPropertyImagePlaceholder.jpg"
 import {FlatButton, IconButton} from "material-ui"
 import Left from "material-ui/svg-icons/hardware/keyboard-arrow-left"
@@ -18,16 +18,20 @@ import {
 const MapWithAMarker = compose(
     withScriptjs,
     withGoogleMap
-)(props =>
-    <GoogleMap
-        defaultZoom={8}
-        defaultCenter={{lat: -34.397, lng: 150.644}}
-    >
-        <Marker
-            position={{lat: -34.397, lng: 150.644}}
-        />
-    </GoogleMap>
-);
+)(props => {
+    console.log(props)
+    const {propertyCoordinates} = props
+    return (
+        <GoogleMap
+            defaultZoom={20}
+            defaultCenter={propertyCoordinates}
+        >
+            <Marker
+                position={propertyCoordinates}
+            />
+        </GoogleMap>
+    )
+});
 class PropertyPage extends React.Component {
     constructor(props) {
         super(props)
@@ -61,6 +65,7 @@ class PropertyPage extends React.Component {
                         loadingElement={<div style={{height: `100%`}}/>}
                         containerElement={<div style={{height: `100%`}}/>}
                         mapElement={<div style={{height: `100%`}}/>}
+                        propertyCoordinates={this.props.propertyCoordinates}
                     />
                 )
             default:
@@ -69,9 +74,14 @@ class PropertyPage extends React.Component {
     }
 
     componentDidMount() {
-        const {getPropertyDetail} = this.props
+        const {getPropertyDetail, getPropertyCoordinatesByAddress} = this.props
         const propertyId = this.props.match.params.propertyId
         getPropertyDetail(propertyId)
+            .then(res => {
+                const {building_name, building_region, building_street_name} = res
+                const address = `${building_name}, ${building_street_name}, ${building_region.replace(/_/g, " ")}`
+                getPropertyCoordinatesByAddress(propertyId, address)
+            })
     }
 
     render() {
@@ -147,7 +157,13 @@ class PropertyPage extends React.Component {
                         </div>
                     </div>
                     <div style={{flex: 1, border: "1px solid red"}}>
-                        <div style={{padding: 10, display: "flex", flexDirection: "column",justifyContent:"space-evenly",minHeight:"50%"}}>
+                        <div style={{
+                            padding: 10,
+                            display: "flex",
+                            flexDirection: "column",
+                            justifyContent: "space-evenly",
+                            minHeight: "50%"
+                        }}>
                             <div style={{fontSize: 40, flex: 1}}>
                                 {building_name}
                             </div>
@@ -167,7 +183,7 @@ class PropertyPage extends React.Component {
                                     flex: 1,
                                     display: "flex",
                                     justifyContent: "space-evenly",
-                                    height:"100%"
+                                    height: "100%"
                                 }}
                             >
                                 <div style={{textAlign: "center"}}>
@@ -203,7 +219,7 @@ class PropertyPage extends React.Component {
                                     }}/>
                                     {number_of_bathroom} Bathrooms
                                 </div>
-                                <div style={{textAlign: "center",textTransform:"capitalize"}}>
+                                <div style={{textAlign: "center", textTransform: "capitalize"}}>
                                     <div style={{
                                         backgroundImage: `url(${propetyPageImages[property_type]})`,
                                         backgroundPosition: "center",
@@ -212,17 +228,20 @@ class PropertyPage extends React.Component {
                                         width: 70,
                                         height: 70
                                     }}/>
-                                    {property_type.replace(/_/g," ")}
+                                    {property_type.replace(/_/g, " ")}
                                 </div>
                             </div>
                         </div>
                     </div>
 
                 </div>
-                <div style={{display:"flex",width:"100%"}}>
-                    <FlatButton style={{flex:1}} label={"Location"} onClick={()=>this.changeStuffToShow("location")}/>
-                    <FlatButton style={{flex:1}} label={"Rent Info"} onClick={()=>this.changeStuffToShow("rentInfo")}/>
-                    <FlatButton style={{flex:1}} label={"Other Info"} onClick={()=>this.changeStuffToShow("otherInfo")}/>
+                <div style={{display: "flex", width: "100%"}}>
+                    <FlatButton style={{flex: 1}} label={"Location"}
+                                onClick={() => this.changeStuffToShow("location")}/>
+                    <FlatButton style={{flex: 1}} label={"Rent Info"}
+                                onClick={() => this.changeStuffToShow("rentInfo")}/>
+                    <FlatButton style={{flex: 1}} label={"Other Info"}
+                                onClick={() => this.changeStuffToShow("otherInfo")}/>
                 </div>
                 {this.renderStuffToShow()}
             </div>
@@ -230,6 +249,7 @@ class PropertyPage extends React.Component {
     }
 }
 const mapStateToProps = (state, props) => ({
-    propertyDetail: state.propertiesDBReducer.propertiesDetail[props.match.params.propertyId]
+    propertyDetail: state.propertiesDBReducer.propertiesDetail[props.match.params.propertyId],
+    propertyCoordinates: state.propertiesDBReducer.propertiesCoordinates[props.match.params.propertyId]
 })
-export default connect(mapStateToProps, {getPropertyDetail})(PropertyPage)
+export default connect(mapStateToProps, {getPropertyDetail, getPropertyCoordinatesByAddress})(PropertyPage)
