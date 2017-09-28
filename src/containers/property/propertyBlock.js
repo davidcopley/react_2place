@@ -36,6 +36,14 @@ class PropertyBlock extends React.Component {
             currentImageIndex: 0
         }
     }
+
+    changeImageIndex = n => {
+        const {currentImageIndex} = this.state
+        const {images} = this.props.propertyBasic
+        if (images.length > 1) {
+            this.setState({currentImageIndex: (currentImageIndex + n) % images.length})
+        }
+    }
     urlRegex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
 
     render() {
