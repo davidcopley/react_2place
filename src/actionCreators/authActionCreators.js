@@ -1,7 +1,7 @@
 import axios from "axios"
 import {api, oauthShit} from "../constants/api"
 import {setCalledApis} from "./apiHistoryActionCreators"
-import {setPropertiesBasic,setPropertiesDetail} from "./propertiesDBActionCreators"
+import {setPropertiesBasic,setPropertiesDetail,getPropertiesBasic} from "./propertiesDBActionCreators"
 export const setAccessToken = accessToken => ({type: "setAccessToken", accessToken})
 export const signin = (username, password) => (dispatch, getState) => {
     axios
@@ -16,6 +16,7 @@ export const signin = (username, password) => (dispatch, getState) => {
             localStorage.setItem('1p_token', access_token);
             dispatch(setAccessToken(access_token))
             dispatch(setCalledApis({}))
+            dispatch(getPropertiesBasic())
         })
         .catch(err=>{
             console.log(err)

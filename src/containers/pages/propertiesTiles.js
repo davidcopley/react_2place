@@ -10,7 +10,7 @@ class PropertiesTiles extends React.Component{
     renderProperties = () => {
         const {propertiesBasic} = this.props
         if(propertiesBasic) {
-            return Object.keys(propertiesBasic).map(property_id => {
+            return Object.keys(propertiesBasic).reverse().map(property_id => {
                 return <PropertyBlock key={`property${property_id}`} property_id={property_id}/>
             })
         }
