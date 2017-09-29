@@ -2,7 +2,7 @@ import React from "react"
 import ReactAvatarEditor from 'react-avatar-editor'
 import Logo from "../../images/1placeLogo.png"
 import {TextField,FlatButton, Chip} from "material-ui"
-import {hong_kong_island,kowloon,outlying_islands,new_territories} from "../../constants/districts"
+import {Hong_Kong_Island,Kowloon,Outlying_Islands,New_Territories} from "../../constants/districts"
 class Signup extends React.Component{
     state = {
         allowZoomOut: false,
@@ -125,44 +125,44 @@ class Signup extends React.Component{
                         <br/>
                         <div style={{fontSize:14,color:"#b2b2b2"}}>Hong Kong Island</div>
                         <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
-                            {Object.keys(hong_kong_island).sort().map(key=> {
+                            {Object.keys(Hong_Kong_Island).sort().map(key=> {
                                 const isSet = !!districts[key]
                                 return (
                                     <Chip key={`chip${key}`} backgroundColor={isSet?"#1e717f":"#eeeeee"} labelStyle={{color:isSet?"#ffffff":"#1e717f"}} style={{margin:2}} onClick={()=>this.setDistrict(key)}>
-                                        {hong_kong_island[key]["district_eng"]}
+                                        {Hong_Kong_Island[key]["district_eng"]}
                                     </Chip>
                                 )
                             })}
                         </div>
                         <div style={{fontSize:14,color:"#b2b2b2"}}>Kowloon</div>
                         <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
-                            {Object.keys(kowloon).sort().map(key=> {
+                            {Object.keys(Kowloon).sort().map(key=> {
                                 const isSet = !!districts[key]
                                 return (
                                     <Chip key={`chip${key}`} backgroundColor={isSet?"#1e717f":"#eeeeee"} labelStyle={{color:isSet?"#ffffff":"#1e717f"}} style={{margin:2}} onClick={()=>this.setDistrict(key)}>
-                                        {kowloon[key]["district_eng"]}
+                                        {Kowloon[key]["district_eng"]}
                                     </Chip>
                                 )
                             })}
                         </div>
                         <div style={{fontSize:14,color:"#b2b2b2"}}>New Territories</div>
                         <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
-                            {Object.keys(new_territories).sort().map(key=> {
+                            {Object.keys(New_Territories).sort().map(key=> {
                                 const isSet = !!districts[key]
                                 return (
                                     <Chip key={`chip${key}`} backgroundColor={isSet?"#1e717f":"#eeeeee"} labelStyle={{color:isSet?"#ffffff":"#1e717f"}} style={{margin:2}} onClick={()=>this.setDistrict(key)}>
-                                        {new_territories[key]["district_eng"]}
+                                        {New_Territories[key]["district_eng"]}
                                     </Chip>
                                 )
                             })}
                         </div>
                         <div style={{fontSize:14,color:"#b2b2b2"}}>Outlying Islands</div>
                         <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
-                            {Object.keys(outlying_islands).sort().map(key=> {
+                            {Object.keys(Outlying_Islands).sort().map(key=> {
                                 const isSet = !!districts[key]
                                 return (
                                     <Chip key={`chip${key}`} backgroundColor={isSet?"#1e717f":"#eeeeee"} labelStyle={{color:isSet?"#ffffff":"#1e717f"}} style={{margin:2}} onClick={()=>this.setDistrict(key)}>
-                                        {outlying_islands[key]["district_eng"]}
+                                        {Outlying_Islands[key]["district_eng"]}
                                     </Chip>
                                 )
                             })}

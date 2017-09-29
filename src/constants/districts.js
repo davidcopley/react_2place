@@ -1032,7 +1032,7 @@ export const districts = {
 }
 
 
-export const hong_kong_island = {
+export const Hong_Kong_Island = {
     aberdeen: {
         key: 'Aberdeen',
         region_key: 'Hong_Kong_Island',
@@ -1434,7 +1434,7 @@ export const hong_kong_island = {
         region_chs: '香港岛'
     }
 }
-export const kowloon = {
+export const Kowloon = {
     wong_tai_sin: {
         key: 'Wong_Tai_Sin',
         region_key: 'Kowloon',
@@ -1776,7 +1776,7 @@ export const kowloon = {
         region_chs: '九龙'
     }
 }
-export const new_territories = {
+export const New_Territories = {
     tsing_yi: {
         key: 'Tsing_Yi',
         region_key: 'New_Territories',
@@ -1998,7 +1998,7 @@ export const new_territories = {
         region_chs: '新界'
     }
 }
-export const outlying_islands = {
+export const Outlying_Islands = {
     cheung_chau: {
         key: 'Cheung_Chau',
         region_key: 'Outlying_Islands',
@@ -2069,4 +2069,11 @@ export const outlying_islands = {
         district_chs: '愉景湾',
         region_chs: '离岛'
     }
+}
+
+export const regions = {
+    Hong_Kong_Island,
+    Kowloon,
+    New_Territories,
+    Outlying_Islands
 }
