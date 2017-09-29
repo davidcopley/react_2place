@@ -387,6 +387,7 @@ class EditPropertyPage extends React.Component {
                                 </div>
                             )
                         })}
+                        {new Array(2).fill(<div style={{width:150}}/>)}
                     </div>
                     <span style={{fontSize:13}}>Facilities</span>
                     <div style={{
@@ -422,6 +423,7 @@ class EditPropertyPage extends React.Component {
                                 </div>
                             )
                         })}
+                        {new Array(2).fill(<div style={{width:150}}/>)}
                     </div>
                     <span style={{fontSize:13}}>Views</span>
                     <div style={{
@@ -457,6 +459,7 @@ class EditPropertyPage extends React.Component {
                                 </div>
                             )
                         })}
+                        {new Array(2).fill(<div style={{width:150}}/>)}
                     </div>
                 </div>
                 <div style={{
@@ -527,7 +530,7 @@ class EditPropertyPage extends React.Component {
                                             backgroundRepeat: "no-repeat",
                                             width: 160,
                                             height: 160,
-                                            margin: 10
+                                            margin: 5
                                         }}
                                     />
                                     <IconButton
@@ -541,6 +544,7 @@ class EditPropertyPage extends React.Component {
                             )
 
                         })}
+                        <div style={{width:170}}/>
                     </Dropzone>
                 </div>
                 <FlatButton onClick={() => this.handleSubmit()} label={"update"} fullWidth style={{marginBottom: 20}}/>

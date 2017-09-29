@@ -84,6 +84,7 @@ class PropertyPageStuffToShow extends React.Component{
                                     </div>
                                 )
                             })}
+                            {new Array(11).fill(<div style={{width:80}}/>)}
                         </div>
                         {property_unit_features && <div>Property unit features</div>}
                         <div style={{display: "flex", flexWrap: "wrap", width: "100%"}}>
@@ -111,7 +112,9 @@ class PropertyPageStuffToShow extends React.Component{
                                     </div>
                                 )
                             })}
+                            {new Array(11).fill(<div style={{width:80}}/>)}
                         </div>
+
                     </span>
                 )
             case("location"):

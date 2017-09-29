@@ -50,6 +50,7 @@ class PropertiesTiles extends React.Component{
                 </div>
                 <div style={{display:"flex",flexWrap:"wrap",width:"100%",justifyContent:"space-evenly",top:60,position:"relative"}}>
                     {this.renderProperties()}
+                    {new Array(3).fill(<div style={{width:300}}/>)}
                 </div>
             </div>
         )

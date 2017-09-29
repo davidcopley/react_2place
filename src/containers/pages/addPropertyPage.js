@@ -157,7 +157,7 @@ class AddPropertyPage extends React.Component {
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Street name</span>
-                        <TextField key='streetName' ref={x => this.streetName = x} fullWidth/>
+                        <TextField name={'streetName'} key='streetName' ref={x => this.streetName = x} fullWidth/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Region</span>
@@ -212,11 +212,11 @@ class AddPropertyPage extends React.Component {
                     <span style={{fontSize: 13}}>Description</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Short title</span>
-                        <TextField key="shortTitle" ref={x => this.shortTitle = x} fullWidth/>
+                        <TextField name={"shortTitle"} key="shortTitle" ref={x => this.shortTitle = x} fullWidth/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Description</span>
-                        <TextField key="remark" ref={x => this.remark = x} fullWidth/>
+                        <TextField name={'remark'} key="remark" ref={x => this.remark = x} fullWidth/>
                     </div>
                 </div>
                 <div style={{
@@ -230,11 +230,11 @@ class AddPropertyPage extends React.Component {
                     <span style={{fontSize: 13}}>Price</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Sale price</span>
-                        <TextField min={0} key="salePrice" ref={x => this.salePrice = x} fullWidth type={"number"}/>
+                        <TextField name="salePrice" min={0} key="salePrice" ref={x => this.salePrice = x} fullWidth type={"number"}/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Rent price</span>
-                        <TextField min={0} key='rentPrice' ref={x => this.rentPrice = x}
+                        <TextField name="rentPrice" min={0} key='rentPrice' ref={x => this.rentPrice = x}
                                    onChange={e => this.setState({forRent: !!e.target.value})}
                                    fullWidth type={"number"}/></div>
                     {forRent &&
@@ -257,18 +257,18 @@ class AddPropertyPage extends React.Component {
                     <span style={{fontSize: 13}}>Size</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Saleable area (ft²)</span>
-                        <TextField min={0} key="saleableArea" ref={x => this.saleableArea = x} fullWidth
+                        <TextField name="saleableArea" min={0} key="saleableArea" ref={x => this.saleableArea = x} fullWidth
                                    type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Gross area (ft²)</span>
-                        <TextField min={0} key="grossArea" ref={x => this.grossArea = x} fullWidth type={"number"}/></div>
+                        <TextField name="grossArea" min={0} key="grossArea" ref={x => this.grossArea = x} fullWidth type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Number of rooms</span>
-                        <TextField min={0} key="numberOfRooms" ref={x => this.numberOfRooms = x} fullWidth
+                        <TextField name="numberOfRooms" min={0} key="numberOfRooms" ref={x => this.numberOfRooms = x} fullWidth
                                    type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Number of bathrooms</span>
-                        <TextField min={0} key="numberOfBathrooms" ref={x => this.numberOfBathrooms = x} fullWidth
+                        <TextField name="numberOfBathrooms" min={0} key="numberOfBathrooms" ref={x => this.numberOfBathrooms = x} fullWidth
                                    type={"number"}/></div>
                 </div>
                 <div style={{
@@ -313,6 +313,7 @@ class AddPropertyPage extends React.Component {
                                 </div>
                             )
                         })}
+                        {new Array(2).fill(<div style={{width:150}}/>)}
                     </div>
                     <span style={{fontSize:13}}>Facilities</span>
                     <div style={{
@@ -348,6 +349,7 @@ class AddPropertyPage extends React.Component {
                                 </div>
                             )
                         })}
+                        {new Array(2).fill(<div style={{width:150}}/>)}
                     </div>
                     <span style={{fontSize:13}}>Views</span>
                     <div style={{
@@ -383,6 +385,7 @@ class AddPropertyPage extends React.Component {
                                 </div>
                             )
                         })}
+                        {new Array(2).fill(<div style={{width:150}}/>)}
                     </div>
                 </div>
                 <div style={{
