@@ -72,6 +72,8 @@ class AddPropertyPage extends React.Component {
     handleSubmit = () => {
         const {postProperty} = this.props
         const {region, district,forRent} = this.state
+        const property_unit_features = Object.keys(this.state.features).filter(key=>this.state.features[key]).join()
+        const property_building_features = Object.keys(this.state.facilities).filter(key=>this.state.facilities[key]).join()
         const data = {
             "building_name": this.buildingName.refs.searchTextField.input.value,
             "building_street_name": tf2val(this.streetName),
@@ -84,7 +86,9 @@ class AddPropertyPage extends React.Component {
             "gross_unit_size": tf2val(this.grossArea),
             "number_of_room": tf2val(this.numberOfRooms),
             "number_of_bathroom": tf2val(this.numberOfBathrooms),
-            "unit_level": this.unitLevel.state.selected
+            "unit_level": this.unitLevel.state.selected,
+            "property_unit_features":property_unit_features,
+            "property_building_features":property_building_features
         }
 
 

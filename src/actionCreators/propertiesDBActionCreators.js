@@ -9,9 +9,9 @@ export const addPropertyCoordinates = (propertyId,propertyCoordinates) => ({type
 
 const headerShit = {headers: {"Accept": "application/vnd.rex.v1+json","Authorization": "Bearer " + localStorage.getItem('1p_token')}}
 
-export const getPropertiesBasic = () => (dispatch, getState) => {
+export const getPropertiesBasic = (force=false) => (dispatch, getState) => {
     const url = `${api}agents/self/properties`
-    if(!getState().apiHistoryReducer.calledApis[url]){
+    if(!getState().apiHistoryReducer.calledApis[url]&&!force){
         axios
             .get(url,headerShit)
             .then(res=>{
@@ -65,6 +65,7 @@ export const postProperty = data => (dispatch,getState) => {
     axios.post(url,data,headerShit)
         .then(res=>{
             console.log(res)
+            dispatch(getPropertiesBasic(true))
         })
         .catch(err=>{
             console.log(err)
