@@ -11,9 +11,6 @@ import EditPropertyPage from "./pages/editPropertyPage"
 import Topbar from "./topbar"
 import {setAccessToken} from "../actionCreators/authActionCreators"
 class Main extends React.Component{
-    constructor(props){
-        super(props)
-    }
     componentWillMount(){
 
         if(localStorage.hasOwnProperty('1p_token')){

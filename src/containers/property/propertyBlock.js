@@ -23,7 +23,7 @@ class PropertyBlock extends React.Component {
             this.setState({currentImageIndex: (currentImageIndex + n) % images.length})
         }
     }
-    urlRegex = /[-a-zA-Z0-9@:%_\+.~#?&//=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_\+.~#?&//=]*)?/gi;
+    urlRegex = /[-a-zA-Z0-9@:%_+.~#?&/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&/=]*)?/gi;
 
     render() {
         const {propertyBasic,property_id,push} = this.props

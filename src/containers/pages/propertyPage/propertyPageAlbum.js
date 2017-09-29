@@ -72,6 +72,7 @@ class PropertyPageAlbum extends React.Component{
                 }}>
                     {imageUrls.map((imageUrl, index) =>
                         <div
+                            key={`albumImage${index}`}
                             className="clickable"
                             style={{
                                 backgroundImage: `url(${imageUrl})`,

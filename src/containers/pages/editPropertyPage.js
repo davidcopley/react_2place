@@ -126,7 +126,6 @@ class EditPropertyPage extends React.Component {
         const {getBuildingById} = this.props
         getBuildingById(value.id)
             .then(res=>{
-                console.log(res)
                 const {building_district,building_region} = res
                 this.setState({district:building_district.toLowerCase(),region:building_region})
             })
@@ -192,7 +191,6 @@ class EditPropertyPage extends React.Component {
 
     render() {
         const {propertyDetail} = this.props
-        console.log(propertyDetail)
         const {features,facilities, propertyType, forRent, dataSource, region, district} = this.state
         return (
             <div style={{width: "100%", display: "flex", flexWrap: "wrap", position: "relative", top: 10}}>
@@ -207,6 +205,7 @@ class EditPropertyPage extends React.Component {
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Building name</span>
                         <AutoComplete
+                            name="buildingName"
                             dataSourceConfig={this.dataSourceConfig}
                             filter={AutoComplete.noFilter}
                             ref={x => this.buildingName = x}

@@ -1,7 +1,7 @@
 import axios from "axios"
 import {api, oauthShit} from "../constants/api"
 import {setCalledApis} from "./apiHistoryActionCreators"
-import {setPropertiesBasic,setPropertiesDetail,setPropertiesCoordinates,getPropertiesBasic} from "./propertiesDBActionCreators"
+import {setPropertiesBasic,setPropertiesDetail,setPropertiesCoordinates} from "./propertiesDBActionCreators"
 import {push} from "react-router-redux"
 export const setAccessToken = accessToken => ({type: "setAccessToken", accessToken})
 export const signin = (username, password) => (dispatch, getState) => {
