@@ -1,8 +1,10 @@
 import React from "react"
 import ReactAvatarEditor from 'react-avatar-editor'
 import Logo from "../../images/1placeLogo.png"
-import {TextField,FlatButton, Chip} from "material-ui"
+import {TextField,FlatButton, Chip,IconButton} from "material-ui"
 import {Hong_Kong_Island,Kowloon,Outlying_Islands,New_Territories} from "../../constants/districts"
+import More from "material-ui/svg-icons/content/add"
+import Less from "material-ui/svg-icons/content/remove"
 class Signup extends React.Component{
     state = {
         allowZoomOut: false,
@@ -13,7 +15,11 @@ class Signup extends React.Component{
         preview: null,
         width: 200,
         height: 200,
-        districts:{}
+        districts:{},
+        showHongKongIsland:false,
+        showKowloon:false,
+        showNewTerritories:false,
+        showOutlyingIslands:false
     }
 
     handleNewImage = e => {
@@ -94,7 +100,7 @@ class Signup extends React.Component{
     }
 
     render () {
-        const {districts} = this.state
+        const {districts,showHongKongIsland,showKowloon,showNewTerritories,showOutlyingIslands} = this.state
         return (
             <div style={{display:"flex",flexWrap:"wrap",position:"relative",top:10,width:"100%"}}>
                 <div style={{minWidth:250,display:"flex",flexDirection:"column",alignItems:"center",border: "1px solid rgb(221, 223, 226)", borderRadius:3,}}>
@@ -148,8 +154,8 @@ class Signup extends React.Component{
                         <TextField fullWidth hintText={"agency"}/>
                         <div style={{color:"#b2b2b2"}}>Districts you cover</div>
                         <br/>
-                        <div style={{fontSize:14,color:"#b2b2b2"}}>Hong Kong Island</div>
-                        <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
+                        <div style={{fontSize:14,color:"#b2b2b2",display:"flex",alignItems:"center"}}><IconButton iconStyle={{fill:"#b2b2b2"}} onClick={()=>this.setState({showHongKongIsland:!showHongKongIsland})}>{showHongKongIsland?<Less/>:<More/>}</IconButton>Hong Kong Island</div>
+                        {showHongKongIsland&&<div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
                             {Object.keys(Hong_Kong_Island).sort().map(key=> {
                                 const isSet = !!districts[key]
                                 return (
@@ -158,20 +164,24 @@ class Signup extends React.Component{
                                     </Chip>
                                 )
                             })}
-                        </div>
-                        <div style={{fontSize:14,color:"#b2b2b2"}}>Kowloon</div>
-                        <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
-                            {Object.keys(Kowloon).sort().map(key=> {
-                                const isSet = !!districts[key]
-                                return (
-                                    <Chip key={`chip${key}`} backgroundColor={isSet?"#1e717f":"#eeeeee"} labelStyle={{color:isSet?"#ffffff":"#1e717f"}} style={{margin:2}} onClick={()=>this.setDistrict(key)}>
-                                        {Kowloon[key]["district_eng"]}
-                                    </Chip>
-                                )
-                            })}
-                        </div>
-                        <div style={{fontSize:14,color:"#b2b2b2"}}>New Territories</div>
-                        <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
+                        </div>}
+                        <div style={{fontSize:14,color:"#b2b2b2",display:"flex",alignItems:"center"}}><IconButton iconStyle={{fill:"#b2b2b2"}} onClick={()=>this.setState({showKowloon:!showKowloon})}>{showKowloon?<Less/>:<More/>}</IconButton>Kowloon</div>
+                        {showKowloon&&
+                            <div style={{display: "flex", flexWrap: "wrap", width: "100%"}}>
+                                {Object.keys(Kowloon).sort().map(key => {
+                                    const isSet = !!districts[key]
+                                    return (
+                                        <Chip key={`chip${key}`} backgroundColor={isSet ? "#1e717f" : "#eeeeee"}
+                                              labelStyle={{color: isSet ? "#ffffff" : "#1e717f"}} style={{margin: 2}}
+                                              onClick={() => this.setDistrict(key)}>
+                                            {Kowloon[key]["district_eng"]}
+                                        </Chip>
+                                    )
+                                })}
+                            </div>
+                        }
+                        <div style={{fontSize:14,color:"#b2b2b2",display:"flex",alignItems:"center"}}><IconButton iconStyle={{fill:"#b2b2b2"}} onClick={()=>this.setState({showNewTerritories:!showNewTerritories})}>{showNewTerritories?<Less/>:<More/>}</IconButton>New Territories</div>
+                        {showNewTerritories&&<div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
                             {Object.keys(New_Territories).sort().map(key=> {
                                 const isSet = !!districts[key]
                                 return (
@@ -180,9 +190,9 @@ class Signup extends React.Component{
                                     </Chip>
                                 )
                             })}
-                        </div>
-                        <div style={{fontSize:14,color:"#b2b2b2"}}>Outlying Islands</div>
-                        <div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
+                        </div>}
+                        <div style={{fontSize:14,color:"#b2b2b2",display:"flex",alignItems:"center"}}><IconButton iconStyle={{fill:"#b2b2b2"}} onClick={()=>this.setState({showOutlyingIslands:!showOutlyingIslands})}>{showOutlyingIslands?<Less/>:<More/>}</IconButton>Outlying Islands</div>
+                        {showOutlyingIslands&&<div style={{display:"flex",flexWrap:"wrap",width:"100%"}}>
                             {Object.keys(Outlying_Islands).sort().map(key=> {
                                 const isSet = !!districts[key]
                                 return (
@@ -191,7 +201,7 @@ class Signup extends React.Component{
                                     </Chip>
                                 )
                             })}
-                        </div>
+                        </div>}
                         <TextField fullWidth hintText={"promotion code"}/>
                         <FlatButton fullWidth style={{color:"#1e717f"}}>Submit</FlatButton>
                     </div>
