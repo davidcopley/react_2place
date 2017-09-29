@@ -71,7 +71,7 @@ class Signup extends React.Component{
     render () {
         const {districts} = this.state
         return (
-            <div style={{display:"flex",flexWrap:"wrap",position:"relative",top:10}}>
+            <div style={{display:"flex",flexWrap:"wrap",position:"relative",top:10,width:"100%"}}>
                 <div style={{minWidth:250,display:"flex",flexDirection:"column",alignItems:"center",border: "1px solid rgb(221, 223, 226)", borderRadius:3,}}>
                     <div style={{height:10}}/>
                     <ReactAvatarEditor
@@ -87,7 +87,7 @@ class Signup extends React.Component{
                         onSave={this.handleSave}
                         image={this.state.image || Logo}
                     />
-                    <div style={{minWidth:250,maxWidth:250,padding:10}}>
+                    <div style={{padding:10}}>
                         <input name='newImage' type='file' onChange={this.handleNewImage} />
                         <br />
                         Zoom:
@@ -106,7 +106,7 @@ class Signup extends React.Component{
                         <button onClick={this.rotateRight}>Right</button>
                     </div>
                 </div>
-                <div style={{flex:1,minWidth:300,border: "1px solid rgb(221, 223, 226)", borderRadius:3,}}>
+                <div style={{flex:1,minWidth:"50%",border: "1px solid rgb(221, 223, 226)", borderRadius:3,}}>
                     <div style={{padding:10}}>
                         <TextField fullWidth hintText={"email"} type={"email"}/>
                         <TextField fullWidth hintText={"password"} type={"password"}/>

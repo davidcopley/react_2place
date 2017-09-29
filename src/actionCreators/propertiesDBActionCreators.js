@@ -59,3 +59,14 @@ export const getPropertyCoordinatesByAddress = (propertyId,address) => (dispatch
             })
     }
 }
+
+export const postProperty = data => (dispatch,getState) => {
+    const url = `${api}agents/self/properties`
+    axios.post(url,data,headerShit)
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+}

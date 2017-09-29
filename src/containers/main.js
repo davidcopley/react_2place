@@ -25,7 +25,7 @@ class Main extends React.Component{
             <div style={{minHeight:"100vh",width:"100%",display:"flex",flexDirection:"column"}}>
                 <Topbar/>
                 <div style={{height:60}}/>
-                <div style={{height:"100%",width:"100%",display:"flex",justifyContent:"center"}}>
+                <div style={{height:"100%",width:"100%",display:"flex",justifyContent:"center",marginBottom:"auto"}}>
                     <div style={{display:"flex",flexDirection:"column",height:"100%",maxWidth:1000,width:"100%"}}>
                         <Route exact path="/" component={Home}/>
                         <Route path="/propertiesTiles" component={PropertiesTiles}/>

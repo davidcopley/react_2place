@@ -12,7 +12,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 const muiTheme = getMuiTheme({
     palette:{
-        primary1Color:"#1e717f"
+        primary1Color:"#1e717f",
+        primary2Color:"#1e717f"
     }
 })
 

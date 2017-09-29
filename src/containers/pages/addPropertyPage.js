@@ -1,18 +1,56 @@
 import React from "react"
-import {TextField, FlatButton, IconButton} from "material-ui"
+import {connect} from "react-redux"
+import {TextField, FlatButton, IconButton, Checkbox, DatePicker,RadioButtonGroup,RadioButton} from "material-ui"
 import Remove from "material-ui/svg-icons/navigation/close"
 import {propertyTypes} from "../../images/propertyPage"
 import featureImages from "../../images/features"
 import Dropzone from 'react-dropzone'
+import {postProperty} from "../../actionCreators/propertiesDBActionCreators"
+const tf2val = textfieldRef => textfieldRef.input.value
 class AddPropertyPage extends React.Component {
     constructor(props) {
         super(props)
         this.state = {
-            images: []
+            images: [],
+            features: {},
+            propertyType: "apartment",
+            forRent: false
         }
     }
 
+    setFeature = feature => this.setState({
+        features: {
+            ...this.state.features,
+            [feature]: !this.state.features[feature]
+        }
+    })
+    setPropertyType = propertyType => this.setState({propertyType: propertyType})
+    handleSubmit = () => {
+        const {postProperty} = this.props
+        console.log(this.unitLevel)
+        const data = {
+            "building_name": tf2val(this.buildingName),
+            "building_street_name": tf2val(this.streetName),
+            "building_region": tf2val(this.region),
+            "building_district": tf2val(this.district),
+            "property_type": this.state.propertyType,
+            "short_title": tf2val(this.shortTitle),
+            "remark": tf2val(this.remark),
+            "unit_price": tf2val(this.salePrice),
+            "rent_price": tf2val(this.rentPrice),
+            "net_unit_size": tf2val(this.saleableArea),
+            "gross_unit_size": tf2val(this.grossArea),
+            "number_of_room": tf2val(this.numberOfRooms),
+            "number_of_bathroom": tf2val(this.numberOfBathrooms),
+            "lease_type":"sell",
+            "unit_level":this.unitLevel.state.selected
+        }
+        postProperty(data)
+    }
+
     render() {
+        const {features, propertyType, forRent} = this.state
+
         return (
             <div style={{width: "100%", display: "flex", flexWrap: "wrap", position: "relative", top: 10}}>
                 <div style={{
@@ -23,34 +61,43 @@ class AddPropertyPage extends React.Component {
                     borderRadius: 3,
                 }}>
                     <span>Property</span>
-                    <TextField fullWidth hintText={"location"}/>
-                    <TextField fullWidth hintText={"street name"}/>
-                    <TextField fullWidth hintText={"region"}/>
-                    <TextField fullWidth hintText={"district"}/>
+                    <TextField ref={x => this.buildingName = x} fullWidth hintText={"building name"}/>
+                    <TextField ref={x => this.streetName = x} fullWidth hintText={"street name"}/>
+                    <TextField ref={x => this.region = x} fullWidth hintText={"region"}/>
+                    <TextField ref={x => this.district = x} fullWidth hintText={"district"}/>
                     <span style={{fontSize: 13}}>Property Type</span>
                     <div style={{display: "flex", justifyContent: "space-evenly", marginTop: 10, marginBottom: 10}}>
-                        {Object.keys(propertyTypes).map(propertyType => {
+                        {Object.keys(propertyTypes).map(type => {
                             return (
-                                <div key={`propertyType${propertyType}`} style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
+                                <div key={`propertyType${type}`}
+                                     style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                                     <div
+                                        onClick={() => this.setPropertyType(type)}
                                         className="clickable"
                                         style={{
-                                            backgroundImage: `url(${propertyTypes[propertyType]})`,
+                                            backgroundImage: `url(${propertyTypes[type]})`,
                                             backgroundPosition: "center",
                                             backgroundSize: "contain",
                                             backgroundRepeat: "no-repeat",
                                             width: 50,
-                                            height: 50
+                                            height: 50,
+                                            filter: propertyType === type ? undefined : "opacity(15%)"
                                         }}
                                     />
-                                    <span style={{fontSize: 12}}>{propertyType.replace(/_/g, ' ')}</span>
+                                    <span style={{fontSize: 12}}>{type.replace(/_/g, ' ')}</span>
                                 </div>
                             )
                         })}
                     </div>
+                    <span style={{fontSize: 13}}>Unit level</span>
+                    <RadioButtonGroup defaultSelected={"middle"} ref={x=>this.unitLevel=x} name="unit_level" style={{ display: 'flex',justifyContent:"space-evenly"}}>
+                        <RadioButton label="high" value={"high"} style={{width:100}}/>
+                        <RadioButton label="middle" value={"middle"} style={{width:100}}/>
+                        <RadioButton label="low" value={"low"} style={{width:100}}/>
+                    </RadioButtonGroup>
                     <span style={{fontSize: 13}}>Description</span>
-                    <TextField fullWidth hintText={"short title"}/>
-                    <TextField fullWidth hintText={"describe your property"}/>
+                    <TextField ref={x => this.shortTitle = x} fullWidth hintText={"short title"}/>
+                    <TextField ref={x => this.remark = x} fullWidth hintText={"describe your property"}/>
                 </div>
                 <div style={{
                     flex: 1,
@@ -61,13 +108,19 @@ class AddPropertyPage extends React.Component {
                 }}>
                     <span>Price & size</span><br/>
                     <span style={{fontSize: 13}}>Price</span>
-                    <TextField fullWidth hintText={"sale price"}/>
-                    <TextField fullWidth hintText={"rent price"}/>
+                    <TextField ref={x => this.salePrice = x} fullWidth hintText={"sale price"} type={"number"}/>
+                    <TextField ref={x => this.rentPrice = x} onChange={e => this.setState({forRent: !!e.target.value})}
+                               fullWidth hintText={"rent price"} type={"number"}/>
+                    {forRent && <span><Checkbox ref={x => this.isShortTermRental = x} label={"short term rental"}/>
+                    < DatePicker ref={x => this.startDate = x} fullWidth hintText={"start date"}/>
+                        <Checkbox ref={x => this.rateAndGovMgmtFees = x} label={"rate & gov mgmt fees"}/>
+                        <Checkbox ref={x => this.allowPets = x} label={"owner allows pets"}/></span>
+                    }
                     <span style={{fontSize: 13}}>Size</span>
-                    <TextField fullWidth hintText={"saleable area (ft²)"}/>
-                    <TextField fullWidth hintText={"gross area (ft²)"}/>
-                    <TextField fullWidth hintText={"number of rooms"}/>
-                    <TextField fullWidth hintText={"number of bathrooms"}/>
+                    <TextField ref={x => this.saleableArea = x} fullWidth hintText={"saleable area (ft²)"} type={"number"}/>
+                    <TextField ref={x => this.grossArea = x} fullWidth hintText={"gross area (ft²)"} type={"number"}/>
+                    <TextField ref={x => this.numberOfRooms = x} fullWidth hintText={"number of rooms"} type={"number"}/>
+                    <TextField ref={x => this.numberOfBathrooms = x} fullWidth hintText={"number of bathrooms"} type={"number"}/>
                 </div>
                 <div style={{
                     flex: 1,
@@ -76,7 +129,7 @@ class AddPropertyPage extends React.Component {
                     border: "1px solid rgb(221, 223, 226)",
                     borderRadius: 3,
                 }}>
-                    <span style={{fontSize: 13}}>Features</span>
+                    <span>Features</span>
                     <div style={{
                         display: "flex",
                         justifyContent: "space-evenly",
@@ -91,8 +144,10 @@ class AddPropertyPage extends React.Component {
                                     flexDirection: "column",
                                     alignItems: "center",
                                     width: 150,
-                                    height: 100
-                                }}>
+                                    height: 100,
+                                }}
+                                     onClick={() => this.setFeature(feature)}
+                                >
                                     <div
                                         style={{
                                             backgroundImage: `url(${featureImages[feature]})`,
@@ -100,7 +155,8 @@ class AddPropertyPage extends React.Component {
                                             backgroundSize: "contain",
                                             backgroundRepeat: "no-repeat",
                                             width: 50,
-                                            height: 50
+                                            height: 50,
+                                            filter: features[feature] ? undefined : "grayscale(100%) opacity(15%)"
                                         }}
                                     />
                                     <span style={{fontSize: 12}}>{feature.replace(/_/g, ' ')}</span>
@@ -116,22 +172,24 @@ class AddPropertyPage extends React.Component {
                     border: "1px solid rgb(221, 223, 226)",
                     borderRadius: 3,
                 }}>
-                    <span style={{fontSize: 13}}>Photos</span>
-                    <FlatButton fullWidth onClick={()=>this.dz.open()}>add image(s)</FlatButton>
+                    <span>Photos</span>
+                    <FlatButton style={{fontSize: 13}} fullWidth onClick={() => this.dz.open()}>add
+                        image(s)</FlatButton>
                     <Dropzone
-                        ref={dz=>this.dz=dz}
+                        ref={dz => this.dz = dz}
                         style={{
                             minHeight: 100,
                             margin: 20,
                             border: "1px solid rgb(221, 223, 226)",
                             borderRadius: 3,
                             display: "flex",
-                            flexWrap: "wrap"
+                            flexWrap: "wrap",
+                            justifyContent: "space-evenly"
                         }}
-                        onDrop={images=> this.setState({images: [...this.state.images, ...images]})}
+                        onDrop={images => this.setState({images: [...this.state.images, ...images]})}
                         disableClick
                     >
-                        {this.state.images.map((image,index) => {
+                        {this.state.images.map((image, index) => {
                             return (
                                 <div key={`image${index}`} style={{position: "relative"}}>
                                     <div
@@ -149,9 +207,9 @@ class AddPropertyPage extends React.Component {
                                         }}
                                     />
                                     <IconButton
-                                        style={{position:"absolute",top:5,right:5}}
-                                        iconStyle={{background:"#cf0001",fill:"#ffffff"}}
-                                        onClick={()=>this.setState({images:this.state.images.filter((_,i)=>i!==index)})}
+                                        style={{position: "absolute", top: 5, right: 5}}
+                                        iconStyle={{background: "#cf0001", fill: "#ffffff"}}
+                                        onClick={() => this.setState({images: this.state.images.filter((_, i) => i !== index)})}
                                     >
                                         <Remove/>
                                     </IconButton>
@@ -161,9 +219,9 @@ class AddPropertyPage extends React.Component {
                         })}
                     </Dropzone>
                 </div>
-                <FlatButton label={"add"} fullWidth style={{marginBottom: 20}}/>
+                <FlatButton onClick={() => this.handleSubmit()} label={"add"} fullWidth style={{marginBottom: 20}}/>
             </div>
         )
     }
 }
-export default AddPropertyPage
+export default connect(null, {postProperty})(AddPropertyPage)
