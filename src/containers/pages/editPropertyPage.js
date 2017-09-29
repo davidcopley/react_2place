@@ -13,10 +13,11 @@ import {
     MenuItem
 } from "material-ui"
 import Remove from "material-ui/svg-icons/navigation/close"
+import Tick from "material-ui/svg-icons/action/done"
 import {propertyTypes} from "../../images/propertyPage"
 import featureImages,{building_features,building_facilities,views} from "../../images/features"
 import Dropzone from 'react-dropzone'
-import {postProperty,postPropertyImages,getPropertyDetail} from "../../actionCreators/propertiesDBActionCreators"
+import {putProperty,postPropertyImages,getPropertyDetail} from "../../actionCreators/propertiesDBActionCreators"
 import {getBuildingAddressAutocompletes,getBuildingById} from "../../actionCreators/autocompleteActionCreators"
 import {regions} from "../../constants/districts"
 const tf2val = textfieldRef => textfieldRef.input.value
@@ -31,7 +32,9 @@ class EditPropertyPage extends React.Component {
             forRent: false,
             dataSource: [],
             region: "Hong_Kong_Island",
-            district: ""
+            district: "",
+            oldImages:[],
+            imagesToDelete:{}
         }
     }
 
@@ -81,7 +84,8 @@ class EditPropertyPage extends React.Component {
             features,
             facilities,
             forRent:lease_type==="rent",
-            propertyType:property_type
+            propertyType:property_type,
+            oldImages:images
         })
         this.buildingName.refs.searchTextField.input.value = building_name
         this.streetName.input.value = building_street_name
@@ -135,10 +139,12 @@ class EditPropertyPage extends React.Component {
         this.streetName.input.value = buildingStreetName
     }
     handleSubmit = () => {
-        const {postProperty} = this.props
-        const {region, district,forRent,images} = this.state
+        const {putProperty,propertyDetail,postPropertyImages} = this.props
+        const {property_id} = propertyDetail
+        const {region, district,forRent,images,imagesToDelete} = this.state
         const property_unit_features = Object.keys(this.state.features).filter(key=>this.state.features[key]).join()
         const property_building_features = Object.keys(this.state.facilities).filter(key=>this.state.facilities[key]).join()
+        console.log(Object.keys(imagesToDelete).filter(i=>imagesToDelete[i]).join())
         const data = {
             "building_name": this.buildingName.refs.searchTextField.input.value,
             "building_street_name": tf2val(this.streetName),
@@ -153,21 +159,22 @@ class EditPropertyPage extends React.Component {
             "number_of_bathroom": tf2val(this.numberOfBathrooms),
             "unit_level": this.unitLevel.state.selected,
             "property_unit_features":property_unit_features,
-            "property_building_features":property_building_features
+            "property_building_features":property_building_features,
+
         }
-
-
+        if(Object.keys(imagesToDelete).length>0){
+            data["delete_images"] = Object.keys(imagesToDelete).filter(i=>imagesToDelete[i]).join()
+        }
         if(tf2val(this.salePrice)){
             const sellAttr = {
                 "unit_price":tf2val(this.salePrice),
                 "lease_type":"sell"
             }
             const sellData = Object.assign({},data,sellAttr)
-            postProperty(sellData).then(res=>{
-                const {postPropertyImages} = this.props
-                const newPropertyId = parseInt(res.headers.location.split('/').slice(-1)[0])
-                postPropertyImages(newPropertyId,this.state.images)
-
+            putProperty(property_id,sellData).then(res=>{
+                if(images.length>0){
+                    postPropertyImages(property_id,images)
+                }
             })
 
         }
@@ -181,7 +188,11 @@ class EditPropertyPage extends React.Component {
                 "including_all_bills":this.allowPets.state.switched?"1":"0"
             }
             const rentData = Object.assign({},data,rentAttr)
-            postProperty(rentData)
+            putProperty(property_id,rentData).then(res=>{
+                if(images.length>0){
+                    postPropertyImages(property_id,images)
+                }
+            })
         }
     }
     dataSourceConfig = {
@@ -190,7 +201,6 @@ class EditPropertyPage extends React.Component {
     };
 
     render() {
-        const {propertyDetail} = this.props
         const {features,facilities, propertyType, forRent, dataSource, region, district} = this.state
         return (
             <div style={{width: "100%", display: "flex", flexWrap: "wrap", position: "relative", top: 10}}>
@@ -474,6 +484,35 @@ class EditPropertyPage extends React.Component {
                         onDrop={images => this.setState({images: [...this.state.images, ...images]})}
                         disableClick
                     >
+                        {this.state.oldImages.map((image, index) => {
+                            const isToDelete = this.state.imagesToDelete[image.image_id]
+                            return (
+                                <div key={`oldImage${index}`} style={{position: "relative"}}>
+                                    <div
+                                        className="clickable"
+                                        style={{
+                                            border: "1px solid rgb(221, 223, 226)", borderRadius: 3,
+                                            background: "#1e717f",
+                                            backgroundImage: `url(${image.image_path})`,
+                                            backgroundPosition: "center",
+                                            backgroundSize: "contain",
+                                            backgroundRepeat: "no-repeat",
+                                            width: 160,
+                                            height: 160,
+                                            margin: 10
+                                        }}
+                                    />
+                                    <IconButton
+                                        style={{position: "absolute", top: 5, right: 5}}
+                                        iconStyle={{background: isToDelete?"#35b056":"#cf0001", fill: "#ffffff"}}
+                                        onClick={() => this.setState({imagesToDelete: {...this.state.imagesToDelete,[image.image_id]:!isToDelete}})}
+                                    >
+                                        {isToDelete?<Tick/>:<Remove/>}
+                                    </IconButton>
+                                </div>
+                            )
+
+                        })}
                         {this.state.images.map((image, index) => {
                             return (
                                 <div key={`image${index}`} style={{position: "relative"}}>
@@ -504,7 +543,7 @@ class EditPropertyPage extends React.Component {
                         })}
                     </Dropzone>
                 </div>
-                <FlatButton onClick={() => this.handleSubmit()} label={"add"} fullWidth style={{marginBottom: 20}}/>
+                <FlatButton onClick={() => this.handleSubmit()} label={"update"} fullWidth style={{marginBottom: 20}}/>
             </div>
         )
     }
@@ -513,4 +552,4 @@ class EditPropertyPage extends React.Component {
 const mapStateToProps = (state, props) => ({
     propertyDetail: state.propertiesDBReducer.propertiesDetail[props.match.params.propertyId],
 })
-export default connect(mapStateToProps, {postProperty, getBuildingAddressAutocompletes,getBuildingById,postPropertyImages,getPropertyDetail})(EditPropertyPage)
+export default connect(mapStateToProps, {putProperty, getBuildingAddressAutocompletes,getBuildingById,postPropertyImages,getPropertyDetail})(EditPropertyPage)

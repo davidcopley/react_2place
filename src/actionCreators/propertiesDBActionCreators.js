@@ -99,10 +99,24 @@ export const postPropertyImage = (id,image) => (dispatch,getState) => {
         axios.post(url,formData,headerShit)
             .then(res=>{
                 dispatch(getPropertiesBasic(true))
+                dispatch(getPropertyDetail(id,true))
             })
             .catch(err=>{
                 console.log(err)
             })
     })
-
 }
+
+export const putProperty = (id,data) => (dispatch,getState) => new Promise((resolve,reject) => {
+    const url = `${api}agents/self/properties/${id}`
+    axios.post(url,data,headerShit)
+        .then(res=>{
+            dispatch(getPropertiesBasic(true))
+            dispatch(getPropertyDetail(id,true))
+            dispatch(push("/propertiesTiles"))
+            return resolve(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+})
