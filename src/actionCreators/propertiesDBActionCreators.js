@@ -31,18 +31,21 @@ export const getPropertiesBasic = (force=false) => (dispatch, getState) => {
             })
     }
 }
-export const getPropertyDetail = id => (dispatch,getState) => new Promise((resolve,reject)=>{
+export const getPropertyDetail = (id,force=false) => (dispatch,getState) => new Promise((resolve,reject)=>{
     const url = `${api}properties/${id}`
-    axios.get(url,headerShit)
-        .then(res=>{
-            const {data} = res.data
-            dispatch(addPropertyDetail(id,data))
-            resolve(data)
-        })
-        .catch(err=>{
-            console.log(err)
-            reject(err)
-        })
+    if(!getState().apiHistoryReducer.calledApis[url]||force) {
+        axios.get(url, headerShit)
+            .then(res => {
+                const {data} = res.data
+                dispatch(addCalledApi(url))
+                dispatch(addPropertyDetail(id, data))
+                resolve(data)
+            })
+            .catch(err => {
+                console.log(err)
+                reject(err)
+            })
+    }
 })
 export const getPropertyCoordinatesByAddress = (propertyId,address) => (dispatch,getState) => {
     const url = `http://maps.google.com/maps/api/geocode/json?address=${address}`

@@ -8,8 +8,8 @@ import {FlatButton, TextField} from "material-ui"
 
 import Logo from "../images/1placeLogo.png"
 
-const Topbar =  props => {
-    const {accessToken,signin,signout,push} = props
+const Topbar = props => {
+    const {accessToken, signin, signout, push} = props
     return <div style={{
         position: "fixed",
         height: 60,
@@ -28,11 +28,15 @@ const Topbar =  props => {
             justifyContent: "start",
             alignItems: "center"
         }}>
-            <div style={{
-                height: 40, width: 40, backgroundImage: `url(${Logo})`, backgroundPosition: "center",
-                backgroundSize: "contain",
-                backgroundRepeat: "no-repeat",
-            }}/>
+            <div
+                className="clickable"
+                onClick={() => push("/")}
+                style={{
+                    height: 40, width: 40, backgroundImage: `url(${Logo})`, backgroundPosition: "center",
+                    backgroundSize: "contain",
+                    backgroundRepeat: "no-repeat",
+                }}
+            />
             <span style={{fontSize: 50, color: "#1e717f"}} className="clickable" onClick={() => push("/")}>1PLACE</span>
             <span style={{marginLeft: "auto"}}>
                 {accessToken ?
@@ -65,9 +69,9 @@ const Topbar =  props => {
     </div>
 }
 
-const mapStateToProps=state=>{
+const mapStateToProps = state => {
     return {
-        accessToken:state.authReducer.accessToken
+        accessToken: state.authReducer.accessToken
     }
 }
-export default withRouter(connect(mapStateToProps,{signin,signout,getPropertiesBasic,push})(Topbar))
+export default withRouter(connect(mapStateToProps, {signin, signout, getPropertiesBasic, push})(Topbar))

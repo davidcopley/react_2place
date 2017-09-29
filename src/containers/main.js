@@ -7,6 +7,7 @@ import PropertyPage from "./pages/propertyPage/propertyPage"
 import SignupPage from "./pages/signupPage"
 import AddPropertyPage from "./pages/addPropertyPage"
 import Home from "./pages/homePage"
+import EditPropertyPage from "./pages/editPropertyPage"
 import Topbar from "./topbar"
 import {setAccessToken} from "../actionCreators/authActionCreators"
 class Main extends React.Component{
@@ -32,6 +33,7 @@ class Main extends React.Component{
                         <Route path="/propertyPage/:propertyId" component={PropertyPage}/>
                         <Route path="/signup" component={SignupPage}/>
                         <Route path="/addProperty" component={AddPropertyPage}/>
+                        <Route path="/editProperty/:propertyId" component={EditPropertyPage}/>
                     </div>
                 </div>
             </div>

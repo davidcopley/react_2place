@@ -1,7 +1,10 @@
 import React from "react"
+import {connect} from "react-redux"
+import {push} from "react-router-redux"
 import propertyPageImages from "../../../images/propertyPage/index"
 import commaNumber from "comma-number"
-export default ({propertyDetail: {short_title, unit_price, lease_type, building_name, building_phase_no, building_street_name, building_region, net_unit_size, gross_unit_size, number_of_room, number_of_bathroom, property_type, remark}}) => (
+import {FlatButton} from "material-ui"
+const PropertyPageInformation = ({push,propertyDetail: {property_id,short_title, unit_price, lease_type, building_name, building_phase_no, building_street_name, building_region, net_unit_size, gross_unit_size, number_of_room, number_of_bathroom, property_type, remark}}) => (
     <div style={{
         minHeight: "50vh",
         width:"100%",
@@ -114,9 +117,14 @@ export default ({propertyDetail: {short_title, unit_price, lease_type, building_
                 <span style={{fontSize: 12}}>{property_type.replace(/_/g, " ")}</span>
             </div>
         </div>
-        <div style={{padding: 10}}>
+        <div style={{padding: 10,marginBottom:"auto"}}>
             <span style={{fontSize: 12}}>Description</span><br/>
             {remark}
         </div>
+        <div style={{display:"flex",marginTop:"auto",width:"100%",borderTop: "1px solid rgb(221, 223, 226)"}}>
+            <FlatButton style={{flex:1}} label="edit" onClick={()=>push(`/editProperty/${property_id}`)}/><FlatButton style={{flex:1}} label="delete"/>
+        </div>
     </div>
 )
+
+export default connect(null,{push})(PropertyPageInformation)
