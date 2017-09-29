@@ -10,7 +10,6 @@ import Home from "./pages/homePage"
 import EditPropertyPage from "./pages/editPropertyPage"
 import Topbar from "./topbar"
 import {setAccessToken} from "../actionCreators/authActionCreators"
-import LoadingBar from "react-redux-loading-bar"
 class Main extends React.Component{
     componentWillMount(){
 
@@ -22,7 +21,6 @@ class Main extends React.Component{
     render(){
         return(
             <div style={{minHeight:"100vh",width:"100%",display:"flex",flexDirection:"column"}}>
-                <LoadingBar/>
                 <Topbar/>
                 <div style={{height:60}}/>
                 <div style={{flex:1,height:"100%",width:"100%",display:"flex",justifyContent:"center",marginBottom:"auto"}}>
