@@ -40,7 +40,7 @@ class PropertiesTiles extends React.Component{
     render(){
         const {showSell,showRent} = this.state
         return(
-            <span style={{width:"100%"}}>
+            <div style={{width:"100%"}}>
                 <div style={{height:50,width:"100%",background:"#ffffff",position:"fixed",top:60,zIndex:2,padding:10,display:"flex",flexWrap:"wrap",alignItems:"center"}}>
                     <TextField hintText={"filter text"} style={{width:200,marginRight:10}} onChange={e=>this.setState({filterText:e.target.value})}/>
                     <div>
@@ -51,7 +51,7 @@ class PropertiesTiles extends React.Component{
                 <div style={{display:"flex",flexWrap:"wrap",width:"100%",justifyContent:"space-evenly",top:60,position:"relative"}}>
                     {this.renderProperties()}
                 </div>
-            </span>
+            </div>
         )
     }
 }

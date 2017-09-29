@@ -24,8 +24,8 @@ class PropertyPage extends React.Component {
         return (
             <div style={{width: "100%", display: "flex", flexDirection: "column", justifyContent:"center"}}>
                 <div style={{minHeight:"50vh",display:"flex",flexWrap:"wrap",width:"100%"}}>
-                    <div style={{flex:1,minWidth:500}}><PropertyPageAlbum propertyDetail={propertyDetail}/></div>
-                    <div style={{flex:1,minWidth:500}}><PropertyPageInformation propertyDetail={propertyDetail}/></div>
+                    <div style={{flex:1,minWidth:300}}><PropertyPageAlbum propertyDetail={propertyDetail}/></div>
+                    <div style={{flex:1,minWidth:300}}><PropertyPageInformation propertyDetail={propertyDetail}/></div>
                 </div>
                 <PropertyPageStuffToShow propertyDetail={propertyDetail} propertyCoordinates={propertyCoordinates}/>
             </div>

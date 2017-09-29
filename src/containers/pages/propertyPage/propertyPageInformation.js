@@ -14,14 +14,15 @@ const PropertyPageInformation = ({push,propertyDetail: {property_id,short_title,
         flexDirection: "column",
     }}>
         <div style={{padding: 10}}>
-            <div style={{fontSize: 20, borderBottom: "1px solid rgb(221, 223, 226)"}}>
+            <div style={{fontSize: 20, borderBottom: "1px solid rgb(221, 223, 226)",wordBreak:"break-all"}}>
                 <span style={{fontSize: 12}}>Short title</span><br/>
                 {short_title}
             </div>
             <div style={{
                 fontSize: 15,
                 paddingTop: 10,
-                borderBottom: "1px solid rgb(221, 223, 226)"
+                borderBottom: "1px solid rgb(221, 223, 226)",
+                wordBreak:"break-all"
             }}>
                 <span style={{fontSize: 12}}>Unit price</span><br/>
                 ${commaNumber(unit_price)} {lease_type === "rent" && <span>per month</span>}
@@ -29,7 +30,8 @@ const PropertyPageInformation = ({push,propertyDetail: {property_id,short_title,
             <div style={{
                 fontSize: 15,
                 paddingTop: 10,
-                borderBottom: "1px solid rgb(221, 223, 226)"
+                borderBottom: "1px solid rgb(221, 223, 226)",
+                wordBreak:"break-all"
             }}>
                 <span style={{fontSize: 12}}>Building name</span><br/>
                 {building_name} {building_phase_no}
@@ -37,7 +39,8 @@ const PropertyPageInformation = ({push,propertyDetail: {property_id,short_title,
             <div style={{
                 fontSize: 14,
                 paddingTop: 10,
-                borderBottom: "1px solid rgb(221, 223, 226)"
+                borderBottom: "1px solid rgb(221, 223, 226)",
+                wordBreak:"break-all"
             }}>
                 <span style={{fontSize: 12}}>Address</span><br/>
                 {building_street_name}<br/>{building_region.replace(/_/g, ' ')}<br/>

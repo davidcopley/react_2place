@@ -35,6 +35,8 @@ const Topbar = props => {
                     height: 40, width: 40, backgroundImage: `url(${Logo})`, backgroundPosition: "center",
                     backgroundSize: "contain",
                     backgroundRepeat: "no-repeat",
+                    minWidth:40,
+                    minHeight:40
                 }}
             />
             <span style={{fontSize: 50, color: "#1e717f"}} className="clickable" onClick={() => push("/")}>1PLACE</span>
