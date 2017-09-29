@@ -133,10 +133,11 @@ class PropertyPageStuffToShow extends React.Component{
         }
     }
     render(){
-        const {stuffToShow,propertyDetail} = this.props
+        const {propertyDetail} = this.props
+        const {stuffToShow} = this.state
         const {lease_type} = propertyDetail
         return(
-            <span>
+            <span style={{width:"100%"}}>
                 <div style={{display: "flex", width: "100%"}}>
                     <FlatButton
                         style={{

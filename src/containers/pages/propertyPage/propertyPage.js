@@ -22,7 +22,7 @@ class PropertyPage extends React.Component {
             return <div>Loading</div>
         }
         return (
-            <div style={{width: "100%", height: "100%", display: "flex", flexDirection: "column"}}>
+            <div style={{width: "100%", display: "flex", flexDirection: "column", justifyContent:"center"}}>
                 <div style={{minHeight:"50vh",display:"flex",flexWrap:"wrap",width:"100%"}}>
                     <div style={{flex:1,minWidth:500}}><PropertyPageAlbum propertyDetail={propertyDetail}/></div>
                     <div style={{flex:1,minWidth:500}}><PropertyPageInformation propertyDetail={propertyDetail}/></div>

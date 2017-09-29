@@ -48,7 +48,7 @@ class PropertiesTiles extends React.Component{
                         <Checkbox checked={showRent} onCheck={()=>this.setState({showRent:!showRent})} style={{width:90}} label="rent"/>
                     </div>
                 </div>
-                <div style={{display:"flex",flexWrap:"wrap",justifyContent:"space-evenly",top:60,position:"relative"}}>
+                <div style={{display:"flex",flexWrap:"wrap",width:"100%",justifyContent:"space-evenly",top:60,position:"relative"}}>
                     {this.renderProperties()}
                 </div>
             </span>

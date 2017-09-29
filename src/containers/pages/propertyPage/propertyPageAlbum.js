@@ -2,7 +2,7 @@ import React from "react"
 import emptyPropertyImagePlaceholder from "../../../images/emptyPropertyImagePlaceholder.jpg"
 import Left from "material-ui/svg-icons/hardware/keyboard-arrow-left"
 import Right from "material-ui/svg-icons/hardware/keyboard-arrow-right"
-import {IconButton,} from "material-ui"
+import {IconButton,Chip} from "material-ui"
 
 class PropertyPageAlbum extends React.Component{
     constructor(props){
@@ -21,7 +21,7 @@ class PropertyPageAlbum extends React.Component{
     render(){
         const {currentImageIndex} = this.state
         const {propertyDetail} = this.props
-        const {images} = propertyDetail
+        const {images,lease_type} = propertyDetail
         const imageUrls = images.map(image => image.image_path)
         const currentImage = imageUrls[currentImageIndex]
         return(
@@ -53,6 +53,15 @@ class PropertyPageAlbum extends React.Component{
                             </IconButton>
                         </span>
                     }
+                    <Chip style={{
+                        position: "absolute",
+                        top: 10,
+                        left: 10,
+                        height: 20,
+                        display: "flex",
+                        alignItems: "center",
+                        border:"1px solid rgb(233, 235, 238)"
+                    }} labelStyle={{color:"#1e717f",}}>{lease_type}</Chip>
                 </div>
                 <div style={{
                     height: "auto",
