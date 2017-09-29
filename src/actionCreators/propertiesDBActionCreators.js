@@ -49,7 +49,6 @@ export const getPropertyCoordinatesByAddress = (propertyId,address) => (dispatch
             .then(res=>{
                 dispatch(addCalledApi(url))
                 const {data} =res
-                console.log(res)
                 if(data.results&&data.results[0]){
                     const coordinates = data.results[0].geometry.location
                     dispatch(addPropertyCoordinates(propertyId,coordinates))

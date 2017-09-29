@@ -14,7 +14,7 @@ import {
 } from "material-ui"
 import Remove from "material-ui/svg-icons/navigation/close"
 import {propertyTypes} from "../../images/propertyPage"
-import featureImages from "../../images/features"
+import featureImages,{building_features,building_facilities,views} from "../../images/features"
 import Dropzone from 'react-dropzone'
 import {postProperty} from "../../actionCreators/propertiesDBActionCreators"
 import {getBuildingAddressAutocompletes,getBuildingById} from "../../actionCreators/autocompleteActionCreators"
@@ -26,6 +26,7 @@ class AddPropertyPage extends React.Component {
         this.state = {
             images: [],
             features: {},
+            facilities: {},
             propertyType: "apartment",
             forRent: false,
             dataSource: [],
@@ -38,6 +39,12 @@ class AddPropertyPage extends React.Component {
         features: {
             ...this.state.features,
             [feature]: !this.state.features[feature]
+        }
+    })
+    setFacilities = facility => this.setState({
+        facilities:{
+            ...this.state.facilities,
+            [facility]: !this.state.facilities[facility]
         }
     })
     setPropertyType = propertyType => this.setState({propertyType: propertyType})
@@ -64,7 +71,7 @@ class AddPropertyPage extends React.Component {
     }
     handleSubmit = () => {
         const {postProperty} = this.props
-        const {region, district} = this.state
+        const {region, district,forRent} = this.state
         const data = {
             "building_name": this.buildingName.refs.searchTextField.input.value,
             "building_street_name": tf2val(this.streetName),
@@ -73,16 +80,35 @@ class AddPropertyPage extends React.Component {
             "property_type": this.state.propertyType,
             "short_title": tf2val(this.shortTitle),
             "remark": tf2val(this.remark),
-            "unit_price": tf2val(this.salePrice),
-            "rent_price": tf2val(this.rentPrice),
             "net_unit_size": tf2val(this.saleableArea),
             "gross_unit_size": tf2val(this.grossArea),
             "number_of_room": tf2val(this.numberOfRooms),
             "number_of_bathroom": tf2val(this.numberOfBathrooms),
-            "lease_type": "sell",
             "unit_level": this.unitLevel.state.selected
         }
-        postProperty(data)
+
+
+        if(tf2val(this.salePrice)){
+            const sellAttr = {
+                "unit_price":tf2val(this.salePrice),
+                "lease_type":"sell"
+            }
+            const sellData = Object.assign({},data,sellAttr)
+            postProperty(sellData)
+
+        }
+        if(forRent){
+            const rentAttr = {
+                "unit_price":tf2val(this.rentPrice),
+                "lease_type":"rent",
+                "rental_start_time":this.startDate.refs.input.input.value,
+                "is_short_terms_rental":this.isShortTermRental.state.switched?"1":"0",
+                "allows_pets":this.allowPets.state.switched?"1":"0",
+                "including_all_bills":this.allowPets.state.switched?"1":"0"
+            }
+            const rentData = Object.assign({},data,rentAttr)
+            postProperty(rentData)
+        }
     }
     dataSourceConfig = {
         text: 'address',
@@ -90,7 +116,7 @@ class AddPropertyPage extends React.Component {
     };
 
     render() {
-        const {features, propertyType, forRent, dataSource, region, district} = this.state
+        const {features,facilities, propertyType, forRent, dataSource, region, district} = this.state
         return (
             <div style={{width: "100%", display: "flex", flexWrap: "wrap", position: "relative", top: 10}}>
                 <div style={{
@@ -119,7 +145,7 @@ class AddPropertyPage extends React.Component {
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Street name</span>
-                        <TextField ref={x => this.streetName = x} fullWidth/>
+                        <TextField key='streetName' ref={x => this.streetName = x} fullWidth/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Region</span>
@@ -167,18 +193,18 @@ class AddPropertyPage extends React.Component {
                     <span style={{fontSize: 13}}>Unit level</span>
                     <RadioButtonGroup defaultSelected={"middle"} ref={x => this.unitLevel = x} name="unit_level"
                                       style={{display: 'flex', justifyContent: "space-evenly"}}>
-                        <RadioButton label="high" value={"high"} style={{width: 100}}/>
-                        <RadioButton label="middle" value={"middle"} style={{width: 100}}/>
-                        <RadioButton label="low" value={"low"} style={{width: 100}}/>
+                        <RadioButton labelStyle={{fontSize:13}} label="high" value={"high"} style={{width: 100}}/>
+                        <RadioButton labelStyle={{fontSize:13}} label="middle" value={"middle"} style={{width: 100}}/>
+                        <RadioButton labelStyle={{fontSize:13}} label="low" value={"low"} style={{width: 100}}/>
                     </RadioButtonGroup>
                     <span style={{fontSize: 13}}>Description</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Short title</span>
-                        <TextField ref={x => this.shortTitle = x} fullWidth/>
+                        <TextField key="shortTitle" ref={x => this.shortTitle = x} fullWidth/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Description</span>
-                        <TextField ref={x => this.remark = x} fullWidth/>
+                        <TextField key="remark" ref={x => this.remark = x} fullWidth/>
                     </div>
                 </div>
                 <div style={{
@@ -192,11 +218,11 @@ class AddPropertyPage extends React.Component {
                     <span style={{fontSize: 13}}>Price</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Sale price</span>
-                        <TextField ref={x => this.salePrice = x} fullWidth type={"number"}/>
+                        <TextField key="salePrice" ref={x => this.salePrice = x} fullWidth type={"number"}/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Rent price</span>
-                        <TextField ref={x => this.rentPrice = x}
+                        <TextField key='rentPrice' ref={x => this.rentPrice = x}
                                    onChange={e => this.setState({forRent: !!e.target.value})}
                                    fullWidth type={"number"}/></div>
                     {forRent &&
@@ -219,18 +245,18 @@ class AddPropertyPage extends React.Component {
                     <span style={{fontSize: 13}}>Size</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Saleable area (ft²)</span>
-                        <TextField ref={x => this.saleableArea = x} fullWidth
+                        <TextField key="saleableArea" ref={x => this.saleableArea = x} fullWidth
                                    type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Gross area (ft²)</span>
-                        <TextField ref={x => this.grossArea = x} fullWidth type={"number"}/></div>
+                        <TextField key="grossArea" ref={x => this.grossArea = x} fullWidth type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Number of rooms</span>
-                        <TextField ref={x => this.numberOfRooms = x} fullWidth
+                        <TextField key="numberOfRooms" ref={x => this.numberOfRooms = x} fullWidth
                                    type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Number of bathrooms</span>
-                        <TextField ref={x => this.numberOfBathrooms = x} fullWidth
+                        <TextField key="numberOfBathrooms" ref={x => this.numberOfBathrooms = x} fullWidth
                                    type={"number"}/></div>
                 </div>
                 <div style={{
@@ -240,7 +266,8 @@ class AddPropertyPage extends React.Component {
                     border: "1px solid rgb(221, 223, 226)",
                     borderRadius: 3,
                 }}>
-                    <span>Features</span>
+                    <span>Features</span><br/>
+                    <span style={{fontSize:13}}>Building features</span>
                     <div style={{
                         display: "flex",
                         justifyContent: "space-evenly",
@@ -248,7 +275,77 @@ class AddPropertyPage extends React.Component {
                         marginBottom: 10,
                         flexWrap: "wrap"
                     }}>
-                        {Object.keys(featureImages).map(feature => {
+                        {Object.keys(building_features).map(feature => {
+                            return (
+                                <div key={`feature${feature}`} className="clickable" style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    width: 150,
+                                    height: 100,
+                                }}
+                                     onClick={() => this.setFeature(feature)}
+                                >
+                                    <div
+                                        style={{
+                                            backgroundImage: `url(${featureImages[feature]})`,
+                                            backgroundPosition: "center",
+                                            backgroundSize: "contain",
+                                            backgroundRepeat: "no-repeat",
+                                            width: 50,
+                                            height: 50,
+                                            filter: features[feature] ? undefined : "grayscale(100%) opacity(15%)"
+                                        }}
+                                    />
+                                    <span style={{fontSize: 12}}>{feature.replace(/_/g, ' ')}</span>
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <span style={{fontSize:13}}>Facilities</span>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        marginTop: 10,
+                        marginBottom: 10,
+                        flexWrap: "wrap"
+                    }}>
+                        {Object.keys(building_facilities).map(facility => {
+                            return (
+                                <div key={`feature${facility}`} className="clickable" style={{
+                                    display: "flex",
+                                    flexDirection: "column",
+                                    alignItems: "center",
+                                    width: 150,
+                                    height: 100,
+                                }}
+                                     onClick={() => this.setFacilities(facility)}
+                                >
+                                    <div
+                                        style={{
+                                            backgroundImage: `url(${building_facilities[facility]})`,
+                                            backgroundPosition: "center",
+                                            backgroundSize: "contain",
+                                            backgroundRepeat: "no-repeat",
+                                            width: 50,
+                                            height: 50,
+                                            filter: facilities[facility] ? undefined : "grayscale(100%) opacity(15%)"
+                                        }}
+                                    />
+                                    <span style={{fontSize: 12}}>{facility.replace(/_/g, ' ')}</span>
+                                </div>
+                            )
+                        })}
+                    </div>
+                    <span style={{fontSize:13}}>Views</span>
+                    <div style={{
+                        display: "flex",
+                        justifyContent: "space-evenly",
+                        marginTop: 10,
+                        marginBottom: 10,
+                        flexWrap: "wrap"
+                    }}>
+                        {Object.keys(views).map(feature => {
                             return (
                                 <div key={`feature${feature}`} className="clickable" style={{
                                     display: "flex",

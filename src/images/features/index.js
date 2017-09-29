@@ -57,3 +57,36 @@ export default {
     url,
     village_house
 }
+
+export const views = {
+    building_view,
+    city_view,
+    garden_view,
+    mountain_view,
+    open_view,
+    private_washroom,
+    racecourse_view,
+    sea_view,
+}
+
+export const building_facilities = {
+    clubhouse,
+    gym,
+    maids_quarter,
+    near_subway,
+    parking,
+    pets,
+    pool
+}
+
+export const building_features = {
+    balcony,
+    duplex,
+    furnished,
+    garden,
+    last_renovated,
+    private_washroom,
+    roof_top,
+    shared_washroom,
+    terrace
+}

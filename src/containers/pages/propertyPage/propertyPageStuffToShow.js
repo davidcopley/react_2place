@@ -16,7 +16,6 @@ const MapWithAMarker = compose(
     withGoogleMap
 )(props => {
     const {propertyCoordinates} = props
-    console.log(propertyCoordinates)
     return (
         <GoogleMap
             defaultZoom={20}
