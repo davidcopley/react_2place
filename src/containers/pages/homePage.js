@@ -10,23 +10,23 @@ const Home = props => {
         <div style={{width: "100%", height: "100%", display: "flex", flexWrap: "wrap",justifyContent:"space-evenly"}}>
             <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                 <IconButton
-                    style={{width: 300,height:250}}
+                    style={{width: 300,height:300}}
                     iconStyle={{width: "100%", height: "100%",fill:"#1e717f"}}
                     onClick={() => push("/propertiesTiles")}
                 >
                     <Tiles/>
                 </IconButton>
-                <div style={{textAlign:"center",width:"100%"}}>Property tiles</div>
+                <div style={{textAlign:"center",width:"100%",position:"relative",top:-50}}>Property tiles</div>
             </div>
             <div style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
                 <IconButton
-                    style={{width: 300,height:250}}
+                    style={{width: 300,height:300}}
                     iconStyle={{width: "100%", height: "100%",fill:"#1e717f"}}
                     onClick={() => push("/addProperty")}
                 >
                     <Add/>
                 </IconButton>
-                <div style={{textAlign:"center",width:"100%"}}>Add new property</div>
+                <div style={{textAlign:"center",width:"100%",position:"relative",top:-50}}>Add new property</div>
             </div>
         </div>
     )
