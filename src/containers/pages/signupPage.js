@@ -41,28 +41,28 @@ class Signup extends React.Component{
     }
 
     handleSignup = () => {
-        const {
-            display_name,
-            email,
-            username,
-            password,
-            password_confirmation,
-            firstname,
-            lastname,
-            salutation,
-            phone,
-            phone_verify_code,
-            license_number,
-            agency,
-            my_usage_of_property,
-            referee_code,
-            max_sell_price,
-            min_sell_price,
-            speaks_chinese,
-            speaks_english,
-            my_region,
-            profilepic
-        } = data
+        // const {
+        //     display_name,
+        //     email,
+        //     username,
+        //     password,
+        //     password_confirmation,
+        //     firstname,
+        //     lastname,
+        //     salutation,
+        //     phone,
+        //     phone_verify_code,
+        //     license_number,
+        //     agency,
+        //     my_usage_of_property,
+        //     referee_code,
+        //     max_sell_price,
+        //     min_sell_price,
+        //     speaks_chinese,
+        //     speaks_english,
+        //     my_region,
+        //     profilepic
+        // } = data
     }
 
     rotateLeft = e => {
