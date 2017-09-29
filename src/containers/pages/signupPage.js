@@ -104,7 +104,7 @@ class Signup extends React.Component {
         return (
             <div style={{display: "flex", flexWrap: "wrap", position: "relative", top: 10, width: "100%"}}>
                 <div style={{
-                    minWidth: 250,
+                    minWidth: 300,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -151,37 +151,37 @@ class Signup extends React.Component {
                     <div style={{padding: 10}}>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Email</span>
-                            <TextField fullWidth hintText={"email"} type={"email"}/>
+                            <TextField fullWidth type={"email"}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Password</span>
-                            <TextField fullWidth hintText={"password"} type={"password"}/>
+                            <TextField fullWidth type={"password"}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Display name</span>
-                            <TextField fullWidth hintText={"display name"}/>
+                            <TextField fullWidth/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div style={{display: "flex", alignItems: "center", width: "100%"}}>
                                 <span style={{fontSize: 13, minWidth: 100}}>Phone number</span>
-                                <TextField fullWidth hintText={"phone number"} type={"tel"}/>
+                                <TextField fullWidth type={"tel"}/>
                             </div>
                             <FlatButton style={{color: "#1e717f"}}>Send code</FlatButton>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div style={{display: "flex", alignItems: "center", width: "100%"}}>
                                 <span style={{fontSize: 13, minWidth: 100}}>Verification code</span>
-                                <TextField fullWidth hintText={"verification code"} type={"tel"}/>
+                                <TextField fullWidth type={"tel"}/>
                             </div>
                             <FlatButton style={{color: "#1e717f"}}>Verify</FlatButton>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Agent license</span>
-                        <TextField fullWidth hintText={"agent license (e.g. A-123456)"}/>
+                        <TextField fullWidth hintText={"e.g. A-123456"}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Agency</span>
-                        <TextField fullWidth hintText={"agency"}/>
+                        <TextField fullWidth/>
                         </div>
                         <br/>
                         <span style={{fontSize: 13, minWidth: 100}}>Districts you cover</span>
@@ -258,7 +258,7 @@ class Signup extends React.Component {
                         </div>}
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Promotion code</span>
-                        <TextField fullWidth hintText={"promotion code"}/>
+                        <TextField fullWidth/>
                         </div>
                         <FlatButton fullWidth style={{color: "#1e717f"}}>Submit</FlatButton>
                     </div>
