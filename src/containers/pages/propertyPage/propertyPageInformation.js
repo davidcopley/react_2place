@@ -122,7 +122,7 @@ const PropertyPageInformation = ({push,propertyDetail: {property_id,short_title,
             {remark}
         </div>
         <div style={{display:"flex",marginTop:"auto",width:"100%",borderTop: "1px solid rgb(221, 223, 226)"}}>
-            <FlatButton style={{flex:1}} label="edit" onClick={()=>push(`/editProperty/${property_id}`)}/><FlatButton style={{flex:1}} label="delete"/>
+            <FlatButton style={{flex:1,borderRight: "1px solid rgb(221, 223, 226)"}} label="edit" onClick={()=>push(`/editProperty/${property_id}`)}/><FlatButton style={{flex:1}} label="delete"/>
         </div>
     </div>
 )

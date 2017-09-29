@@ -113,7 +113,7 @@ export const putProperty = (id,data) => (dispatch,getState) => new Promise((reso
         .then(res=>{
             dispatch(getPropertiesBasic(true))
             dispatch(getPropertyDetail(id,true))
-            dispatch(push("/propertiesTiles"))
+            dispatch(push(`/propertyPage/${id}`))
             return resolve(res)
         })
         .catch(err=>{

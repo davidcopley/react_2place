@@ -115,7 +115,11 @@ class AddPropertyPage extends React.Component {
                 "including_all_bills":this.allowPets.state.switched?"1":"0"
             }
             const rentData = Object.assign({},data,rentAttr)
-            postProperty(rentData)
+            postProperty(rentData).then(res=>{
+                const {postPropertyImages} = this.props
+                const newPropertyId = parseInt(res.headers.location.split('/').slice(-1)[0])
+                postPropertyImages(newPropertyId,this.state.images)
+            })
         }
     }
     dataSourceConfig = {
