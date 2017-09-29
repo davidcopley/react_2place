@@ -16,7 +16,7 @@ import Remove from "material-ui/svg-icons/navigation/close"
 import {propertyTypes} from "../../images/propertyPage"
 import featureImages,{building_features,building_facilities,views} from "../../images/features"
 import Dropzone from 'react-dropzone'
-import {postProperty} from "../../actionCreators/propertiesDBActionCreators"
+import {postProperty,postPropertyImages} from "../../actionCreators/propertiesDBActionCreators"
 import {getBuildingAddressAutocompletes,getBuildingById} from "../../actionCreators/autocompleteActionCreators"
 import {regions} from "../../constants/districts"
 const tf2val = textfieldRef => textfieldRef.input.value
@@ -65,13 +65,12 @@ class AddPropertyPage extends React.Component {
             })
         let buildingName, buildingStreetName
         [buildingName, buildingStreetName] = value.address.split(",")
-        console.log(this.buildingName)
         this.buildingName.refs.searchTextField.input.value = buildingName
         this.streetName.input.value = buildingStreetName
     }
     handleSubmit = () => {
         const {postProperty} = this.props
-        const {region, district,forRent} = this.state
+        const {region, district,forRent,images} = this.state
         const property_unit_features = Object.keys(this.state.features).filter(key=>this.state.features[key]).join()
         const property_building_features = Object.keys(this.state.facilities).filter(key=>this.state.facilities[key]).join()
         const data = {
@@ -98,7 +97,12 @@ class AddPropertyPage extends React.Component {
                 "lease_type":"sell"
             }
             const sellData = Object.assign({},data,sellAttr)
-            postProperty(sellData)
+            postProperty(sellData).then(res=>{
+                const {postPropertyImages} = this.props
+                const newPropertyId = parseInt(res.headers.location.split('/').slice(-1)[0])
+                postPropertyImages(newPropertyId,this.state.images)
+
+            })
 
         }
         if(forRent){
@@ -222,11 +226,11 @@ class AddPropertyPage extends React.Component {
                     <span style={{fontSize: 13}}>Price</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Sale price</span>
-                        <TextField key="salePrice" ref={x => this.salePrice = x} fullWidth type={"number"}/>
+                        <TextField min={0} key="salePrice" ref={x => this.salePrice = x} fullWidth type={"number"}/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Rent price</span>
-                        <TextField key='rentPrice' ref={x => this.rentPrice = x}
+                        <TextField min={0} key='rentPrice' ref={x => this.rentPrice = x}
                                    onChange={e => this.setState({forRent: !!e.target.value})}
                                    fullWidth type={"number"}/></div>
                     {forRent &&
@@ -249,18 +253,18 @@ class AddPropertyPage extends React.Component {
                     <span style={{fontSize: 13}}>Size</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Saleable area (ft²)</span>
-                        <TextField key="saleableArea" ref={x => this.saleableArea = x} fullWidth
+                        <TextField min={0} key="saleableArea" ref={x => this.saleableArea = x} fullWidth
                                    type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Gross area (ft²)</span>
-                        <TextField key="grossArea" ref={x => this.grossArea = x} fullWidth type={"number"}/></div>
+                        <TextField min={0} key="grossArea" ref={x => this.grossArea = x} fullWidth type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Number of rooms</span>
-                        <TextField key="numberOfRooms" ref={x => this.numberOfRooms = x} fullWidth
+                        <TextField min={0} key="numberOfRooms" ref={x => this.numberOfRooms = x} fullWidth
                                    type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>Number of bathrooms</span>
-                        <TextField key="numberOfBathrooms" ref={x => this.numberOfBathrooms = x} fullWidth
+                        <TextField min={0} key="numberOfBathrooms" ref={x => this.numberOfBathrooms = x} fullWidth
                                    type={"number"}/></div>
                 </div>
                 <div style={{
@@ -388,6 +392,7 @@ class AddPropertyPage extends React.Component {
                     <FlatButton style={{fontSize: 13}} fullWidth onClick={() => this.dz.open()}>add
                         image(s)</FlatButton>
                     <Dropzone
+                        accept={'image/*'}
                         ref={dz => this.dz = dz}
                         style={{
                             minHeight: 100,
@@ -436,4 +441,4 @@ class AddPropertyPage extends React.Component {
         )
     }
 }
-export default connect(null, {postProperty, getBuildingAddressAutocompletes,getBuildingById})(AddPropertyPage)
+export default connect(null, {postProperty, getBuildingAddressAutocompletes,getBuildingById,postPropertyImages})(AddPropertyPage)
