@@ -117,7 +117,7 @@ const PropertyPageInformation = ({push,propertyDetail: {property_id,short_title,
                 <span style={{fontSize: 12}}>{property_type.replace(/_/g, " ")}</span>
             </div>
         </div>
-        <div style={{padding: 10,marginBottom:"auto"}}>
+        <div style={{padding: 10,marginBottom:"auto",wordBreak:"break-all"}}>
             <span style={{fontSize: 12}}>Description</span><br/>
             {remark}
         </div>
