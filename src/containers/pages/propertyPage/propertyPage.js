@@ -11,8 +11,8 @@ class PropertyPage extends React.Component {
         const propertyId = this.props.match.params.propertyId
         getPropertyDetail(propertyId)
             .then(res => {
-                const {building_name, building_region, building_street_name} = res
-                const address = `${building_name}, ${building_street_name}, ${building_region.replace(/_/g, " ")}`
+                const {building_name,building_district, building_region, building_street_name} = res
+                const address = `${building_name.replace(/ /g,"_")}, ${building_street_name.replace(/ /g,"_")},${building_district}, ${building_region.replace(/_/g, " ")}`
                 getPropertyCoordinatesByAddress(propertyId, address)
             })
     }
