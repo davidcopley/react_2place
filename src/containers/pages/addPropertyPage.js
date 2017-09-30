@@ -106,12 +106,8 @@ class AddPropertyPage extends React.Component {
                 const {postPropertyImages} = this.props
                 const newPropertyId = parseInt(res.headers.location.split('/').slice(-1)[0])
                 postPropertyImages(newPropertyId,this.state.images)
-                    .catch(err=>{
-                        console.log("ERROR")
-                        console.log(err.message.split(","))
-                    })
-
             }).catch(err=>{
+                console.log(err)
                 this.setState({errors:err.response.data.errors})
             })
 
