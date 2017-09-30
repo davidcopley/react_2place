@@ -104,7 +104,7 @@ export default {
     "property": {en: 'Property', zh: '物業'},
     PriceSize: {en: 'Price & size', zh: '價錢 & 面積'},
     Unit: {en: 'UNIT', zh: '單位'},
-    Photo: {en: 'PHOTO', zh: '相片'},
+    Photo: {en: 'Photos', zh: '相片'},
     Finish: {en: 'FINISH', zh: '完成'},
     Location: {en: 'LOCATION*', zh: '地點*'},
     PropertyType: {en: 'Property type', zh: '物業類型'},
@@ -324,5 +324,7 @@ export default {
     submit:{en:"submit",zh:"確定"},
     forgotPassword:{en:"forgot password",zh:"忘記密碼"},
     filterText:{en:"filter text",zh:"過濾字眼"},
-    loading:{en:"loading",zh:"載入中"}
+    loading:{en:"loading",zh:"載入中"},
+    addImages:{en:"add image(s)",zh:"上載照片"},
+    update:{en:"update",zh:"更新"}
 }

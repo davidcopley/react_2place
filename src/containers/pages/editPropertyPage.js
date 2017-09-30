@@ -357,8 +357,7 @@ class EditPropertyPage extends React.Component {
                     border: "1px solid rgb(221, 223, 226)",
                     borderRadius: 3,
                 }}>
-                    <span>Features</span><br/>
-                    <span style={{fontSize:13}}>Building features</span>
+                    <span style={{fontSize:13}}>{x['facilities'][locale]}</span>
                     <div style={{
                         display: "flex",
                         justifyContent: "space-evenly",
@@ -388,13 +387,13 @@ class EditPropertyPage extends React.Component {
                                             filter: features[feature] ? undefined : "grayscale(100%) opacity(15%)"
                                         }}
                                     />
-                                    <span style={{fontSize: 12}}>{feature.replace(/_/g, ' ')}</span>
+                                    <span style={{fontSize: 12}}>{x[feature][locale]}</span>
                                 </div>
                             )
                         })}
                         {new Array(2).fill(<div style={{width:150}}/>)}
                     </div>
-                    <span style={{fontSize:13}}>Facilities</span>
+                    <span style={{fontSize:13}}>{x['features'][locale]}</span>
                     <div style={{
                         display: "flex",
                         justifyContent: "space-evenly",
@@ -424,13 +423,13 @@ class EditPropertyPage extends React.Component {
                                             filter: facilities[facility] ? undefined : "grayscale(100%) opacity(15%)"
                                         }}
                                     />
-                                    <span style={{fontSize: 12}}>{facility.replace(/_/g, ' ')}</span>
+                                    <span style={{fontSize: 12}}>{x[facility][locale]}</span>
                                 </div>
                             )
                         })}
                         {new Array(2).fill(<div style={{width:150}}/>)}
                     </div>
-                    <span style={{fontSize:13}}>Views</span>
+                    <span style={{fontSize:13}}>{x['views'][locale]}</span>
                     <div style={{
                         display: "flex",
                         justifyContent: "space-evenly",
@@ -460,7 +459,7 @@ class EditPropertyPage extends React.Component {
                                             filter: features[feature] ? undefined : "grayscale(100%) opacity(15%)"
                                         }}
                                     />
-                                    <span style={{fontSize: 12}}>{feature.replace(/_/g, ' ')}</span>
+                                    <span style={{fontSize: 12}}>{x[feature][locale]}</span>
                                 </div>
                             )
                         })}
@@ -474,9 +473,8 @@ class EditPropertyPage extends React.Component {
                     border: "1px solid rgb(221, 223, 226)",
                     borderRadius: 3,
                 }}>
-                    <span>Photos</span>
-                    <FlatButton style={{fontSize: 13}} fullWidth onClick={() => this.dz.open()}>add
-                        image(s)</FlatButton>
+                    <span>{x['Photo'][locale]}</span>
+                    <FlatButton style={{fontSize: 13}} fullWidth onClick={() => this.dz.open()}>{x['addImages'][locale]}</FlatButton>
                     <Dropzone
                         accept={'image/*'}
                         ref={dz => this.dz = dz}
@@ -552,7 +550,7 @@ class EditPropertyPage extends React.Component {
                         <div style={{width:170}}/>
                     </Dropzone>
                 </div>
-                <FlatButton onClick={() => this.handleSubmit()} label={"update"} fullWidth style={{marginBottom: 20}}/>
+                <FlatButton onClick={() => this.handleSubmit()} label={x['update'][locale]} fullWidth style={{marginBottom: 20}}/>
             </div>
         )
     }
