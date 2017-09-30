@@ -4,6 +4,7 @@ import {getPropertyDetail, getPropertyCoordinatesByAddress} from "../../../actio
 import PropertyPageStuffToShow from "./propertyPageStuffToShow"
 import PropertyPageAlbum from "./propertyPageAlbum"
 import PropertyPageInformation from "./propertyPageInformation"
+import x from "../../../constants/locale"
 class PropertyPage extends React.Component {
     componentDidMount() {
         const {getPropertyDetail, getPropertyCoordinatesByAddress} = this.props
@@ -17,9 +18,9 @@ class PropertyPage extends React.Component {
     }
 
     render() {
-        const {propertyDetail,propertyCoordinates} = this.props
+        const {propertyDetail,propertyCoordinates,locale} = this.props
         if (!propertyDetail) {
-            return <div>Loading</div>
+            return <div>{x["loading"][locale]}</div>
         }
         return (
             <div style={{width: "100%", display: "flex", flexDirection: "column", justifyContent:"center"}}>
@@ -35,5 +36,6 @@ class PropertyPage extends React.Component {
 const mapStateToProps = (state, props) => ({
     propertyDetail: state.propertiesDBReducer.propertiesDetail[props.match.params.propertyId],
     propertyCoordinates: state.propertiesDBReducer.propertiesCoordinates[props.match.params.propertyId],
+    locale:state.localeReducer.locale
 })
 export default connect(mapStateToProps, {getPropertyDetail, getPropertyCoordinatesByAddress})(PropertyPage)

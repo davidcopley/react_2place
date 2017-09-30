@@ -2,6 +2,7 @@ import React from "react"
 import {connect} from "react-redux"
 import {FlatButton,Avatar,RaisedButton,TextField} from "material-ui"
 import {signin} from "../../actionCreators/authActionCreators"
+import x from "../../constants/locale"
 class AccountBlock extends React.Component {
     constructor(props){
         super(props)
@@ -17,10 +18,10 @@ class AccountBlock extends React.Component {
     }
     render() {
         const {open} = this.state
-        const {accessToken,signin} = this.props
+        const {accessToken,signin,locale} = this.props
         return (
             <span>
-                <FlatButton onClick={()=>this.setState({open:!open})} style={{color:"#1e717f"}}>sign-in</FlatButton>
+                <FlatButton onClick={()=>this.setState({open:!open})} style={{color:"#1e717f"}}>{x["signIn"][locale]}</FlatButton>
                 {open&&
                     <div style={{width: "100vw", height: "100vh", position: "fixed", zIndex: 3,maxWidth:1000}}>
                         <div
@@ -63,15 +64,15 @@ class AccountBlock extends React.Component {
                             {!accessToken&&
                                 <span>
                                     <div style={{display: "flex", alignItems: "center"}}>
-                                        <span style={{fontSize: 13, minWidth: 100}}>email</span>
+                                        <span style={{fontSize: 13, minWidth: 100}}>{x["emailInput"][locale]}</span>
                                         <TextField name="email" ref={x=>this.email=x} type={"email"} onKeyPress={e=>e.key==="Enter"&&signin(this.email.input.value,this.password.input.value)}/>
                                     </div>
                                     <div style={{display: "flex", alignItems: "center"}}>
-                                        <span style={{fontSize: 13, minWidth: 100}}>password</span>
+                                        <span style={{fontSize: 13, minWidth: 100}}>{x["passwordInput"][locale]}</span>
                                         <TextField name="password" ref={x=>this.password=x} type={"password"} onKeyPress={e=>e.key==="Enter"&&signin(this.email.input.value,this.password.input.value)}/>
                                     </div>
-                                    <FlatButton fullWidth style={{fontSize:13}} onClick={()=>signin(this.email.input.value,this.password.input.value)}>submit</FlatButton>
-                                    <FlatButton fullWidth style={{fontSize:13}}>forgot password</FlatButton>
+                                    <FlatButton fullWidth style={{fontSize:13}} onClick={()=>signin(this.email.input.value,this.password.input.value)}>{x["submit"][locale]}</FlatButton>
+                                    <FlatButton fullWidth style={{fontSize:13}}>{x["forgotPassword"][locale]}</FlatButton>
                                 </span>
                             }
                         </div>
@@ -83,7 +84,7 @@ class AccountBlock extends React.Component {
 }
 
 const mapStateToProps = state => {
-    return {accessToken: state.authReducer.accessToken}
+    return {accessToken: state.authReducer.accessToken,locale: state.localeReducer.locale}
 }
 
 export default connect(mapStateToProps,{signin})(AccountBlock)

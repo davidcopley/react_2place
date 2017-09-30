@@ -10,6 +10,7 @@ import Home from "./pages/homePage"
 import EditPropertyPage from "./pages/editPropertyPage"
 import Topbar from "./topbar"
 import {setAccessToken} from "../actionCreators/authActionCreators"
+
 class Main extends React.Component{
     componentWillMount(){
 
@@ -19,6 +20,7 @@ class Main extends React.Component{
         }
     }
     render(){
+        const {locale} = this.props
         return(
             <div style={{minHeight:"100vh",width:"100%",display:"flex",flexDirection:"column"}}>
                 <Topbar/>
@@ -42,7 +44,8 @@ class Main extends React.Component{
 }
 const mapStateToProps=state=>{
     return {
-        accessToken:state.authReducer.accessToken
+        accessToken:state.authReducer.accessToken,
+        locale:state.localeReducer.locale
     }
 }
 export default withRouter(connect(mapStateToProps,{setAccessToken})(Main))

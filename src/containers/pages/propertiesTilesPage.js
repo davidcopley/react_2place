@@ -5,6 +5,7 @@ import {connect} from "react-redux"
 import PropertyBlock from "../property/propertyBlock"
 import {withRouter} from "react-router-dom"
 import fuzzy from "fuzzy"
+import x from "../../constants/locale"
 class PropertiesTiles extends React.Component{
     constructor(props){
         super(props)
@@ -39,13 +40,14 @@ class PropertiesTiles extends React.Component{
     }
     render(){
         const {showSell,showRent} = this.state
+        const {locale} = this.props
         return(
             <div style={{width:"100%"}}>
                 <div style={{height:50,width:"100%",background:"#ffffff",position:"fixed",top:60,zIndex:2,padding:10,display:"flex",flexWrap:"wrap",alignItems:"center"}}>
-                    <TextField hintText={"filter text"} style={{width:200,marginRight:10}} onChange={e=>this.setState({filterText:e.target.value})}/>
+                    <TextField hintText={x["filterText"][locale]} style={{width:200,marginRight:10}} onChange={e=>this.setState({filterText:e.target.value})}/>
                     <div>
-                        <Checkbox checked={showSell} onCheck={()=>this.setState({showSell:!showSell})} style={{width:90}} label="sell"/>
-                        <Checkbox checked={showRent} onCheck={()=>this.setState({showRent:!showRent})} style={{width:90}} label="rent"/>
+                        <Checkbox checked={showSell} onCheck={()=>this.setState({showSell:!showSell})} style={{width:150}} label={x["sell"][locale]}/>
+                        <Checkbox checked={showRent} onCheck={()=>this.setState({showRent:!showRent})} style={{width:150}} label={x["rent"][locale]}/>
                     </div>
                 </div>
                 <div style={{display:"flex",flexWrap:"wrap",width:"100%",justifyContent:"space-evenly",top:60,position:"relative"}}>
@@ -57,7 +59,8 @@ class PropertiesTiles extends React.Component{
     }
 }
 const mapStateToProps = state => ({
-    propertiesBasic:state.propertiesDBReducer.propertiesBasic
+    propertiesBasic:state.propertiesDBReducer.propertiesBasic,
+    locale: state.localeReducer.locale
 })
 
 export default withRouter(connect(mapStateToProps,{getPropertiesBasic})(PropertiesTiles))

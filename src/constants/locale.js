@@ -1,7 +1,7 @@
 export default {
     "1place":{en:"1PLACE",zh:"一坊"},
-    signIn: {en: 'Sign In', zh: '登入'},
-    signOut: {en: 'Sign Out', zh: '登出'},
+    signIn: {en: 'sign-in', zh: '登入'},
+    signOut: {en: 'sign-out', zh: '登出'},
     pleaseSignin: {en: 'Please Sign In', zh: '請先登入'},
     username: {en: 'Email', zh: '電郵地址'},
     password: {
@@ -17,7 +17,7 @@ export default {
     signinfailure: {en: 'Invalid Email or Password', zh: '無效的電郵地址或密碼'},
     currentUser: {en: 'Current User', zh: '現有用戶'},
     newUser: {en: 'New User', zh: '新用戶'},
-    signup: {en: 'Signup in 1PLACE', zh: '登記使用1PLACE'},
+    signUp: {en: 'sign-up', zh: '登記'},
     profilepic: {en: 'Please provide a Profile Photo', zh: '請提供一張頭像照片'},
     pleasecrop: {en: 'Please crop your image', zh: '你可能需要裁剪你的照片'},
     phone: {
@@ -66,9 +66,9 @@ export default {
         zh: '多謝你使用1PLACE<br/>我們仍然在努力建設此網頁版本中，而現在你可以使用此網頁版管理你的物業.<br/>更多功能將會很快推出！'
     },
     home: {en: 'HOME', zh: '主頁'},
-    myProperties: {en: 'MY PROPERTIES', zh: '我的物業'},
+    myProperties: {en: 'My properties', zh: '我的物業'},
     requests: {en: 'REQUESTS', zh: '客人需求'},
-    addProperty: {en: 'ADD PROPERTY', zh: '添加物業'},
+    addProperty: {en: 'Add property', zh: '添加物業'},
     clients: {en: 'CLIENTS', zh: '客人'},
     propertyDetail: {en: 'PROPERTY DETAIL', zh: '物業資料'},
     studio: {en: 'Studio', zh: '開放式'},
@@ -169,8 +169,8 @@ export default {
     net_size: {en: 'NET SIZE', zh: '實用面積'},
     gross_size: {en: 'GROSS SIZE', zh: '建築面積'},
     LeaseType: {en: 'LEASE TYPE', zh: '放盤類型'},
-    rent: {en: 'RENT', zh: '租盤'},
-    sell: {en: 'SELL', zh: '賣盤'},
+    rent: {en: 'Rent', zh: '租盤'},
+    sell: {en: 'Sell', zh: '賣盤'},
     all: {en: '#All', zh: '#所有'},
     sellPriceRange: {en: 'SELL PRICE RANGE', zh: '賣盤價錢範圍'},
     rentPriceRange: {en: 'RENT PRICE RANGE', zh: '租盤價錢範圍'},
@@ -318,5 +318,11 @@ export default {
     hihi: {en: 'hihih', zh: 'hihih'},
     unit_level:{en:'Unit level',zh:'樓層'},
     address:{en: 'address', zh: '位置'},
-    unableToLocateAddress:{en:"Unable to locate address",zh:'無法找到位置'}
+    unableToLocateAddress:{en:"Unable to locate address",zh:'無法找到位置'},
+    emailInput:{en:"email",zh:"電郵地址"},
+    passwordInput:{en:"password",zh:"密碼"},
+    submit:{en:"submit",zh:"確定"},
+    forgotPassword:{en:"forgot password",zh:"忘記密碼"},
+    filterText:{en:"filter text",zh:"過濾字眼"},
+    loading:{en:"loading",zh:"載入中"}
 }

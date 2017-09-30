@@ -57,6 +57,11 @@ export const getPropertyCoordinatesByAddress = (propertyId,address) => (dispatch
                 if(data.results&&data.results[0]){
                     const coordinates = data.results[0].geometry.location
                     dispatch(addPropertyCoordinates(propertyId,coordinates))
+                }else{
+                    address = address.split(",").slice(1).join(",")
+                    if(address.length>0){
+                        dispatch(getPropertyCoordinatesByAddress(propertyId,address))
+                    }
                 }
             })
             .catch(err=>{

@@ -48,13 +48,13 @@ const Topbar = props => {
                 {accessToken ?
                     <span>
                         <FlatButton onClick={() => signout()} style={{color:"#1e717f"}}>
-                            sign-out
+                            {x["signOut"][locale]}
                         </FlatButton>
                     </span> :
                     <span>
                         <AccountBlock/>
                         <FlatButton onClick={() => push("/signup")} style={{color:"#1e717f"}}>
-                            sign-up
+                            {x["signUp"][locale]}
                         </FlatButton>
                     </span>
                 }

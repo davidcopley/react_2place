@@ -6,7 +6,7 @@ import Left from "material-ui/svg-icons/hardware/keyboard-arrow-left"
 import Right from "material-ui/svg-icons/hardware/keyboard-arrow-right"
 import emptyPropertyImagePlaceholder from "../../images/1placeLogo.png"
 import commaNumber from "comma-number"
-
+import x from "../../constants/locale"
 class PropertyBlock extends React.Component {
     constructor(props) {
         super(props)
@@ -26,7 +26,7 @@ class PropertyBlock extends React.Component {
     urlRegex = /[-a-zA-Z0-9@:%_+.~#?&/=]{2,256}\.[a-z]{2,4}\b(\/[-a-zA-Z0-9@:%_+.~#?&/=]*)?/gi;
 
     render() {
-        const {propertyBasic,property_id,push} = this.props
+        const {propertyBasic,property_id,push,locale} = this.props
         const {currentImageIndex} = this.state
         let {building_name, building_phase_no, building_region, building_street_name} = propertyBasic
         const {images} = propertyBasic
@@ -58,7 +58,7 @@ class PropertyBlock extends React.Component {
                     height: 20,
                     display: "flex",
                     alignItems: "center"
-                }} labelStyle={{color:"#1e717f",}}>{lease_type}</Chip>
+                }} labelStyle={{color:"#1e717f",}}>{x[lease_type][locale]}</Chip>
                 <div style={{display: "flex", width: "100%", height: "100%"}}>
                     <div style={{
                         flex: 1,
@@ -87,7 +87,7 @@ class PropertyBlock extends React.Component {
                         </div>
                         <div style={{height: "auto"}} className="clickable" onClick={()=>push(`/propertyPage/${property_id}`)}>
                             <div style={{padding: 5, textOverflow: "ellipsis", overflow: "hidden", maxWidth: 300}}>
-                                ${commaNumber(unit_price)} {lease_type === "rent" && <span>per month</span>}
+                                ${commaNumber(unit_price)} {lease_type === "rent" && <span>{x["perMonth"][locale]}</span>}
                             </div>
                             <div style={{
                                 padding: 5,
@@ -117,7 +117,9 @@ class PropertyBlock extends React.Component {
 }
 
 const mapStateToProps = (state, props) => ({
-    propertyBasic: state.propertiesDBReducer.propertiesBasic[props.property_id]
+    propertyBasic: state.propertiesDBReducer.propertiesBasic[props.property_id],
+    locale:state.localeReducer.locale
 })
+
 
 export default connect(mapStateToProps, {push})(PropertyBlock)
