@@ -502,7 +502,7 @@ class EditPropertyPage extends React.Component {
                                             backgroundRepeat: "no-repeat",
                                             width: 160,
                                             height: 160,
-                                            margin: 10
+                                            margin: 5
                                         }}
                                     />
                                     <IconButton

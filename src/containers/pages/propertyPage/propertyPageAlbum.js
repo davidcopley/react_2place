@@ -1,5 +1,5 @@
 import React from "react"
-import emptyPropertyImagePlaceholder from "../../../images/emptyPropertyImagePlaceholder.jpg"
+import emptyPropertyImagePlaceholder from "../../../images/1placeLogo.png"
 import Left from "material-ui/svg-icons/hardware/keyboard-arrow-left"
 import Right from "material-ui/svg-icons/hardware/keyboard-arrow-right"
 import {IconButton,Chip} from "material-ui"

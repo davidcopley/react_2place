@@ -4,7 +4,7 @@ import {push} from "react-router-redux"
 import {Chip, IconButton} from "material-ui"
 import Left from "material-ui/svg-icons/hardware/keyboard-arrow-left"
 import Right from "material-ui/svg-icons/hardware/keyboard-arrow-right"
-import emptyPropertyImagePlaceholder from "../../images/emptyPropertyImagePlaceholder.jpg"
+import emptyPropertyImagePlaceholder from "../../images/1placeLogo.png"
 import commaNumber from "comma-number"
 
 class PropertyBlock extends React.Component {
@@ -69,7 +69,7 @@ class PropertyBlock extends React.Component {
                     }}>
                         <div style={{
                             flex: 1,
-                            background: "#1e717f",
+                            background: currentImage?"#1e717f":"#fafafa",
                             backgroundImage: `url(${currentImage || emptyPropertyImagePlaceholder})`,
                             backgroundPosition: "center",
                             backgroundSize: "contain",

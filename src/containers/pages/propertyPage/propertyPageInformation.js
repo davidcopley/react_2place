@@ -4,7 +4,7 @@ import {push} from "react-router-redux"
 import propertyPageImages from "../../../images/propertyPage/index"
 import commaNumber from "comma-number"
 import {FlatButton} from "material-ui"
-const PropertyPageInformation = ({push,propertyDetail: {property_id,short_title, unit_price,unit_level, lease_type, building_name, building_phase_no, building_street_name, building_region, net_unit_size, gross_unit_size, number_of_room, number_of_bathroom, property_type, remark}}) => (
+const PropertyPageInformation = ({push,propertyDetail: {property_id,short_title, unit_price,unit_level, lease_type, building_name, building_phase_no, building_street_name,building_district, building_region, net_unit_size, gross_unit_size, number_of_room, number_of_bathroom, property_type, remark}}) => (
     <div style={{
         minHeight: "50vh",
         width:"100%",
@@ -50,10 +50,11 @@ const PropertyPageInformation = ({push,propertyDetail: {property_id,short_title,
                 fontSize: 14,
                 paddingTop: 10,
                 borderBottom: "1px solid rgb(221, 223, 226)",
-                wordBreak:"break-all"
+                wordBreak:"break-all",
+                textTransform:"capitalize"
             }}>
                 <span style={{fontSize: 12}}>Address</span><br/>
-                {building_street_name}<br/>{building_region.replace(/_/g, ' ')}<br/>
+                {building_street_name}<br/>{building_district.replace(/_/g," ")}<br/>{building_region.replace(/_/g, ' ')}<br/>
             </div>
         </div>
         <br/>

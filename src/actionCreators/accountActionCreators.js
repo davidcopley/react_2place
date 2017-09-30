@@ -1,5 +1,5 @@
 import axios from "axios"
-import {api} from "../constants/api"
+import {api,headerShit} from "../constants/api"
 
 export const postUser = data => (dispatch,getState) => new Promise((resolve,reject) => {
     const url = `${api}agents`
@@ -29,4 +29,15 @@ export const postUser = data => (dispatch,getState) => new Promise((resolve,reje
     Object.keys(data).forEach(key=>{
         formData.append(key,data[key])
     })
+})
+
+export const getUser = () => (dispatch,getState) => new Promise((resolve,reject) => {
+    const url = `${api}agents/self`
+    axios.get(url,headerShit)
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
 })

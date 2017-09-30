@@ -5,6 +5,7 @@ import {withRouter} from "react-router-dom"
 import {signin, signout} from "../actionCreators/authActionCreators"
 import {getPropertiesBasic} from "../actionCreators/propertiesDBActionCreators"
 import {FlatButton, TextField} from "material-ui"
+import AccountBlock from "./blocks/accountBlock"
 
 import Logo from "../images/1placeLogo.png"
 
@@ -43,25 +44,13 @@ const Topbar = props => {
             <span style={{marginLeft: "auto"}}>
                 {accessToken ?
                     <span>
-                        <FlatButton onClick={() => signout()}>
+                        <FlatButton onClick={() => signout()} style={{color:"#1e717f"}}>
                             sign-out
                         </FlatButton>
                     </span> :
                     <span>
-                        <TextField
-                            key={"usernameTextfield"}
-                            style={{width: 150, marginRight: 10}}
-                            hintText={"email"}
-                            type={"email"}
-                            ref={email => this.email = email}
-                        />
-                        <TextField key={"passwordTextfield"} style={{width: 150}} hinttext={"password"}
-                                   type={"password"} ref={password => this.password = password}/>
-                        <FlatButton
-                            onClick={() => signin(this.email.input.value, this.password.input.value)}>
-                            sign-in
-                        </FlatButton>
-                        <FlatButton onClick={() => push("/signup")}>
+                        <AccountBlock/>
+                        <FlatButton onClick={() => push("/signup")} style={{color:"#1e717f"}}>
                             sign-up
                         </FlatButton>
                     </span>

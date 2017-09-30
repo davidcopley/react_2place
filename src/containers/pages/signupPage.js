@@ -1,10 +1,12 @@
 import React from "react"
+import {connect} from "react-redux"
 import ReactAvatarEditor from 'react-avatar-editor'
 import Logo from "../../images/1placeLogo.png"
 import {TextField, FlatButton, Chip, IconButton} from "material-ui"
 import {Hong_Kong_Island, Kowloon, Outlying_Islands, New_Territories} from "../../constants/districts"
 import More from "material-ui/svg-icons/content/add"
 import Less from "material-ui/svg-icons/content/remove"
+import {sendVerificationCode,validateVerificationCode} from "../../actionCreators/phoneVerificationActionCreators"
 class Signup extends React.Component {
     state = {
         allowZoomOut: false,
@@ -19,7 +21,9 @@ class Signup extends React.Component {
         showHongKongIsland: false,
         showKowloon: false,
         showNewTerritories: false,
-        showOutlyingIslands: false
+        showOutlyingIslands: false,
+        verificationCodeIsSent:false,
+        verificationCodeIsValidated:false
     }
 
     handleNewImage = e => {
@@ -46,7 +50,7 @@ class Signup extends React.Component {
         this.setState({scale})
     }
 
-    handleSignup = () => {
+    handleSubmit = () => {
         // const {
         //     display_name,
         //     email,
@@ -99,8 +103,29 @@ class Signup extends React.Component {
         this.setState({districts: {...this.state.districts, [districtKey]: !this.state.districts[districtKey]}})
     }
 
+    handleSendCode = () => {
+        const {sendVerificationCode} = this.props
+        sendVerificationCode(this.countryCode.input.value,this.phoneNumber.input.value)
+            .then(res=>{
+                console.log(res)
+                this.setState({verificationCodeIsSent:true})
+            })
+    }
+
+    handleVerifyCode = () => {
+        const {validateVerificationCode} = this.props
+        validateVerificationCode(this.countryCode.input.value,this.phoneNumber.input.value,this.verificationCode.input.value)
+            .then(res=>{
+                console.log(res)
+                const {valid} = res.data
+                if(valid) {
+                    this.setState({verificationCodeIsValidated: true})
+                }
+            })
+    }
+
     render() {
-        const {districts, showHongKongIsland, showKowloon, showNewTerritories, showOutlyingIslands} = this.state
+        const {districts, showHongKongIsland, showKowloon, showNewTerritories, showOutlyingIslands, verificationCodeIsSent,verificationCodeIsValidated} = this.state
         return (
             <div style={{display: "flex", flexWrap: "wrap", position: "relative", top: 10, width: "100%"}}>
                 <div style={{
@@ -151,37 +176,38 @@ class Signup extends React.Component {
                     <div style={{padding: 10}}>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Email</span>
-                            <TextField fullWidth type={"email"}/>
+                            <TextField name={"email"} fullWidth type={"email"} ref={x=>this.email=x}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Password</span>
-                            <TextField fullWidth type={"password"}/>
+                            <TextField name={"password"} fullWidth type={"password"} ref={x=>this.password=x}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Display name</span>
-                            <TextField fullWidth/>
+                            <TextField name={"displayName"} fullWidth ref={x=>this.displayName=x}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div style={{display: "flex", alignItems: "center", width: "100%"}}>
                                 <span style={{fontSize: 13, minWidth: 100}}>Phone number</span>
-                                <TextField fullWidth type={"tel"}/>
+                                <TextField name={"countryCode"} ref={x=>this.countryCode = x} style={{width:100,marginRight:5}} type={"number"} hintText={"852"} disabled={verificationCodeIsSent}/>
+                                <TextField name={"phoneNumber"} ref={x=>this.phoneNumber = x} fullWidth type={"tel"} hintText={"91234567"} disabled={verificationCodeIsSent}/>
                             </div>
-                            <FlatButton style={{color: "#1e717f"}}>Send code</FlatButton>
+                            <FlatButton style={{color: "#1e717f"}} onClick={()=>this.handleSendCode()} disabled={verificationCodeIsSent}>Send code</FlatButton>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div style={{display: "flex", alignItems: "center", width: "100%"}}>
                                 <span style={{fontSize: 13, minWidth: 100}}>Verification code</span>
-                                <TextField fullWidth type={"tel"}/>
+                                <TextField name={"verificationCode"} ref={x=>this.verificationCode = x} fullWidth type={"number"} disabled={verificationCodeIsValidated}/>
                             </div>
-                            <FlatButton style={{color: "#1e717f"}}>Verify</FlatButton>
+                            <FlatButton style={{color: "#1e717f"}} onClick={()=>this.handleVerifyCode()} disabled={verificationCodeIsValidated}>Verify</FlatButton>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Agent license</span>
-                        <TextField fullWidth hintText={"e.g. A-123456"}/>
+                        <TextField name={"agentLicense"} fullWidth hintText={"e.g. A-123456"}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Agency</span>
-                        <TextField fullWidth/>
+                        <TextField name={"agency"} fullWidth/>
                         </div>
                         <br/>
                         <span style={{fontSize: 13, minWidth: 100}}>Districts you cover</span>
@@ -258,7 +284,7 @@ class Signup extends React.Component {
                         </div>}
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Promotion code</span>
-                        <TextField fullWidth/>
+                        <TextField name={"promotionCode"} fullWidth/>
                         </div>
                         <FlatButton fullWidth style={{color: "#1e717f"}}>Submit</FlatButton>
                     </div>
@@ -267,4 +293,7 @@ class Signup extends React.Component {
         )
     }
 }
-export default Signup
+export default connect(null,{
+    sendVerificationCode,
+    validateVerificationCode
+})(Signup)
