@@ -213,7 +213,7 @@ class EditPropertyPage extends React.Component {
                     border: "1px solid rgb(221, 223, 226)",
                     borderRadius: 3,
                 }}>
-                    <span>Property</span>
+                    <span>{x["property"][locale]}</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["building_name"][locale]}</span>
                         <AutoComplete
@@ -254,37 +254,41 @@ class EditPropertyPage extends React.Component {
                             )}
                         </DropDownMenu>
                     </div>
-                    <span style={{fontSize: 13}}>{x['PropertyType'][locale]}</span>
-                    <div style={{display: "flex", justifyContent: "space-evenly", marginTop: 10, marginBottom: 10}}>
-                        {Object.keys(propertyTypes).map(type => {
-                            return (
-                                <div key={`propertyType${type}`}
-                                     style={{display: "flex", flexDirection: "column", alignItems: "center"}}>
-                                    <div
-                                        onClick={() => this.setPropertyType(type)}
-                                        className="clickable"
-                                        style={{
-                                            backgroundImage: `url(${propertyTypes[type]})`,
-                                            backgroundPosition: "center",
-                                            backgroundSize: "contain",
-                                            backgroundRepeat: "no-repeat",
-                                            width: 50,
-                                            height: 50,
-                                            filter: propertyType === type ? undefined : "opacity(15%)"
-                                        }}
-                                    />
-                                    <span style={{fontSize: 12}}>{x[type][locale]}</span>
-                                </div>
-                            )
-                        })}
+                    <div style={{display:"flex"}}>
+                        <span style={{fontSize: 13}}>{x['PropertyType'][locale]}</span>
+                        <div style={{display: "flex", justifyContent: "space-evenly", marginTop: 10, marginBottom: 10, width:"100%",flex:1}}>
+                            {Object.keys(propertyTypes).map(type => {
+                                return (
+                                    <div key={`propertyType${type}`}
+                                         style={{display: "flex", flexDirection: "column", alignItems: "center",flex:1}}>
+                                        <div
+                                            onClick={() => this.setPropertyType(type)}
+                                            className="clickable"
+                                            style={{
+                                                backgroundImage: `url(${propertyTypes[type]})`,
+                                                backgroundPosition: "center",
+                                                backgroundSize: "contain",
+                                                backgroundRepeat: "no-repeat",
+                                                width: 50,
+                                                height: 50,
+                                                filter: propertyType === type ? undefined : "opacity(15%)"
+                                            }}
+                                        />
+                                        <span style={{fontSize: 12}}>{x[type][locale]}</span>
+                                    </div>
+                                )
+                            })}
+                        </div>
                     </div>
-                    <span style={{fontSize: 13}}>{x["unit_level"][locale]}</span>
+                    <div style={{display:"flex",width:"100%"}}>
+                    <span style={{fontSize: 13,minWidth:100}}>{x["unit_level"][locale]}</span>
                     <RadioButtonGroup defaultSelected={"middle"} ref={x => this.unitLevel = x} name="unit_level"
-                                      style={{display: 'flex', justifyContent: "space-evenly"}}>
+                                      style={{display: 'flex', justifyContent: "space-evenly",flex:1}}>
                         <RadioButton labelStyle={{fontSize:13}} label={x["high"][locale]} value={"high"} style={{width: 100}}/>
                         <RadioButton labelStyle={{fontSize:13}} label={x["middle"][locale]} value={"middle"} style={{width: 100}}/>
                         <RadioButton labelStyle={{fontSize:13}} label={x["low"][locale]} value={"low"} style={{width: 100}}/>
                     </RadioButtonGroup>
+                    </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["short_title"][locale]}</span>
                         <TextField name={"shortTitle"} key="shortTitle" ref={x => this.shortTitle = x} fullWidth/>
@@ -301,14 +305,14 @@ class EditPropertyPage extends React.Component {
                     border: "1px solid rgb(221, 223, 226)",
                     borderRadius: 3,
                 }}>
-                    <span>Price & size</span><br/>
-                    <span style={{fontSize: 13}}>Price</span>
+                    <span>{x["PriceSize"][locale]}</span><br/>
+                    <span style={{fontSize: 13}}>{x["Price"][locale]}</span>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Sale price</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["salePrice"][locale]}</span>
                         <TextField name={"salePrice"} min={0} key="salePrice" ref={x => this.salePrice = x} fullWidth type={"number"}/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Rent price</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["rentPrice"][locale]}</span>
                         <TextField name={"rentPrice"} min={0} key='rentPrice' ref={x => this.rentPrice = x}
                                    onChange={e => this.setState({forRent: !!e.target.value})}
                                    fullWidth type={"number"}/></div>
@@ -329,20 +333,20 @@ class EditPropertyPage extends React.Component {
                         </div>
                     </span>
                     }
-                    <span style={{fontSize: 13}}>Size</span>
+                    <span style={{fontSize: 13}}>{x['Size'][locale]}</span>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Saleable area (ft²)</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["saleableArea"][locale]}</span>
                         <TextField name={"saleableArea"} min={0} key="saleableArea" ref={x => this.saleableArea = x} fullWidth
                                    type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Gross area (ft²)</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["grossArea"][locale]}</span>
                         <TextField name={"grossArea"} min={0} key="grossArea" ref={x => this.grossArea = x} fullWidth type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Number of rooms</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["numberOfRoom"][locale]}</span>
                         <TextField name={"numberOfRooms"} min={0} key="numberOfRooms" ref={x => this.numberOfRooms = x} fullWidth
                                    type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Number of bathrooms</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["numberOfBathRoom"][locale]}</span>
                         <TextField name={"numberOfBathrooms"} min={0} key="numberOfBathrooms" ref={x => this.numberOfBathrooms = x} fullWidth
                                    type={"number"}/></div>
                 </div>
