@@ -74,14 +74,12 @@ export const postProperty = data => (dispatch,getState) => new Promise((resolve,
     const url = `${api}agents/self/properties`
     axios.post(url,data,headerShit)
         .then(res=>{
-            console.log(res)
             dispatch(getPropertiesBasic(true))
             dispatch(push("/propertiesTiles"))
-            return resolve(res)
+            resolve(res)
         })
         .catch(err=>{
-            console.log(err)
-            return reject(err)
+            reject(err)
         })
 })
 
@@ -119,7 +117,7 @@ export const putProperty = (id,data) => (dispatch,getState) => new Promise((reso
             dispatch(getPropertiesBasic(true))
             dispatch(getPropertyDetail(id,true))
             dispatch(push(`/propertyPage/${id}`))
-            return resolve(res)
+            resolve(res)
         })
         .catch(err=>{
             console.log(err)
