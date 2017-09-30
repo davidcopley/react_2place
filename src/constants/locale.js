@@ -1,4 +1,4 @@
-const locale = {
+export default {
     signIn: {en: 'Sign In', zh: '登入'},
     signOut: {en: 'Sign Out', zh: '登出'},
     pleaseSignin: {en: 'Please Sign In', zh: '請先登入'},
@@ -316,12 +316,3 @@ const locale = {
     },
     hihi: {en: 'hihih', zh: 'hihih'}
 }
-
-let temp = {}
-Object.keys(locale["en"]).forEach(k => {
-    let obj = {}
-    obj["en"] = locale["en"][k]
-    obj["zh"] = locale["zh"][k]
-    temp[k.split(".").slice(-1).join()] = obj
-})
-console.log(temp)
