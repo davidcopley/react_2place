@@ -11,7 +11,7 @@ export const addPropertyCoordinates = (propertyId,propertyCoordinates) => ({type
 
 const headerShit = {headers: {"Accept": "application/vnd.rex.v1+json","Authorization": "Bearer " + localStorage.getItem('1p_token')}}
 
-export const getPropertiesBasic = (force=false) => (dispatch, getState) => {
+export const getPropertiesBasic = (force=false) => (dispatch, getState) => new Promise((resolve,reject)=>{
     const url = `${api}agents/self/properties`
     if(!getState().apiHistoryReducer.calledApis[url]||force){
         axios
@@ -21,16 +21,20 @@ export const getPropertiesBasic = (force=false) => (dispatch, getState) => {
                 const propertiesBasic = res.data.data
                 let propertiesBasicSet = {}
                 propertiesBasic.forEach(propertyBasic=>{
-                    const {property_id} = propertyBasic
-                    propertiesBasicSet[property_id] = propertyBasic
+                    if(!propertyBasic['is_hidden_by_agent']) {
+                        const {property_id} = propertyBasic
+                        propertiesBasicSet[property_id] = propertyBasic
+                    }
                 })
                 dispatch(setPropertiesBasic(propertiesBasicSet))
+                resolve(res)
             })
             .catch(err=>{
                 console.log(err)
+                reject(err)
             })
     }
-}
+})
 export const getPropertyDetail = (id,force=false) => (dispatch,getState) => new Promise((resolve,reject)=>{
     const url = `${api}properties/${id}`
     if(!getState().apiHistoryReducer.calledApis[url]||force) {
@@ -123,3 +127,18 @@ export const putProperty = (id,data) => (dispatch,getState) => new Promise((reso
             console.log(err)
         })
 })
+
+export const hideProperty = id => (dispatch,getState) => {
+    const url = `${api}agents/self/properties/${id}/mark_hidden`
+    axios.post(url,'',headerShit)
+        .then(res=>{
+            console.log(res)
+            dispatch(getPropertiesBasic(true))
+                .then(res=>{
+                    dispatch(push("/propertiesTiles"))
+                })
+        })
+        .catch(err=>{
+            console.log(err)
+        })
+}

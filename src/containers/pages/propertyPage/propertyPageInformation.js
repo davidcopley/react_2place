@@ -5,7 +5,8 @@ import propertyPageImages from "../../../images/propertyPage/index"
 import commaNumber from "comma-number"
 import {FlatButton} from "material-ui"
 import x from "../../../constants/locale"
-const PropertyPageInformation = ({locale,push,propertyDetail: {property_id,short_title, unit_price,unit_level, lease_type, building_name, building_phase_no, building_street_name,building_district, building_region, net_unit_size, gross_unit_size, number_of_room, number_of_bathroom, property_type, remark}}) => (
+import {hideProperty} from "../../../actionCreators/propertiesDBActionCreators"
+const PropertyPageInformation = ({hideProperty,locale,push,propertyDetail: {property_id,short_title, unit_price,unit_level, lease_type, building_name, building_phase_no, building_street_name,building_district, building_region, net_unit_size, gross_unit_size, number_of_room, number_of_bathroom, property_type, remark}}) => (
     <div style={{
         minHeight: "50vh",
         width:"100%",
@@ -137,11 +138,11 @@ const PropertyPageInformation = ({locale,push,propertyDetail: {property_id,short
             {remark}
         </div>
         <div style={{display:"flex",marginTop:"auto",width:"100%",borderTop: "1px solid rgb(221, 223, 226)"}}>
-            <FlatButton style={{flex:1,borderRight: "1px solid rgb(221, 223, 226)"}} label={x["edit"][locale]} onClick={()=>push(`/editProperty/${property_id}`)}/><FlatButton style={{flex:1}} label={x["remove"][locale]}/>
+            <FlatButton style={{flex:1,borderRight: "1px solid rgb(221, 223, 226)"}} label={x["edit"][locale]} onClick={()=>push(`/editProperty/${property_id}`)}/><FlatButton style={{flex:1}} label={x["remove"][locale]} onClick={()=>hideProperty(property_id)}/>
         </div>
     </div>
 )
 const mapStateToProps = state => ({
     locale:state.localeReducer.locale
 })
-export default connect(mapStateToProps,{push})(PropertyPageInformation)
+export default connect(mapStateToProps,{push,hideProperty})(PropertyPageInformation)
