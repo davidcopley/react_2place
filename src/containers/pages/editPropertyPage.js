@@ -319,16 +319,16 @@ class EditPropertyPage extends React.Component {
                     {forRent &&
                     <span>
                         <div style={{display: "flex", alignItems: "center"}}>
-                            <span style={{fontSize: 13, minWidth: 200}}>short term rental</span>
+                            <span style={{fontSize: 13, minWidth: 200}}>{x['shortTermRental'][locale]}</span>
                             <Checkbox ref={x => this.isShortTermRental = x}/>
                         </div>
-                        <DatePicker ref={x => this.startDate = x} fullWidth hintText={"start date"}/>
+                        <DatePicker ref={x => this.startDate = x} fullWidth hintText={x['rentStartDate'][locale]}/>
                         <div style={{display: "flex", alignItems: "center"}}>
-                            <span style={{fontSize: 13, minWidth: 200}}>rate & gov mgmt fees</span>
+                            <span style={{fontSize: 13, minWidth: 200}}>{x['govFees'][locale]}</span>
                             <Checkbox ref={x => this.rateAndGovMgmtFees = x}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
-                            <span style={{fontSize: 13, minWidth: 200}}>owner allows pets</span>
+                            <span style={{fontSize: 13, minWidth: 200}}>{x['allowPets'][locale]}</span>
                             <Checkbox ref={x => this.allowPets = x}/>
                         </div>
                     </span>

@@ -43,7 +43,7 @@ const Topbar = props => {
                 }}
             />
             <span style={{fontSize: 50, color: "#1e717f"}} className="clickable" onClick={() => push("/")}>{x["1place"][locale]}</span>
-            <span style={{marginLeft: "auto"}}>
+            <div style={{marginLeft: "auto",display:"flex"}}>
                 <FlatButton onClick={()=>locale==="en"?setZh():setEn()}>{locale==="en"?"繁":"en"}</FlatButton>
                 {accessToken ?
                     <span>
@@ -58,7 +58,7 @@ const Topbar = props => {
                         </FlatButton>
                     </span>
                 }
-            </span>
+            </div>
         </div>
     </div>
 }

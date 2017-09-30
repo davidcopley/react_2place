@@ -99,7 +99,7 @@ export default {
     high: {en: 'High', zh: '高層'},
     middle: {en: 'Middle', zh: '中層'},
     low: {en: 'Low', zh: '低層'},
-    CreateProperty: {en: 'CREATE PROPERTY', zh: '添加物業'},
+    CreateProperty: {en: 'Create property', zh: '添加物業'},
     EditProperty: {en: 'EDIT PROPERTY', zh: '編輯物業'},
     "property": {en: 'Property', zh: '物業'},
     PriceSize: {en: 'Price & size', zh: '價錢 & 面積'},
@@ -326,5 +326,6 @@ export default {
     filterText:{en:"filter text",zh:"過濾字眼"},
     loading:{en:"loading",zh:"載入中"},
     addImages:{en:"add image(s)",zh:"上載照片"},
-    update:{en:"update",zh:"更新"}
+    update:{en:"update",zh:"更新"},
+    url:{en:"url",zh:'網址'}
 }
