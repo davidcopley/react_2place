@@ -28,6 +28,7 @@ class PropertyPageAlbum extends React.Component{
         return(
             <div style={{
                 minHeight:"50vh",
+                height:"100%",
                 width:"100%",
                 border: "1px solid rgb(221, 223, 226)",
                 borderRadius: 3,

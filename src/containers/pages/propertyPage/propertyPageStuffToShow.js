@@ -60,8 +60,8 @@ class PropertyPageStuffToShow extends React.Component{
                 const {property_building_features, property_unit_features} = propertyDetail
                 return (
                     <span>
-                        {property_building_features && <div>{x["facilities"][locale]}</div>}
-                        <div style={{display: "flex", flexWrap: "wrap", width: "100%"}}>
+                        <div>{x["facilities"][locale]}</div><br/>
+                        <div style={{display: "flex", flexWrap: "wrap", width: "100%",borderBottom:"1px solid rgb(221, 223, 226)"}}>
                             {Object.keys(property_building_features).map(feature => {
                                 return (
                                     <div style={{
@@ -88,9 +88,37 @@ class PropertyPageStuffToShow extends React.Component{
                             })}
                             {new Array(11).fill(<div style={{width:80}}/>)}
                         </div>
-                        {property_unit_features && <div>{x["features"][locale]}</div>}
-                        <div style={{display: "flex", flexWrap: "wrap", width: "100%"}}>
-                            {Object.keys(property_unit_features).map(feature => {
+                        <div>{x["features"][locale]}</div><br/>
+                        <div style={{display: "flex", flexWrap: "wrap", width: "100%",borderBottom:"1px solid rgb(221, 223, 226)"}}>
+                            {Object.keys(property_unit_features).filter(x=>!x.match(/view/)).map(feature => {
+                                return (
+                                    <div style={{
+                                        textAlign: "center",
+                                        display: "flex",
+                                        flexDirection: "column",
+                                        alignItems: "center",
+                                        padding: 5
+                                    }}>
+                                        <div style={{
+                                            backgroundImage: `url(${featuresImages[feature]})`,
+                                            backgroundPosition: "center",
+                                            backgroundSize: "contain",
+                                            backgroundRepeat: "no-repeat",
+                                            width: 70,
+                                            height: 70
+                                        }}/>
+                                        <span style={{
+                                            fontSize: 12,
+                                            textTransform: "capitalize"
+                                        }}>{x[feature][locale]}</span>
+                                    </div>
+                                )
+                            })}
+                            {new Array(11).fill(<div style={{width:80}}/>)}
+                        </div>
+                        <div>{x["views"][locale]}</div><br/>
+                        <div style={{display: "flex", flexWrap: "wrap", width: "100%",borderBottom:"1px solid rgb(221, 223, 226)"}}>
+                            {Object.keys(property_unit_features).filter(x=>x.match(/view/)).map(feature => {
                                 return (
                                     <div style={{
                                         textAlign: "center",

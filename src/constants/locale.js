@@ -91,7 +91,7 @@ export default {
     otherInfo: {en: 'OTHER INFO', zh: '其它資料'},
     facilities: {en: 'Facilities', zh: '設施'},
     features: {en: 'Features', zh: '特色'},
-    views: {en: 'VIEWS', zh: '景觀'},
+    views: {en: 'Views', zh: '景觀'},
     Or: {en: 'Or', zh: '或者'},
     residential: {en: 'Residential', zh: '住宅'},
     commercial: {en: 'Commercial', zh: '商鋪'},
