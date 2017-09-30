@@ -27,8 +27,16 @@ export const postUser = data => (dispatch,getState) => new Promise((resolve,reje
         profilepic
     } = data
     Object.keys(data).forEach(key=>{
+        console.log(key)
         formData.append(key,data[key])
     })
+    axios.post(url,formData)
+        .then(res=>{
+            console.log(res)
+        })
+        .catch(err=>{
+            console.log(err)
+        })
 })
 
 export const getUser = () => (dispatch,getState) => new Promise((resolve,reject) => {

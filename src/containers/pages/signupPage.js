@@ -3,10 +3,11 @@ import {connect} from "react-redux"
 import ReactAvatarEditor from 'react-avatar-editor'
 import Logo from "../../images/1placeLogo.png"
 import {TextField, FlatButton, Chip, IconButton} from "material-ui"
-import {Hong_Kong_Island, Kowloon, Outlying_Islands, New_Territories} from "../../constants/districts"
+import {Hong_Kong_Island, Kowloon, Outlying_Islands, New_Territories,regions} from "../../constants/districts"
 import More from "material-ui/svg-icons/content/add"
 import Less from "material-ui/svg-icons/content/remove"
 import {sendVerificationCode,validateVerificationCode} from "../../actionCreators/phoneVerificationActionCreators"
+import {postUser} from "../../actionCreators/accountActionCreators"
 class Signup extends React.Component {
     state = {
         allowZoomOut: false,
@@ -50,29 +51,37 @@ class Signup extends React.Component {
         this.setState({scale})
     }
 
+    tf2val = tf => tf.input.value
+
     handleSubmit = () => {
-        // const {
-        //     display_name,
-        //     email,
-        //     username,
-        //     password,
-        //     password_confirmation,
-        //     firstname,
-        //     lastname,
-        //     salutation,
-        //     phone,
-        //     phone_verify_code,
-        //     license_number,
-        //     agency,
-        //     my_usage_of_property,
-        //     referee_code,
-        //     max_sell_price,
-        //     min_sell_price,
-        //     speaks_chinese,
-        //     speaks_english,
-        //     my_region,
-        //     profilepic
-        // } = data
+        const t2v = this.tf2val
+        const {postUser} = this.props
+        const data = {
+            display_name:t2v(this.displayName),
+            email:t2v(this.email),
+            username:t2v(this.email),
+            password:t2v(this.password),
+            password_confirmation:t2v(this.password),
+            firstname:t2v(this.password),
+            lastname:"",
+            salutation:"Mr",
+            phone:`${t2v(this.countryCode)}-${t2v(this.phoneNumber)}`,
+            phone_verify_code:t2v(this.verificationCode),
+            license_number:t2v(this.agentLicense),
+            agency:t2v(this.agency),
+            my_usage_of_property:"residential",
+            referee_code:t2v(this.promotionCode),
+            max_sell_price:0,
+            min_sell_price:0,
+            max_rent_price:0,
+            min_rent_price:0,
+            speaks_chinese:1,
+            speaks_english:1,
+            my_region:Object.keys(regions).join(),
+            my_district:"Aberdeen",
+            profilepic:this.state.image
+        }
+        postUser(data)
     }
 
     rotateLeft = e => {
@@ -203,11 +212,11 @@ class Signup extends React.Component {
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Agent license</span>
-                        <TextField name={"agentLicense"} fullWidth hintText={"e.g. A-123456"}/>
+                        <TextField name={"agentLicense"} fullWidth hintText={"e.g. A-123456"} ref={x=>this.agentLicense = x}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Agency</span>
-                        <TextField name={"agency"} fullWidth/>
+                        <TextField name={"agency"} fullWidth ref={x=>this.agency = x}/>
                         </div>
                         <br/>
                         <span style={{fontSize: 13, minWidth: 100}}>Districts you cover</span>
@@ -284,9 +293,9 @@ class Signup extends React.Component {
                         </div>}
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Promotion code</span>
-                        <TextField name={"promotionCode"} fullWidth/>
+                        <TextField name={"promotionCode"} fullWidth ref={x=>this.promotionCode=x}/>
                         </div>
-                        <FlatButton fullWidth style={{color: "#1e717f"}}>Submit</FlatButton>
+                        <FlatButton fullWidth style={{color: "#1e717f"}} onClick={()=>this.handleSubmit()}>Submit</FlatButton>
                     </div>
                 </div>
             </div>
@@ -295,5 +304,6 @@ class Signup extends React.Component {
 }
 export default connect(null,{
     sendVerificationCode,
-    validateVerificationCode
+    validateVerificationCode,
+    postUser
 })(Signup)

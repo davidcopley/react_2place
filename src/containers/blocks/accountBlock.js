@@ -22,7 +22,7 @@ class AccountBlock extends React.Component {
             <span>
                 <FlatButton onClick={()=>this.setState({open:!open})} style={{color:"#1e717f"}}>sign-in</FlatButton>
                 {open&&
-                    <div style={{width: "100vw", height: "100vh", position: "fixed", zIndex: 3}}>
+                    <div style={{width: "100vw", height: "100vh", position: "fixed", zIndex: 3,maxWidth:1000}}>
                         <div
                             tabIndex={0}
                             style={{
@@ -30,7 +30,7 @@ class AccountBlock extends React.Component {
                                 height: 180,
                                 background: "#ffffff"
                                 , position: "fixed"
-                                , top: 60
+                                , top: 70
                                 , right: 10
                                 , zIndex: 4,
                                 boxShadow: "0px 0px 5px #999999",
