@@ -6,11 +6,13 @@ import {signin, signout} from "../actionCreators/authActionCreators"
 import {getPropertiesBasic} from "../actionCreators/propertiesDBActionCreators"
 import {FlatButton, TextField} from "material-ui"
 import AccountBlock from "./blocks/accountBlock"
+import {setEn,setZh} from "../actionCreators/localeActionCreators"
+import x from "../constants/locale"
 
 import Logo from "../images/1placeLogo.png"
 
 const Topbar = props => {
-    const {accessToken, signin, signout, push} = props
+    const {accessToken, signout, push,locale, setEn, setZh} = props
     return <div style={{
         position: "fixed",
         height: 60,
@@ -40,8 +42,9 @@ const Topbar = props => {
                     minHeight:40
                 }}
             />
-            <span style={{fontSize: 50, color: "#1e717f"}} className="clickable" onClick={() => push("/")}>1PLACE</span>
+            <span style={{fontSize: 50, color: "#1e717f"}} className="clickable" onClick={() => push("/")}>{x["1place"][locale]}</span>
             <span style={{marginLeft: "auto"}}>
+                <FlatButton onClick={()=>locale==="en"?setZh():setEn()}>{locale==="en"?"繁":"en"}</FlatButton>
                 {accessToken ?
                     <span>
                         <FlatButton onClick={() => signout()} style={{color:"#1e717f"}}>
@@ -62,7 +65,8 @@ const Topbar = props => {
 
 const mapStateToProps = state => {
     return {
-        accessToken: state.authReducer.accessToken
+        accessToken: state.authReducer.accessToken,
+        locale: state.localeReducer.locale
     }
 }
-export default withRouter(connect(mapStateToProps, {signin, signout, getPropertiesBasic, push})(Topbar))
+export default withRouter(connect(mapStateToProps, {signin, signout, getPropertiesBasic, push, setEn, setZh})(Topbar))

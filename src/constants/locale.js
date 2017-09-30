@@ -1,4 +1,5 @@
 export default {
+    "1place":{en:"1PLACE",zh:"一坊"},
     signIn: {en: 'Sign In', zh: '登入'},
     signOut: {en: 'Sign Out', zh: '登出'},
     pleaseSignin: {en: 'Please Sign In', zh: '請先登入'},
@@ -71,15 +72,15 @@ export default {
     clients: {en: 'CLIENTS', zh: '客人'},
     propertyDetail: {en: 'PROPERTY DETAIL', zh: '物業資料'},
     studio: {en: 'Studio', zh: '開放式'},
-    room: {en: '{number_of_room} Room', zh: '{number_of_room}間房'},
-    rooms: {en: '{number_of_room} Rooms', zh: '{number_of_room}間房'},
+    room: {en: 'Room', zh: '間房'},
+    rooms: {en: 'Rooms', zh: '間房'},
     bathroom: {
         en: '{number_of_bathroom} Bathroom',
         zh: '{number_of_bathroom}個浴室'
     },
     bathrooms: {
-        en: '{number_of_bathroom} Bathrooms',
-        zh: '{number_of_bathroom}個浴室'
+        en: 'Bathrooms',
+        zh: '個浴室'
     },
     perMonth: {en: '/Month', zh: '/月'},
     apartment: {en: 'Apartment', zh: '屋苑'},
@@ -88,8 +89,8 @@ export default {
     location: {en: 'LOCATION', zh: '位置'},
     rentOptions: {en: 'RENT INFO', zh: '租盤資料'},
     otherInfo: {en: 'OTHER INFO', zh: '其它資料'},
-    facilities: {en: 'FACILITIES', zh: '設施'},
-    features: {en: 'FEATURES', zh: '特色'},
+    facilities: {en: 'Facilities', zh: '設施'},
+    features: {en: 'Features', zh: '特色'},
     views: {en: 'VIEWS', zh: '景觀'},
     Or: {en: 'Or', zh: '或者'},
     residential: {en: 'Residential', zh: '住宅'},
@@ -100,14 +101,14 @@ export default {
     low: {en: 'Low', zh: '低層'},
     CreateProperty: {en: 'CREATE PROPERTY', zh: '添加物業'},
     EditProperty: {en: 'EDIT PROPERTY', zh: '編輯物業'},
-    Property: {en: 'PROPERTY', zh: '物業'},
+    "property": {en: 'PROPERTY', zh: '物業'},
     PriceSize: {en: 'PRICE & SIZE', zh: '價錢 & 面積'},
     Unit: {en: 'UNIT', zh: '單位'},
     Photo: {en: 'PHOTO', zh: '相片'},
     Finish: {en: 'FINISH', zh: '完成'},
     Location: {en: 'LOCATION*', zh: '地點*'},
     PropertyType: {en: 'PROPERTY TYPE*', zh: '物業類型*'},
-    Description: {en: 'DESCRIPTION*', zh: '描述*'},
+    Description: {en: 'Description', zh: '描述'},
     Price: {en: 'PRICE*', zh: '價錢*'},
     Size: {en: 'SIZE*', zh: '呎數*'},
     UnitLevel: {en: 'LEVEL*', zh: '樓層高度*'},
@@ -118,7 +119,7 @@ export default {
     regionhint: {en: 'Select A Region', zh: '選擇一個區域'},
     district: {en: 'DISTRICT', zh: '位置'},
     districthint: {en: 'Select a District', zh: '選擇一個位置'},
-    shortTitlehint: {en: 'Short Title', zh: '短標題'},
+    "short_title": {en: 'Short title', zh: '短標題'},
     shortTitlefloating: {
         en: 'Describe something attractive of your Property',
         zh: '描述一些此物業吸引的地方'
@@ -136,10 +137,10 @@ export default {
         zh: '租金(無需填寫如非租盤)'
     },
     shortTermRental: {en: 'SHORT TERM RENTAL', zh: '短期租'},
-    rentStartDate: {en: 'RENT START DATE', zh: '起租日期'},
-    govFees: {en: 'RATE & GOV MGMT FEES', zh: '包差餉／地租／管理費'},
-    allBills: {en: 'INCLUDE ALL BILLS', zh: '包所有帳單'},
-    allowPets: {en: 'OWNER ALLOWS PETS', zh: '業主允許寵物'},
+    rentStartDate: {en: 'Rent start date', zh: '起租日期'},
+    govFees: {en: 'Rate & gov mgmt fees', zh: '包差餉／地租／管理費'},
+    allBills: {en: 'Include all bills', zh: '包所有帳單'},
+    allowPets: {en: 'Owner allows pets', zh: '業主允許寵物'},
     saleableArea: {en: 'Saleable Area (ft²)', zh: '實用面積(ft²)'},
     grossArea: {en: 'Gross Area (ft²)', zh: '建築面積ft²)'},
     numberOfRoom: {en: 'NUMBER OF ROOMS*', zh: '房間數目*'},
@@ -163,8 +164,8 @@ export default {
     descending: {en: 'DESCENDING', zh: '降序'},
     date_added: {en: 'DATE ADDED', zh: '添加時間'},
     last_updated: {en: 'LAST UPDATED', zh: '最後更新時間'},
-    building_name: {en: 'BUILDING NAME', zh: '物業名稱'},
-    unit_price: {en: 'UNIT PRICE', zh: '價錢'},
+    building_name: {en: 'Building  name', zh: '物業名稱'},
+    unit_price: {en: 'Unit price', zh: '價錢'},
     net_size: {en: 'NET SIZE', zh: '實用面積'},
     gross_size: {en: 'GROSS SIZE', zh: '建築面積'},
     LeaseType: {en: 'LEASE TYPE', zh: '放盤類型'},
@@ -314,5 +315,8 @@ export default {
         en: 'You are going to delete this Property. Once the property is deleted you will not be able to see it again! Are you sure?',
         zh: '你正在移除此物業.\n確認移除後你將不會再見到此物業!\n你確定繼續?'
     },
-    hihi: {en: 'hihih', zh: 'hihih'}
+    hihi: {en: 'hihih', zh: 'hihih'},
+    unit_level:{en:'Unit level',zh:'樓層'},
+    address:{en: 'address', zh: '位置'},
+    unableToLocateAddress:{en:"Unable to locate address",zh:'無法找到位置'}
 }

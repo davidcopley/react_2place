@@ -34,6 +34,6 @@ class PropertyPage extends React.Component {
 }
 const mapStateToProps = (state, props) => ({
     propertyDetail: state.propertiesDBReducer.propertiesDetail[props.match.params.propertyId],
-    propertyCoordinates: state.propertiesDBReducer.propertiesCoordinates[props.match.params.propertyId]
+    propertyCoordinates: state.propertiesDBReducer.propertiesCoordinates[props.match.params.propertyId],
 })
 export default connect(mapStateToProps, {getPropertyDetail, getPropertyCoordinatesByAddress})(PropertyPage)

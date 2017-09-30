@@ -1,9 +1,10 @@
 import React from "react"
+import {connect} from "react-redux"
 import emptyPropertyImagePlaceholder from "../../../images/1placeLogo.png"
 import Left from "material-ui/svg-icons/hardware/keyboard-arrow-left"
 import Right from "material-ui/svg-icons/hardware/keyboard-arrow-right"
 import {IconButton,Chip} from "material-ui"
-
+import x from "../../../constants/locale"
 class PropertyPageAlbum extends React.Component{
     constructor(props){
         super(props)
@@ -20,7 +21,7 @@ class PropertyPageAlbum extends React.Component{
     }
     render(){
         const {currentImageIndex} = this.state
-        const {propertyDetail} = this.props
+        const {propertyDetail,locale} = this.props
         const {images,lease_type} = propertyDetail
         const imageUrls = images.map(image => image.image_path)
         const currentImage = imageUrls[currentImageIndex]
@@ -61,7 +62,7 @@ class PropertyPageAlbum extends React.Component{
                         display: "flex",
                         alignItems: "center",
                         border:"1px solid rgb(233, 235, 238)"
-                    }} labelStyle={{color:"#1e717f",}}>{lease_type}</Chip>
+                    }} labelStyle={{color:"#1e717f",}}>{x[lease_type][locale]}</Chip>
                 </div>
                 <div style={{
                     height: "auto",
@@ -91,5 +92,7 @@ class PropertyPageAlbum extends React.Component{
         )
     }
 }
-
-export default PropertyPageAlbum
+const mapStateToProps = state => ({
+    locale:state.localeReducer.locale
+})
+export default connect(mapStateToProps)(PropertyPageAlbum)

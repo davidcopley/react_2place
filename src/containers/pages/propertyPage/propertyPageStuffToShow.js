@@ -1,9 +1,11 @@
 import React from "react"
+import {connect} from "react-redux"
 import {compose} from "redux"
 import {FlatButton, List, ListItem} from "material-ui"
 import Tick from "material-ui/svg-icons/action/done"
 import Cross from "material-ui/svg-icons/navigation/close"
 import featuresImages from "../../../images/features/index"
+import x from "../../../constants/locale"
 import {
     withScriptjs,
     withGoogleMap,
@@ -39,18 +41,18 @@ class PropertyPageStuffToShow extends React.Component{
     }
     renderStuffToshow(){
         const {stuffToShow} = this.state
-        const {propertyDetail} = this.props
+        const {propertyDetail,locale} = this.props
         switch (stuffToShow) {
             case("rentInfo"):
                 const {rental_start_time, is_short_terms_rental, allows_pets, including_all_bills} = propertyDetail
                 return (
                     <List>
-                        <ListItem primaryText={"rent start date"} rightIcon={<span
+                        <ListItem primaryText={x["rentStartDate"][locale]} rightIcon={<span
                             style={{minWidth: 200, textAlign: "right"}}>{rental_start_time}</span>}/>
-                        <ListItem primaryText={"short term rental"}
+                        <ListItem primaryText={x['shortTermRental'][locale]}
                                   rightIcon={is_short_terms_rental ? <Tick/> : <Cross/>}/>
-                        <ListItem primaryText={"owner allows pets"} rightIcon={allows_pets ? <Tick/> : <Cross/>}/>
-                        <ListItem primaryText={"rate & gov mgmt fees"}
+                        <ListItem primaryText={x['allowPets'][locale]} rightIcon={allows_pets ? <Tick/> : <Cross/>}/>
+                        <ListItem primaryText={x["govFees"][locale]}
                                   rightIcon={including_all_bills ? <Tick/> : <Cross/>}/>
                     </List>
                 )
@@ -58,7 +60,7 @@ class PropertyPageStuffToShow extends React.Component{
                 const {property_building_features, property_unit_features} = propertyDetail
                 return (
                     <span>
-                        {property_building_features && <div>Property building features</div>}
+                        {property_building_features && <div>{x["facilities"][locale]}</div>}
                         <div style={{display: "flex", flexWrap: "wrap", width: "100%"}}>
                             {Object.keys(property_building_features).map(feature => {
                                 return (
@@ -80,13 +82,13 @@ class PropertyPageStuffToShow extends React.Component{
                                         <span style={{
                                             fontSize: 12,
                                             textTransform: "capitalize"
-                                        }}>{feature.replace(/_/g, " ")}</span>
+                                        }}>{x[feature][locale]}</span>
                                     </div>
                                 )
                             })}
                             {new Array(11).fill(<div style={{width:80}}/>)}
                         </div>
-                        {property_unit_features && <div>Property unit features</div>}
+                        {property_unit_features && <div>{x["features"][locale]}</div>}
                         <div style={{display: "flex", flexWrap: "wrap", width: "100%"}}>
                             {Object.keys(property_unit_features).map(feature => {
                                 return (
@@ -108,7 +110,7 @@ class PropertyPageStuffToShow extends React.Component{
                                         <span style={{
                                             fontSize: 12,
                                             textTransform: "capitalize"
-                                        }}>{feature.replace(/_/g, " ")}</span>
+                                        }}>{x[feature][locale]}</span>
                                     </div>
                                 )
                             })}
@@ -119,7 +121,7 @@ class PropertyPageStuffToShow extends React.Component{
                 )
             case("location"):
                 if (!this.props.propertyCoordinates) {
-                    return <div>Unable to locate address.</div>
+                    return <div>{x["unableToLocateAddress"][locale]}</div>
                 }
                 return (
                     <MapWithAMarker
@@ -135,7 +137,7 @@ class PropertyPageStuffToShow extends React.Component{
         }
     }
     render(){
-        const {propertyDetail} = this.props
+        const {propertyDetail,locale} = this.props
         const {stuffToShow} = this.state
         const {lease_type} = propertyDetail
         return(
@@ -147,7 +149,7 @@ class PropertyPageStuffToShow extends React.Component{
                             border: "1px solid rgb(221, 223, 226)",
                             color: stuffToShow === "location" ? "#ffffff" : "#1e717f"
                         }}
-                        label={"Location"}
+                        label={x['location'][locale]}
                         onClick={() => this.changeStuffToShow("location")}
                         backgroundColor={stuffToShow === "location" ? "#1e717f" : "#ffffff"}
                     />
@@ -158,7 +160,7 @@ class PropertyPageStuffToShow extends React.Component{
                             border: "1px solid rgb(221, 223, 226)",
                             color: stuffToShow === "rentInfo" ? "#ffffff" : "#1e717f"
                         }}
-                        label={"Rent Info"}
+                        label={x['rentOptions'][locale]}
                         onClick={() => this.changeStuffToShow("rentInfo")}
                         backgroundColor={stuffToShow === "rentInfo" ? "#1e717f" : "#ffffff"}
                     />}
@@ -168,7 +170,7 @@ class PropertyPageStuffToShow extends React.Component{
                             border: "1px solid rgb(221, 223, 226)",
                             color: stuffToShow === "otherInfo" ? "#ffffff" : "#1e717f"
                         }}
-                        label={"Other Info"}
+                        label={x['otherInfo'][locale]}
                         onClick={() => this.changeStuffToShow("otherInfo")}
                         backgroundColor={stuffToShow === "otherInfo" ? "#1e717f" : "#ffffff"}
                     />
@@ -178,4 +180,7 @@ class PropertyPageStuffToShow extends React.Component{
         )
     }
 }
-export default PropertyPageStuffToShow
+const mapStateToProps = state => ({
+    locale:state.localeReducer.locale
+})
+export default connect(mapStateToProps)(PropertyPageStuffToShow)
