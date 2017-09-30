@@ -1,6 +1,6 @@
 import React from "react"
 import {connect} from "react-redux"
-import {Route} from "react-router"
+import {Route,Switch} from "react-router"
 import {withRouter} from "react-router-dom"
 import PropertiesTiles from "./pages/propertiesTilesPage"
 import PropertyPage from "./pages/propertyPage/propertyPage"
@@ -20,19 +20,22 @@ class Main extends React.Component{
         }
     }
     render(){
-        const {locale} = this.props
+        const {accessToken} = this.props
         return(
             <div style={{minHeight:"100vh",width:"100%",display:"flex",flexDirection:"column"}}>
                 <Topbar/>
                 <div style={{height:60}}/>
                 <div style={{flex:1,height:"100%",width:"100%",display:"flex",justifyContent:"center",marginBottom:"auto"}}>
                     <div style={{display:"flex",flexDirection:"column",height:"100%",maxWidth:1000,width:"100%"}}>
-                        <Route exact path="/" component={Home}/>
-                        <Route path="/propertiesTiles" component={PropertiesTiles}/>
-                        <Route path="/propertyPage/:propertyId" component={PropertyPage}/>
-                        <Route path="/signup" component={SignupPage}/>
-                        <Route path="/addProperty" component={AddPropertyPage}/>
-                        <Route path="/editProperty/:propertyId" component={EditPropertyPage}/>
+                        <Switch>
+                            <Route exact path="/" component={Home}/>
+                            <Route exact path="/propertiesTiles" component={!accessToken?Home:PropertiesTiles}/>
+                            <Route exact path="/propertyPage/:propertyId" component={!accessToken?Home:PropertyPage}/>
+                            <Route exact path="/signup" component={SignupPage}/>
+                            <Route exact path="/addProperty" component={!accessToken?Home:AddPropertyPage}/>
+                            <Route exact path="/editProperty/:propertyId" component={!accessToken?Home:EditPropertyPage}/>
+                            <Route component={Home}/>
+                        </Switch>
                     </div>
                 </div>
                 <div style={{display:"flex",padding:10,alignItems:"center",background:"rgb(238, 238, 238)",marginTop:100}}>

@@ -165,7 +165,7 @@ class AddPropertyPage extends React.Component {
                             dataSource={dataSource}
                             openOnFocus
                             listStyle={{zIndex: 10}}
-                            style={{zIndex: 10}}
+                            style={{zIndex: 1}}
                             menuStyle={{zIndex: 10}}
                             errorText={errors["building_name"]}
                         />
