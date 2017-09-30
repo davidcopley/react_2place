@@ -10,10 +10,10 @@ export const postUser = data => (dispatch,getState) => new Promise((resolve,reje
     })
     axios.post(url,formData)
         .then(res=>{
-            console.log(res)
+            resolve(res)
         })
         .catch(err=>{
-            console.log(err)
+            reject(err)
         })
 })
 

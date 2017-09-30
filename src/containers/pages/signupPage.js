@@ -8,6 +8,7 @@ import More from "material-ui/svg-icons/content/add"
 import Less from "material-ui/svg-icons/content/remove"
 import {sendVerificationCode,validateVerificationCode} from "../../actionCreators/phoneVerificationActionCreators"
 import {postUser} from "../../actionCreators/accountActionCreators"
+import x from "../../constants/locale"
 class Signup extends React.Component {
     state = {
         allowZoomOut: false,
@@ -24,7 +25,8 @@ class Signup extends React.Component {
         showNewTerritories: false,
         showOutlyingIslands: false,
         verificationCodeIsSent:false,
-        verificationCodeIsValidated:false
+        verificationCodeIsValidated:false,
+        errors:{}
     }
 
     handleNewImage = e => {
@@ -83,6 +85,10 @@ class Signup extends React.Component {
             profilepic:this.state.image
         }
         postUser(data)
+            .catch(err=>{
+                console.log(err.response.data.errors)
+                this.setState({errors:err.response.data.errors})
+            })
     }
 
     rotateLeft = e => {
@@ -105,7 +111,6 @@ class Signup extends React.Component {
     }
 
     handlePositionChange = position => {
-        console.log('Position set to', position)
         this.setState({position})
     }
 
@@ -135,7 +140,9 @@ class Signup extends React.Component {
     }
 
     render() {
-        const {districts, showHongKongIsland, showKowloon, showNewTerritories, showOutlyingIslands, verificationCodeIsSent,verificationCodeIsValidated} = this.state
+        const {districts, showHongKongIsland, showKowloon, showNewTerritories, showOutlyingIslands, verificationCodeIsSent,verificationCodeIsValidated,errors} = this.state
+        const {locale} = this.props
+        const z = key => x[key][locale]
         return (
             <div style={{display: "flex", flexWrap: "wrap", position: "relative", top: 10, width: "100%"}}>
                 <div style={{
@@ -148,7 +155,7 @@ class Signup extends React.Component {
                 }}>
                     <div style={{height: 10}}/>
                     <ReactAvatarEditor
-                        style={{borderRadius: 3}}
+                        style={{borderRadius: 3,border:errors['profilepic']?'3px solid red':undefined}}
                         ref={this.setEditorRef}
                         scale={parseFloat(this.state.scale)}
                         width={this.state.width}
@@ -161,9 +168,10 @@ class Signup extends React.Component {
                         image={this.state.image || Logo}
                     />
                     <div style={{padding: 10}}>
+                        <div style={{fontSize: 13,width:"100%"}}>{z('profilePicInput')}</div>
                         <input name='newImage' type='file' onChange={this.handleNewImage}/>
                         <br />
-                        <span style={{fontSize: 13, minWidth: 100}}>zoom</span><br/>
+                        <span style={{fontSize: 13, minWidth: 100}}>{z('zoom')}</span><br/>
                         <input
                             name='scale'
                             type='range'
@@ -175,57 +183,57 @@ class Signup extends React.Component {
                             style={{width:"100%"}}
                         />
                         <br />
-                        <span style={{fontSize: 13, minWidth: 100}}>rotate</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{z('rotate')}</span>
                         <div style={{display:"flex"}}>
-                        <FlatButton onClick={this.rotateLeft} style={{fontSize:13,flex:1}}>Left</FlatButton>
-                        <FlatButton onClick={this.rotateRight} style={{fontSize:13,flex:1}}>Right</FlatButton>
+                        <FlatButton onClick={this.rotateLeft} style={{fontSize:13,flex:1}}>{z('rotateLeft')}</FlatButton>
+                        <FlatButton onClick={this.rotateRight} style={{fontSize:13,flex:1}}>{z('rotateRight')}</FlatButton>
                         </div>
                     </div>
                 </div>
                 <div style={{flex: 3, minWidth: "50%", border: "1px solid rgb(221, 223, 226)", borderRadius: 3,}}>
                     <div style={{padding: 10}}>
                         <div style={{display: "flex", alignItems: "center"}}>
-                            <span style={{fontSize: 13, minWidth: 100}}>Email</span>
-                            <TextField name={"email"} fullWidth type={"email"} ref={x=>this.email=x}/>
+                            <span style={{fontSize: 13, minWidth: 100}}>{z('emailInput')}</span>
+                            <TextField name={"email"} fullWidth type={"email"} ref={x=>this.email=x} errorText={errors['username']}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
-                            <span style={{fontSize: 13, minWidth: 100}}>Password</span>
+                            <span style={{fontSize: 13, minWidth: 100}}>{z('passwordInput')}</span>
                             <TextField name={"password"} fullWidth type={"password"} ref={x=>this.password=x}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
-                            <span style={{fontSize: 13, minWidth: 100}}>Display name</span>
-                            <TextField name={"displayName"} fullWidth ref={x=>this.displayName=x}/>
+                            <span style={{fontSize: 13, minWidth: 100}}>{z('displayName')}</span>
+                            <TextField name={"displayName"} fullWidth ref={x=>this.displayName=x} errorText={errors['display_name']}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div style={{display: "flex", alignItems: "center", width: "100%"}}>
-                                <span style={{fontSize: 13, minWidth: 100}}>Phone number</span>
-                                <TextField name={"countryCode"} ref={x=>this.countryCode = x} style={{width:100,marginRight:5}} type={"tel"} hintText={"852"} disabled={verificationCodeIsSent}/>
-                                <TextField name={"phoneNumber"} ref={x=>this.phoneNumber = x} fullWidth type={"tel"} hintText={"91234567"} disabled={verificationCodeIsSent}/>
+                                <span style={{fontSize: 13, minWidth: 100}}>{z('phoneInput')}</span>
+                                <TextField name={"countryCode"} ref={x=>this.countryCode = x} style={{width:100,marginRight:5}} type={"tel"} hintText={"852"} disabled={verificationCodeIsSent} errorText={errors['phone']?"Error":null}/>
+                                <TextField name={"phoneNumber"} ref={x=>this.phoneNumber = x} fullWidth type={"tel"} hintText={"91234567"} disabled={verificationCodeIsSent} errorText={errors['phone']}/>
                             </div>
-                            <FlatButton style={{color: "#1e717f"}} onClick={()=>this.handleSendCode()} disabled={verificationCodeIsSent}>Send code</FlatButton>
+                            <FlatButton style={{color: "#1e717f"}} onClick={()=>this.handleSendCode()} disabled={verificationCodeIsSent}>{z('send')}</FlatButton>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div style={{display: "flex", alignItems: "center", width: "100%"}}>
-                                <span style={{fontSize: 13, minWidth: 100}}>Verification code</span>
-                                <TextField name={"verificationCode"} ref={x=>this.verificationCode = x} fullWidth type={"tel"} disabled={verificationCodeIsValidated}/>
+                                <span style={{fontSize: 13, minWidth: 100}}>{z('verificationCode')}</span>
+                                <TextField name={"verificationCode"} ref={x=>this.verificationCode = x} fullWidth type={"tel"} disabled={verificationCodeIsValidated} errorText={errors['phone_verify_code']}/>
                             </div>
-                            <FlatButton style={{color: "#1e717f"}} onClick={()=>this.handleVerifyCode()} disabled={verificationCodeIsValidated}>Verify</FlatButton>
+                            <FlatButton style={{color: "#1e717f"}} onClick={()=>this.handleVerifyCode()} disabled={verificationCodeIsValidated}>{z('verifyButton')}</FlatButton>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
-                            <span style={{fontSize: 13, minWidth: 100}}>Agent license</span>
-                        <TextField name={"agentLicense"} fullWidth hintText={"e.g. A-123456"} ref={x=>this.agentLicense = x}/>
+                            <span style={{fontSize: 13, minWidth: 100}}>{z('agentLicense')}</span>
+                        <TextField name={"agentLicense"} fullWidth hintText={"e.g. A-123456"} ref={x=>this.agentLicense = x} errorText={errors['license_number']}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
-                            <span style={{fontSize: 13, minWidth: 100}}>Agency</span>
-                        <TextField name={"agency"} fullWidth ref={x=>this.agency = x}/>
+                            <span style={{fontSize: 13, minWidth: 100}}>{z('agencyInput')}</span>
+                        <TextField name={"agency"} fullWidth ref={x=>this.agency = x} errorText={errors['agency']}/>
                         </div>
                         <br/>
-                        <span style={{fontSize: 13, minWidth: 100}}>Districts you cover</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{z('districts')}</span>
                         <br/>
-                        <div style={{fontSize: 14, color: "#b2b2b2", display: "flex", alignItems: "center"}}><IconButton
+                        <div style={{fontSize: 14,  display: "flex", alignItems: "center"}}><IconButton
                             iconStyle={{fill: "#b2b2b2"}}
                             onClick={() => this.setState({showHongKongIsland: !showHongKongIsland})}>{showHongKongIsland ?
-                            <Less/> : <More/>}</IconButton>Hong Kong Island
+                            <Less/> : <More/>}</IconButton>{z('Hong_Kong_Island')}
                         </div>
                         {showHongKongIsland && <div style={{display: "flex", flexWrap: "wrap", width: "100%"}}>
                             {Object.keys(Hong_Kong_Island).sort().map(key => {
@@ -234,15 +242,15 @@ class Signup extends React.Component {
                                     <Chip key={`chip${key}`} backgroundColor={isSet ? "#1e717f" : "#eeeeee"}
                                           labelStyle={{color: isSet ? "#ffffff" : "#1e717f"}} style={{margin: 2}}
                                           onClick={() => this.setDistrict(key)}>
-                                        {Hong_Kong_Island[key]["district_eng"]}
+                                        {z(key)}
                                     </Chip>
                                 )
                             })}
                         </div>}
-                        <div style={{fontSize: 14, color: "#b2b2b2", display: "flex", alignItems: "center"}}><IconButton
+                        <div style={{fontSize: 14, display: "flex", alignItems: "center"}}><IconButton
                             iconStyle={{fill: "#b2b2b2"}}
                             onClick={() => this.setState({showKowloon: !showKowloon})}>{showKowloon ? <Less/> :
-                            <More/>}</IconButton>Kowloon
+                            <More/>}</IconButton>{z('Kowloon')}
                         </div>
                         {showKowloon &&
                         <div style={{display: "flex", flexWrap: "wrap", width: "100%"}}>
@@ -252,16 +260,16 @@ class Signup extends React.Component {
                                     <Chip key={`chip${key}`} backgroundColor={isSet ? "#1e717f" : "#eeeeee"}
                                           labelStyle={{color: isSet ? "#ffffff" : "#1e717f"}} style={{margin: 2}}
                                           onClick={() => this.setDistrict(key)}>
-                                        {Kowloon[key]["district_eng"]}
+                                        {z(key)}
                                     </Chip>
                                 )
                             })}
                         </div>
                         }
-                        <div style={{fontSize: 14, color: "#b2b2b2", display: "flex", alignItems: "center"}}><IconButton
+                        <div style={{fontSize: 14, display: "flex", alignItems: "center"}}><IconButton
                             iconStyle={{fill: "#b2b2b2"}}
                             onClick={() => this.setState({showNewTerritories: !showNewTerritories})}>{showNewTerritories ?
-                            <Less/> : <More/>}</IconButton>New Territories
+                            <Less/> : <More/>}</IconButton>{z('New_Territories')}
                         </div>
                         {showNewTerritories && <div style={{display: "flex", flexWrap: "wrap", width: "100%"}}>
                             {Object.keys(New_Territories).sort().map(key => {
@@ -270,15 +278,15 @@ class Signup extends React.Component {
                                     <Chip key={`chip${key}`} backgroundColor={isSet ? "#1e717f" : "#eeeeee"}
                                           labelStyle={{color: isSet ? "#ffffff" : "#1e717f"}} style={{margin: 2}}
                                           onClick={() => this.setDistrict(key)}>
-                                        {New_Territories[key]["district_eng"]}
+                                        {z(key)}
                                     </Chip>
                                 )
                             })}
                         </div>}
-                        <div style={{fontSize: 14, color: "#b2b2b2", display: "flex", alignItems: "center"}}><IconButton
+                        <div style={{fontSize: 14, display: "flex", alignItems: "center"}}><IconButton
                             iconStyle={{fill: "#b2b2b2"}}
                             onClick={() => this.setState({showOutlyingIslands: !showOutlyingIslands})}>{showOutlyingIslands ?
-                            <Less/> : <More/>}</IconButton>Outlying Islands
+                            <Less/> : <More/>}</IconButton>{z('Outlying_Islands')}
                         </div>
                         {showOutlyingIslands && <div style={{display: "flex", flexWrap: "wrap", width: "100%"}}>
                             {Object.keys(Outlying_Islands).sort().map(key => {
@@ -287,23 +295,28 @@ class Signup extends React.Component {
                                     <Chip key={`chip${key}`} backgroundColor={isSet ? "#1e717f" : "#eeeeee"}
                                           labelStyle={{color: isSet ? "#ffffff" : "#1e717f"}} style={{margin: 2}}
                                           onClick={() => this.setDistrict(key)}>
-                                        {Outlying_Islands[key]["district_eng"]}
+                                        {z(key)}
                                     </Chip>
                                 )
                             })}
                         </div>}
                         <div style={{display: "flex", alignItems: "center"}}>
-                            <span style={{fontSize: 13, minWidth: 100}}>Promotion code</span>
+                            <span style={{fontSize: 13, minWidth: 100}}>{z('promoCode')}</span>
                         <TextField name={"promotionCode"} fullWidth ref={x=>this.promotionCode=x}/>
                         </div>
-                        <FlatButton fullWidth style={{color: "#1e717f"}} onClick={()=>this.handleSubmit()}>Submit</FlatButton>
+                        <FlatButton fullWidth style={{color: "#1e717f"}} onClick={()=>this.handleSubmit()}>{z('submit')}</FlatButton>
                     </div>
                 </div>
             </div>
         )
     }
 }
-export default connect(null,{
+
+const mapStateToProps = state => ({
+    locale: state.localeReducer.locale
+})
+
+export default connect(mapStateToProps,{
     sendVerificationCode,
     validateVerificationCode,
     postUser

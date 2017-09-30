@@ -112,7 +112,6 @@ class AddPropertyPage extends React.Component {
                     })
 
             }).catch(err=>{
-                console.log(err.response.data.errors)
                 this.setState({errors:err.response.data.errors})
             })
 

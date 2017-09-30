@@ -31,8 +31,8 @@ export default {
     displayName: {en: 'Display Name', zh: '顯示名稱'},
     verificationCode: {en: 'Verification Code', zh: '驗證碼'},
     agentLicense: {
-        en: 'Agent License (eg. A-123456)',
-        zh: '代理牌照號碼(例如：A-123456)'
+        en: 'Agent License',
+        zh: '代理牌照號碼'
     },
     agency: {en: 'Please specify your Agency', zh: '請提供你的地產代理資料'},
     crop: {en: 'Crop', zh: '裁剪'},
@@ -43,7 +43,7 @@ export default {
         zh: '我同意遵守1PLACE的'
     },
     tc: {en: 'Terms and Conditions', zh: '使用條款'},
-    districts: {en: 'Please select at least 1 District', zh: '請選擇至少一個區域'},
+    districts: {en: 'Please select at least 1 district you cover', zh: '請選擇至少一個你負責的區域'},
     propertyType: {en: 'What Properties are you offering?', zh: '你代理什麼類型的物業?'},
     failed: {en: 'Failed to Signup', zh: '登記失敗'},
     displayname: {en: 'Display Name should not be empty', zh: '顯示名稱不應為空'},
@@ -327,5 +327,13 @@ export default {
     loading:{en:"loading",zh:"載入中"},
     addImages:{en:"add image(s)",zh:"上載照片"},
     update:{en:"update",zh:"更新"},
-    url:{en:"url",zh:'網址'}
+    url:{en:"url",zh:'網址'},
+    phoneInput:{en:"Phone number",zh:"電話號碼"},
+    verifyButton:{en:"Verify",zh:"驗證"},
+    agencyInput:{en:"Agency",zh:"地產代理"},
+    rotateLeft:{en:"Rotate left",zh:"逆時針"},
+    rotateRight:{en:"Rotate right",zh:"順時針"},
+    rotate:{en:"Rotate",zh:"旋轉"},
+    zoom:{en:"Zoom",zh:"放大"},
+    profilePicInput:{en:"Profile picture",zh:"頭像照片"}
 }
