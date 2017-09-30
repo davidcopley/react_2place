@@ -56,6 +56,7 @@ class Signup extends React.Component {
     handleSubmit = () => {
         const t2v = this.tf2val
         const {postUser} = this.props
+        const {districts} = this.state
         const data = {
             display_name:t2v(this.displayName),
             email:t2v(this.email),
@@ -78,7 +79,7 @@ class Signup extends React.Component {
             speaks_chinese:1,
             speaks_english:1,
             my_region:Object.keys(regions).join(),
-            my_district:"Aberdeen",
+            my_district:Object.keys(districts).fill(x=>x).join(","),
             profilepic:this.state.image
         }
         postUser(data)
@@ -138,7 +139,7 @@ class Signup extends React.Component {
         return (
             <div style={{display: "flex", flexWrap: "wrap", position: "relative", top: 10, width: "100%"}}>
                 <div style={{
-                    minWidth: 300,
+                    flex:1,
                     display: "flex",
                     flexDirection: "column",
                     alignItems: "center",
@@ -181,7 +182,7 @@ class Signup extends React.Component {
                         </div>
                     </div>
                 </div>
-                <div style={{flex: 1, minWidth: "50%", border: "1px solid rgb(221, 223, 226)", borderRadius: 3,}}>
+                <div style={{flex: 3, minWidth: "50%", border: "1px solid rgb(221, 223, 226)", borderRadius: 3,}}>
                     <div style={{padding: 10}}>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>Email</span>
