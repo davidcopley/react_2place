@@ -20,6 +20,7 @@ import Dropzone from 'react-dropzone'
 import {putProperty,postPropertyImages,getPropertyDetail} from "../../actionCreators/propertiesDBActionCreators"
 import {getBuildingAddressAutocompletes,getBuildingById} from "../../actionCreators/autocompleteActionCreators"
 import {regions} from "../../constants/districts"
+import x from "../../constants/locale"
 const tf2val = textfieldRef => textfieldRef.input.value
 class EditPropertyPage extends React.Component {
     constructor(props) {
@@ -202,6 +203,7 @@ class EditPropertyPage extends React.Component {
 
     render() {
         const {features,facilities, propertyType, forRent, dataSource, region, district} = this.state
+        const {locale} = this.props
         return (
             <div style={{width: "100%", display: "flex", flexWrap: "wrap", position: "relative", top: 10}}>
                 <div style={{
@@ -213,7 +215,7 @@ class EditPropertyPage extends React.Component {
                 }}>
                     <span>Property</span>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Building name</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["building_name"][locale]}</span>
                         <AutoComplete
                             name="buildingName"
                             dataSourceConfig={this.dataSourceConfig}
@@ -230,29 +232,29 @@ class EditPropertyPage extends React.Component {
                         />
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Street name</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["street_name"][locale]}</span>
                         <TextField name={"streetName"} key='streetName' ref={x => this.streetName = x} fullWidth/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Region</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["region"][locale]}</span>
                         <DropDownMenu value={region} onChange={(x, y, v) => this.setState({region: v, district: ""})}
                                       style={{width: "100%"}} menuStyle={{width: "100%"}} listStyle={{width: "100%"}}>
                             {Object.keys(regions).map(region =>
-                                <MenuItem key={`region${region}`} primaryText={region} value={region}/>
+                                <MenuItem key={`region${region}`} primaryText={x[region][locale]} value={region}/>
                             )}
                         </DropDownMenu>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>District</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x['district'][locale]}</span>
                         <DropDownMenu maxHeight={300} value={district}
                                       onChange={(x, y, v) => this.setState({district: v})} style={{width: "100%"}}
                                       menuStyle={{width: "100%"}} listStyle={{width: "100%"}}>
                             {Object.keys(regions[region]).map(district =>
-                                <MenuItem key={`district${district}`} primaryText={district} value={district}/>
+                                <MenuItem key={`district${district}`} primaryText={x[district][locale]} value={district}/>
                             )}
                         </DropDownMenu>
                     </div>
-                    <span style={{fontSize: 13}}>Property Type</span>
+                    <span style={{fontSize: 13}}>{x['PropertyType'][locale]}</span>
                     <div style={{display: "flex", justifyContent: "space-evenly", marginTop: 10, marginBottom: 10}}>
                         {Object.keys(propertyTypes).map(type => {
                             return (
@@ -271,25 +273,24 @@ class EditPropertyPage extends React.Component {
                                             filter: propertyType === type ? undefined : "opacity(15%)"
                                         }}
                                     />
-                                    <span style={{fontSize: 12}}>{type.replace(/_/g, ' ')}</span>
+                                    <span style={{fontSize: 12}}>{x[type][locale]}</span>
                                 </div>
                             )
                         })}
                     </div>
-                    <span style={{fontSize: 13}}>Unit level</span>
+                    <span style={{fontSize: 13}}>{x["unit_level"][locale]}</span>
                     <RadioButtonGroup defaultSelected={"middle"} ref={x => this.unitLevel = x} name="unit_level"
                                       style={{display: 'flex', justifyContent: "space-evenly"}}>
-                        <RadioButton labelStyle={{fontSize:13}} label="high" value={"high"} style={{width: 100}}/>
-                        <RadioButton labelStyle={{fontSize:13}} label="middle" value={"middle"} style={{width: 100}}/>
-                        <RadioButton labelStyle={{fontSize:13}} label="low" value={"low"} style={{width: 100}}/>
+                        <RadioButton labelStyle={{fontSize:13}} label={x["high"][locale]} value={"high"} style={{width: 100}}/>
+                        <RadioButton labelStyle={{fontSize:13}} label={x["middle"][locale]} value={"middle"} style={{width: 100}}/>
+                        <RadioButton labelStyle={{fontSize:13}} label={x["low"][locale]} value={"low"} style={{width: 100}}/>
                     </RadioButtonGroup>
-                    <span style={{fontSize: 13}}>Description</span>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Short title</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["short_title"][locale]}</span>
                         <TextField name={"shortTitle"} key="shortTitle" ref={x => this.shortTitle = x} fullWidth/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
-                        <span style={{fontSize: 13, minWidth: 100}}>Description</span>
+                        <span style={{fontSize: 13, minWidth: 100}}>{x["Description"][locale]}</span>
                         <TextField name={"remark"} key="remark" ref={x => this.remark = x} fullWidth/>
                     </div>
                 </div>
@@ -555,5 +556,6 @@ class EditPropertyPage extends React.Component {
 
 const mapStateToProps = (state, props) => ({
     propertyDetail: state.propertiesDBReducer.propertiesDetail[props.match.params.propertyId],
+    locale:state.localeReducer.locale
 })
 export default connect(mapStateToProps, {putProperty, getBuildingAddressAutocompletes,getBuildingById,postPropertyImages,getPropertyDetail})(EditPropertyPage)
