@@ -189,7 +189,7 @@ class Signup extends React.Component {
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div style={{display: "flex", alignItems: "center", width: "100%"}}>
                                 <span style={{fontSize: 13, minWidth: 100}}>Phone number</span>
-                                <TextField name={"countryCode"} ref={x=>this.countryCode = x} style={{width:100,marginRight:5}} type={"number"} hintText={"852"} disabled={verificationCodeIsSent}/>
+                                <TextField name={"countryCode"} ref={x=>this.countryCode = x} style={{width:100,marginRight:5}} type={"tel"} hintText={"852"} disabled={verificationCodeIsSent}/>
                                 <TextField name={"phoneNumber"} ref={x=>this.phoneNumber = x} fullWidth type={"tel"} hintText={"91234567"} disabled={verificationCodeIsSent}/>
                             </div>
                             <FlatButton style={{color: "#1e717f"}} onClick={()=>this.handleSendCode()} disabled={verificationCodeIsSent}>Send code</FlatButton>
@@ -197,7 +197,7 @@ class Signup extends React.Component {
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div style={{display: "flex", alignItems: "center", width: "100%"}}>
                                 <span style={{fontSize: 13, minWidth: 100}}>Verification code</span>
-                                <TextField name={"verificationCode"} ref={x=>this.verificationCode = x} fullWidth type={"number"} disabled={verificationCodeIsValidated}/>
+                                <TextField name={"verificationCode"} ref={x=>this.verificationCode = x} fullWidth type={"tel"} disabled={verificationCodeIsValidated}/>
                             </div>
                             <FlatButton style={{color: "#1e717f"}} onClick={()=>this.handleVerifyCode()} disabled={verificationCodeIsValidated}>Verify</FlatButton>
                         </div>
