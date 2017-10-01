@@ -92,7 +92,13 @@ class AddPropertyPage extends React.Component {
             "property_building_features":property_building_features
         }
         if(!tf2val(this.salePrice)&&!tf2val(this.rentPrice)){
-            this.setState({errors:{sale_price:"Sale price or rent price must be filled. ",rent_price:"Sale price or rent price must be filled. "}})
+            postProperty(data).then(res=>{
+                const {postPropertyImages} = this.props
+                const newPropertyId = parseInt(res.headers.location.split('/').slice(-1)[0])
+                postPropertyImages(newPropertyId,this.state.images)
+            }).catch(err=>{
+                this.setState({errors:err.response.data.errors})
+            })
             return
         }
 
@@ -125,6 +131,8 @@ class AddPropertyPage extends React.Component {
                 const {postPropertyImages} = this.props
                 const newPropertyId = parseInt(res.headers.location.split('/').slice(-1)[0])
                 postPropertyImages(newPropertyId,this.state.images)
+            }).catch(err=>{
+                this.setState({errors:err.response.data.errors})
             })
         }
     }
@@ -136,6 +144,7 @@ class AddPropertyPage extends React.Component {
     render() {
         const {features,facilities, propertyType, forRent, dataSource, region, district, errors} = this.state
         const {locale} = this.props
+        const y = key => key&&x["errors"][key]&&x["errors"][key][locale]
         return (
             <div style={{width: "100%", display: "flex", flexWrap: "wrap", position: "relative", top: 10}}>
                 <div style={{
@@ -161,12 +170,12 @@ class AddPropertyPage extends React.Component {
                             listStyle={{zIndex: 10}}
                             style={{zIndex: 1}}
                             menuStyle={{zIndex: 10}}
-                            errorText={errors["building_name"]}
+                            errorText={y(errors["building_name"])}
                         />
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["street_name"][locale]}</span>
-                        <TextField name={"streetName"} key='streetName' ref={x => this.streetName = x} fullWidth errorText={errors['building_street_name']}/>
+                        <TextField name={"streetName"} key='streetName' ref={x => this.streetName = x} fullWidth errorText={y(errors['building_street_name'])}/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["region"][locale]}</span>
@@ -224,7 +233,7 @@ class AddPropertyPage extends React.Component {
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["short_title"][locale]}</span>
-                        <TextField name={"shortTitle"} key="shortTitle" ref={x => this.shortTitle = x} fullWidth errorText={errors['short_title']}/>
+                        <TextField name={"shortTitle"} key="shortTitle" ref={x => this.shortTitle = x} fullWidth errorText={y(errors['short_title'])}/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["Description"][locale]}</span>
@@ -242,11 +251,11 @@ class AddPropertyPage extends React.Component {
                     <span style={{fontSize: 13}}>{x["Price"][locale]}</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["salePrice"][locale]}</span>
-                        <TextField name={"salePrice"} min={0} key="salePrice" ref={x => this.salePrice = x} fullWidth type={"number"} errorText={errors['sale_price']}/>
+                        <TextField name={"salePrice"} min={0} key="salePrice" ref={x => this.salePrice = x} fullWidth type={"number"} errorText={y(errors['unit_price'])}/>
                     </div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["rentPrice"][locale]}</span>
-                        <TextField name={"rentPrice"} min={0} key='rentPrice' ref={x => this.rentPrice = x} errorText={errors['rent_price']}
+                        <TextField name={"rentPrice"} min={0} key='rentPrice' ref={x => this.rentPrice = x} errorText={y(errors['unit_price'])}
                                    onChange={e => this.setState({forRent: !!e.target.value})}
                                    fullWidth type={"number"}/></div>
                     {forRent &&
@@ -269,18 +278,18 @@ class AddPropertyPage extends React.Component {
                     <span style={{fontSize: 13}}>{x['Size'][locale]}</span>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["saleableArea"][locale]}</span>
-                        <TextField name={"saleableArea"} min={0} key="saleableArea" ref={x => this.saleableArea = x} fullWidth errorText={errors['net_unit_size']}
+                        <TextField name={"saleableArea"} min={0} key="saleableArea" ref={x => this.saleableArea = x} fullWidth errorText={y(errors['net_unit_size'])}
                                    type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["grossArea"][locale]}</span>
-                        <TextField name={"grossArea"} min={0} key="grossArea" ref={x => this.grossArea = x} fullWidth type={"number"} errorText={errors['gross_unit_size']}/></div>
+                        <TextField name={"grossArea"} min={0} key="grossArea" ref={x => this.grossArea = x} fullWidth type={"number"} errorText={y(errors['gross_unit_size'])}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["numberOfRoom"][locale]}</span>
-                        <TextField name={"numberOfRooms"} min={0} key="numberOfRooms" ref={x => this.numberOfRooms = x} fullWidth errorText={errors['number_of_room']}
+                        <TextField name={"numberOfRooms"} min={0} key="numberOfRooms" ref={x => this.numberOfRooms = x} fullWidth errorText={y(errors['number_of_room'])}
                                    type={"number"}/></div>
                     <div style={{display: "flex", alignItems: "center"}}>
                         <span style={{fontSize: 13, minWidth: 100}}>{x["numberOfBathRoom"][locale]}</span>
-                        <TextField name={"numberOfBathrooms"} min={0} key="numberOfBathrooms" ref={x => this.numberOfBathrooms = x} fullWidth errorText={errors['number_of_bathroom']}
+                        <TextField name={"numberOfBathrooms"} min={0} key="numberOfBathrooms" ref={x => this.numberOfBathrooms = x} fullWidth errorText={y(errors['number_of_bathroom'])}
                                    type={"number"}/></div>
                 </div>
                 <div style={{
