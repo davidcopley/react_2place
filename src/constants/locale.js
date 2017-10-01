@@ -1,5 +1,5 @@
 export default {
-    "1place":{en:"1PLACE",zh:"一坊"},
+    "1place": {en: "1PLACE", zh: "一坊"},
     signIn: {en: 'sign-in', zh: '登入'},
     signOut: {en: 'sign-out', zh: '登出'},
     pleaseSignin: {en: 'Please Sign In', zh: '請先登入'},
@@ -27,36 +27,7 @@ export default {
     agentInfo: {en: 'Agent Information', zh: '代理資料'},
     promoCode: {en: 'Promo Code', zh: '推廣代碼'},
     finish: {en: 'FINISH', zh: '完成'},
-    email: {en: 'This is not a valid email address', zh: '輸入了無效的電郵地址'},
-    displayName: {en: 'Display Name', zh: '顯示名稱'},
-    verificationCode: {en: 'Verification Code', zh: '驗證碼'},
-    agentLicense: {
-        en: 'Agent License',
-        zh: '代理牌照號碼'
-    },
-    agency: {en: 'Please specify your Agency', zh: '請提供你的地產代理資料'},
-    crop: {en: 'Crop', zh: '裁剪'},
-    send: {en: 'Get Verification Code', zh: '獲取驗證碼'},
-    verify: {en: 'Invalid Verification code', zh: '無效的驗證碼'},
-    agree: {
-        en: 'By signing up, I agree to 1PLACE\'s ',
-        zh: '我同意遵守1PLACE的'
-    },
-    tc: {en: 'Terms and Conditions', zh: '使用條款'},
-    districts: {en: 'Please select at least 1 district you cover', zh: '請選擇至少一個你負責的區域'},
-    propertyType: {en: 'What Properties are you offering?', zh: '你代理什麼類型的物業?'},
-    failed: {en: 'Failed to Signup', zh: '登記失敗'},
-    displayname: {en: 'Display Name should not be empty', zh: '顯示名稱不應為空'},
-    phoneEmpty: {en: 'Invalid Phone Number', zh: '無效的手提電話號碼'},
-    emailtaken: {
-        en: 'Email is invalid or has already been taken',
-        zh: '電郵地址無效或已經被使用'
-    },
-    license: {
-        en: 'License is invalid or has already been taken',
-        zh: '代理牌照無效或已經被使用'
-    },
-    promocode: {en: 'Promo code is invalid', zh: '無效的推廣代碼'},
+
     redirect: {
         en: 'Your browser will be redirected in 5 seconds',
         zh: '你的瀏覽器將會在5秒內自動跳轉'
@@ -316,24 +287,65 @@ export default {
         zh: '你正在移除此物業.\n確認移除後你將不會再見到此物業!\n你確定繼續?'
     },
     hihi: {en: 'hihih', zh: 'hihih'},
-    unit_level:{en:'Unit level',zh:'樓層'},
-    address:{en: 'address', zh: '位置'},
-    unableToLocateAddress:{en:"Unable to locate address",zh:'無法找到位置'},
-    emailInput:{en:"email",zh:"電郵地址"},
-    passwordInput:{en:"password",zh:"密碼"},
-    submit:{en:"submit",zh:"確定"},
-    forgotPassword:{en:"forgot password",zh:"忘記密碼"},
-    filterText:{en:"filter text",zh:"過濾字眼"},
-    loading:{en:"loading",zh:"載入中"},
-    addImages:{en:"add image(s)",zh:"上載照片"},
-    update:{en:"update",zh:"更新"},
-    url:{en:"url",zh:'網址'},
-    phoneInput:{en:"Phone number",zh:"電話號碼"},
-    verifyButton:{en:"Verify",zh:"驗證"},
-    agencyInput:{en:"Agency",zh:"地產代理"},
-    rotateLeft:{en:"Rotate left",zh:"逆時針"},
-    rotateRight:{en:"Rotate right",zh:"順時針"},
-    rotate:{en:"Rotate",zh:"旋轉"},
-    zoom:{en:"Zoom",zh:"放大"},
-    profilePicInput:{en:"Profile picture",zh:"頭像照片"}
+    unit_level: {en: 'Unit level', zh: '樓層'},
+    address: {en: 'address', zh: '位置'},
+    unableToLocateAddress: {en: "Unable to locate address", zh: '無法找到位置'},
+    emailInput: {en: "email", zh: "電郵地址"},
+    passwordInput: {en: "password", zh: "密碼"},
+    submit: {en: "submit", zh: "確定"},
+    forgotPassword: {en: "forgot password", zh: "忘記密碼"},
+    filterText: {en: "filter text", zh: "過濾字眼"},
+    loading: {en: "loading", zh: "載入中"},
+    addImages: {en: "add image(s)", zh: "上載照片"},
+    update: {en: "update", zh: "更新"},
+    url: {en: "url", zh: '網址'},
+    phoneInput: {en: "Phone number", zh: "電話號碼"},
+    verifyButton: {en: "Verify", zh: "驗證"},
+    agencyInput: {en: "Agency", zh: "地產代理"},
+    rotateLeft: {en: "Rotate left", zh: "逆時針"},
+    rotateRight: {en: "Rotate right", zh: "順時針"},
+    rotate: {en: "Rotate", zh: "旋轉"},
+    zoom: {en: "Zoom", zh: "放大"},
+    profilePicInput: {en: "Profile picture", zh: "頭像照片"},
+    displayName: {en: 'Display Name', zh: '顯示名稱'},
+    send: {en: 'Get Verification Code', zh: '獲取驗證碼'},
+    verificationCode: {en: 'Verification Code', zh: '驗證碼'},
+    agentLicense: {
+        en: 'Agent License',
+        zh: '代理牌照號碼'
+    },
+    districts: {en: 'Please select at least 1 district you cover', zh: '請選擇至少一個你負責的區域'},
+    errors: {
+        "2539| The display name field is required.":{en:"The display name field is required.",zh:"請輸入顯示名稱"},
+        "2539| The email field is required.":{en:"The email field is required.",zh:"請輸入用戶電郵"},
+        "2534 7| The phone must be at least 7 characters.":{en:"The phone must be at least 7 characters.",zh:"電話號碼需要最少7個數字"},
+        "2541 phone| The phone verify code field is required when phone is present.":{en:"The phone verify code field is required when phone is present.",zh:"請輸入用戶驗證碼"},
+        "2544 facebook id \/ linkedin id| The username field is required when none of facebook id \/ linkedin id are present.":{en:"The username field is required when none of facebook id \/ linkedin id are present.",zh:"請輸入用戶電郵"},
+        "2523| The profilepic must be an image.":{en:"The profilepic must be an image.",zh:"請上載用戶顯示頭像"},
+        "2539| The license number field is required.":{en:"The license number field is required.",zh:"請輸入代理牌照號碼"},
+        "2539| The agency field is required.":{en:"The agency field is required.",zh:"請輸入地產代理"},
+        "2551| The username has already been taken.":{en:"The username has already been taken.",zh:"電郵已被使用"}
+    }
+}
+
+const temp = {
+    "message": "Could not create new user.",
+    "errors": {
+        "display_name": ["2539| The display name field is required."],
+        "email": ["2539| The email field is required."],
+        "phone": ["2534 7| The phone must be at least 7 characters."],
+        "phone_verify_code": ["2541 phone| The phone verify code field is required when phone is present."],
+        "username": ["2544 facebook id \/ linkedin id| The username field is required when none of facebook id \/ linkedin id are present."],
+        "password": ["2544 facebook id \/ linkedin id| The password field is required when none of facebook id \/ linkedin id are present."],
+        "profilepic": ["2523| The profilepic must be an image."],
+        "license_number": ["2539| The license number field is required."],
+        "agency": ["2539| The agency field is required."]
+    },
+    "status_code": 422,
+    "debug": {
+        "line": 20,
+        "file": "\/var\/www\/oneplace\/web\/platform\/app\/Http\/Requests\/ApiStoreResourceRequest.php",
+        "class": "Dingo\\Api\\Exception\\StoreResourceFailedException",
+        "trace": ["#0 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Validation\/ValidatesWhenResolvedTrait.php(25): App\\Http\\Requests\\ApiStoreResourceRequest->failedValidation(Object(Felixkiss\\UniqueWithValidator\\ValidatorExtension))", "#1 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Validation\/ValidationServiceProvider.php(32): Illuminate\\Foundation\\Http\\FormRequest->validate()", "#2 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php(1024): Illuminate\\Validation\\ValidationServiceProvider->Illuminate\\Validation\\{closure}(Object(App\\Http\\Requests\\ApiStorePropertyAgentRequest), Object(Illuminate\\Foundation\\Application))", "#3 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php(989): Illuminate\\Container\\Container->fireCallbackArray(Object(App\\Http\\Requests\\ApiStorePropertyAgentRequest), Array)", "#4 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Container\/Container.php(650): Illuminate\\Container\\Container->fireResolvingCallbacks('App\\\\Http\\\\Reques...', Object(App\\Http\\Requests\\ApiStorePropertyAgentRequest))", "#5 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Application.php(674): Illuminate\\Container\\Container->make('App\\\\Http\\\\Reques...', Array)", "#6 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/RouteDependencyResolverTrait.php(87): Illuminate\\Foundation\\Application->make('App\\\\Http\\\\Reques...')", "#7 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/RouteDependencyResolverTrait.php(61): Illuminate\\Routing\\ControllerDispatcher->transformDependency(Object(ReflectionParameter), Array, Array)", "#8 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/RouteDependencyResolverTrait.php(44): Illuminate\\Routing\\ControllerDispatcher->resolveMethodDependencies(Array, Object(ReflectionMethod))", "#9 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/ControllerDispatcher.php(162): Illuminate\\Routing\\ControllerDispatcher->resolveClassMethodDependencies(Array, Object(App\\Http\\Controllers\\ApiPropertyAgentController), 'store')", "#10 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/ControllerDispatcher.php(112): Illuminate\\Routing\\ControllerDispatcher->call(Object(App\\Http\\Controllers\\ApiPropertyAgentController), Object(Illuminate\\Routing\\Route), 'store')", "#11 [internal function]: Illuminate\\Routing\\ControllerDispatcher->Illuminate\\Routing\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#12 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(139): call_user_func(Object(Closure), Object(Dingo\\Api\\Http\\Request))", "#13 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#14 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(103): call_user_func(Object(Closure), Object(Dingo\\Api\\Http\\Request))", "#15 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/ControllerDispatcher.php(114): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))", "#16 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/ControllerDispatcher.php(69): Illuminate\\Routing\\ControllerDispatcher->callWithinStack(Object(App\\Http\\Controllers\\ApiPropertyAgentController), Object(Illuminate\\Routing\\Route), Object(Dingo\\Api\\Http\\Request), 'store')", "#17 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Route.php(203): Illuminate\\Routing\\ControllerDispatcher->dispatch(Object(Illuminate\\Routing\\Route), Object(Dingo\\Api\\Http\\Request), 'App\\\\Http\\\\Contro...', 'store')", "#18 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Route.php(134): Illuminate\\Routing\\Route->runWithCustomDispatcher(Object(Dingo\\Api\\Http\\Request))", "#19 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php(708): Illuminate\\Routing\\Route->run(Object(Dingo\\Api\\Http\\Request))", "#20 [internal function]: Illuminate\\Routing\\Router->Illuminate\\Routing\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#21 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(139): call_user_func(Object(Closure), Object(Dingo\\Api\\Http\\Request))", "#22 \/var\/www\/oneplace\/web\/platform\/vendor\/dingo\/api\/src\/Http\/Middleware\/RateLimit.php(65): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#23 [internal function]: Dingo\\Api\\Http\\Middleware\\RateLimit->handle(Object(Dingo\\Api\\Http\\Request), Object(Closure))", "#24 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(124): call_user_func_array(Array, Array)", "#25 \/var\/www\/oneplace\/web\/platform\/vendor\/dingo\/api\/src\/Http\/Middleware\/Auth.php(53): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#26 [internal function]: Dingo\\Api\\Http\\Middleware\\Auth->handle(Object(Dingo\\Api\\Http\\Request), Object(Closure))", "#27 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(124): call_user_func_array(Array, Array)", "#28 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#29 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(103): call_user_func(Object(Closure), Object(Dingo\\Api\\Http\\Request))", "#30 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php(710): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))", "#31 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php(675): Illuminate\\Routing\\Router->runRouteWithinStack(Object(Illuminate\\Routing\\Route), Object(Dingo\\Api\\Http\\Request))", "#32 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Routing\/Router.php(635): Illuminate\\Routing\\Router->dispatchToRoute(Object(Dingo\\Api\\Http\\Request))", "#33 \/var\/www\/oneplace\/web\/platform\/vendor\/dingo\/api\/src\/Routing\/Adapter\/Laravel.php(65): Illuminate\\Routing\\Router->dispatch(Object(Dingo\\Api\\Http\\Request))", "#34 \/var\/www\/oneplace\/web\/platform\/vendor\/dingo\/api\/src\/Routing\/Router.php(563): Dingo\\Api\\Routing\\Adapter\\Laravel->dispatch(Object(Dingo\\Api\\Http\\Request), 'v1')", "#35 \/var\/www\/oneplace\/web\/platform\/vendor\/dingo\/api\/src\/Http\/Middleware\/Request.php(91): Dingo\\Api\\Routing\\Router->dispatch(Object(Dingo\\Api\\Http\\Request))", "#36 [internal function]: Dingo\\Api\\Http\\Middleware\\Request->Dingo\\Api\\Http\\Middleware\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#37 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(139): call_user_func(Object(Closure), Object(Dingo\\Api\\Http\\Request))", "#38 \/var\/www\/oneplace\/web\/platform\/vendor\/barryvdh\/laravel-cors\/src\/HandlePreflight.php(25): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#39 [internal function]: Barryvdh\\Cors\\HandlePreflight->handle(Object(Dingo\\Api\\Http\\Request), Object(Closure))", "#40 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(124): call_user_func_array(Array, Array)", "#41 \/var\/www\/oneplace\/web\/platform\/vendor\/barryvdh\/laravel-cors\/src\/HandleCors.php(42): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#42 [internal function]: Barryvdh\\Cors\\HandleCors->handle(Object(Dingo\\Api\\Http\\Request), Object(Closure))", "#43 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(124): call_user_func_array(Array, Array)", "#44 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/View\/Middleware\/ShareErrorsFromSession.php(49): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#45 [internal function]: Illuminate\\View\\Middleware\\ShareErrorsFromSession->handle(Object(Dingo\\Api\\Http\\Request), Object(Closure))", "#46 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(124): call_user_func_array(Array, Array)", "#47 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Session\/Middleware\/StartSession.php(62): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#48 [internal function]: Illuminate\\Session\\Middleware\\StartSession->handle(Object(Dingo\\Api\\Http\\Request), Object(Closure))", "#49 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(124): call_user_func_array(Array, Array)", "#50 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Cookie\/Middleware\/AddQueuedCookiesToResponse.php(37): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#51 [internal function]: Illuminate\\Cookie\\Middleware\\AddQueuedCookiesToResponse->handle(Object(Dingo\\Api\\Http\\Request), Object(Closure))", "#52 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(124): call_user_func_array(Array, Array)", "#53 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Cookie\/Middleware\/EncryptCookies.php(59): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#54 [internal function]: Illuminate\\Cookie\\Middleware\\EncryptCookies->handle(Object(Dingo\\Api\\Http\\Request), Object(Closure))", "#55 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(124): call_user_func_array(Array, Array)", "#56 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Middleware\/CheckForMaintenanceMode.php(44): Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#57 [internal function]: Illuminate\\Foundation\\Http\\Middleware\\CheckForMaintenanceMode->handle(Object(Dingo\\Api\\Http\\Request), Object(Closure))", "#58 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(124): call_user_func_array(Array, Array)", "#59 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Dingo\\Api\\Http\\Request))", "#60 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(103): call_user_func(Object(Closure), Object(Dingo\\Api\\Http\\Request))", "#61 \/var\/www\/oneplace\/web\/platform\/vendor\/dingo\/api\/src\/Http\/Middleware\/Request.php(92): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))", "#62 \/var\/www\/oneplace\/web\/platform\/vendor\/dingo\/api\/src\/Http\/Middleware\/Request.php(73): Dingo\\Api\\Http\\Middleware\\Request->sendRequestThroughRouter(Object(Dingo\\Api\\Http\\Request))", "#63 [internal function]: Dingo\\Api\\Http\\Middleware\\Request->handle(Object(Illuminate\\Http\\Request), Object(Closure))", "#64 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(124): call_user_func_array(Array, Array)", "#65 [internal function]: Illuminate\\Pipeline\\Pipeline->Illuminate\\Pipeline\\{closure}(Object(Illuminate\\Http\\Request))", "#66 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Pipeline\/Pipeline.php(103): call_user_func(Object(Closure), Object(Illuminate\\Http\\Request))", "#67 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php(122): Illuminate\\Pipeline\\Pipeline->then(Object(Closure))", "#68 \/var\/www\/oneplace\/web\/platform\/vendor\/laravel\/framework\/src\/Illuminate\/Foundation\/Http\/Kernel.php(87): Illuminate\\Foundation\\Http\\Kernel->sendRequestThroughRouter(Object(Illuminate\\Http\\Request))", "#69 \/var\/www\/oneplace\/web\/platform\/public\/index.php(54): Illuminate\\Foundation\\Http\\Kernel->handle(Object(Illuminate\\Http\\Request))", "#70 {main}"]
+    }
 }

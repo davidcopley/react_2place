@@ -143,6 +143,7 @@ class Signup extends React.Component {
         const {districts, showHongKongIsland, showKowloon, showNewTerritories, showOutlyingIslands, verificationCodeIsSent,verificationCodeIsValidated,errors} = this.state
         const {locale} = this.props
         const z = key => x[key][locale]
+        const y = key => key&&x["errors"][key]&&x["errors"][key][locale]
         return (
             <div style={{display: "flex", flexWrap: "wrap", position: "relative", top: 10, width: "100%"}}>
                 <div style={{
@@ -194,7 +195,7 @@ class Signup extends React.Component {
                     <div style={{padding: 10}}>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>{z('emailInput')}</span>
-                            <TextField name={"email"} fullWidth type={"email"} ref={x=>this.email=x} errorText={errors['username']}/>
+                            <TextField name={"email"} fullWidth type={"email"} ref={x=>this.email=x} errorText={y(errors['username'])}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>{z('passwordInput')}</span>
@@ -202,30 +203,30 @@ class Signup extends React.Component {
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>{z('displayName')}</span>
-                            <TextField name={"displayName"} fullWidth ref={x=>this.displayName=x} errorText={errors['display_name']}/>
+                            <TextField name={"displayName"} fullWidth ref={x=>this.displayName=x} errorText={y(errors['display_name'])}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div style={{display: "flex", alignItems: "center", width: "100%"}}>
                                 <span style={{fontSize: 13, minWidth: 100}}>{z('phoneInput')}</span>
                                 <TextField name={"countryCode"} ref={x=>this.countryCode = x} style={{width:100,marginRight:5}} type={"tel"} hintText={"852"} disabled={verificationCodeIsSent} errorText={errors['phone']?"Error":null}/>
-                                <TextField name={"phoneNumber"} ref={x=>this.phoneNumber = x} fullWidth type={"tel"} hintText={"91234567"} disabled={verificationCodeIsSent} errorText={errors['phone']}/>
+                                <TextField name={"phoneNumber"} ref={x=>this.phoneNumber = x} fullWidth type={"tel"} hintText={"91234567"} disabled={verificationCodeIsSent} errorText={y(errors['phone'])}/>
                             </div>
                             <FlatButton style={{color: "#1e717f"}} onClick={()=>this.handleSendCode()} disabled={verificationCodeIsSent}>{z('send')}</FlatButton>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <div style={{display: "flex", alignItems: "center", width: "100%"}}>
                                 <span style={{fontSize: 13, minWidth: 100}}>{z('verificationCode')}</span>
-                                <TextField name={"verificationCode"} ref={x=>this.verificationCode = x} fullWidth type={"tel"} disabled={verificationCodeIsValidated} errorText={errors['phone_verify_code']}/>
+                                <TextField name={"verificationCode"} ref={x=>this.verificationCode = x} fullWidth type={"tel"} disabled={verificationCodeIsValidated} errorText={y(errors['phone_verify_code'])}/>
                             </div>
                             <FlatButton style={{color: "#1e717f"}} onClick={()=>this.handleVerifyCode()} disabled={verificationCodeIsValidated}>{z('verifyButton')}</FlatButton>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>{z('agentLicense')}</span>
-                        <TextField name={"agentLicense"} fullWidth hintText={"e.g. A-123456"} ref={x=>this.agentLicense = x} errorText={errors['license_number']}/>
+                        <TextField name={"agentLicense"} fullWidth hintText={"e.g. A-123456"} ref={x=>this.agentLicense = x} errorText={y(errors['license_number'])}/>
                         </div>
                         <div style={{display: "flex", alignItems: "center"}}>
                             <span style={{fontSize: 13, minWidth: 100}}>{z('agencyInput')}</span>
-                        <TextField name={"agency"} fullWidth ref={x=>this.agency = x} errorText={errors['agency']}/>
+                        <TextField name={"agency"} fullWidth ref={x=>this.agency = x} errorText={y(errors['agency'])}/>
                         </div>
                         <br/>
                         <span style={{fontSize: 13, minWidth: 100}}>{z('districts')}</span>

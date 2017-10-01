@@ -52,7 +52,7 @@ export const getPropertyDetail = (id,force=false) => (dispatch,getState) => new 
     }
 })
 export const getPropertyCoordinatesByAddress = (propertyId,address) => (dispatch,getState) => {
-    const url = `http://maps.google.com/maps/api/geocode/json?address=${address}`
+    const url = `https://maps.google.com/maps/api/geocode/json?address=${address}`
     if(!getState().apiHistoryReducer.calledApis[url]){
         axios.get(url)
             .then(res=>{
