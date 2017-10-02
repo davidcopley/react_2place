@@ -61,9 +61,8 @@ class AddPropertyPage extends React.Component {
         const {getBuildingById} = this.props
         getBuildingById(value.id)
             .then(res=>{
-                console.log(res)
                 const {building_district,building_region} = res
-                this.setState({district:building_district.toLowerCase(),region:building_region})
+                this.setState({region:building_region,district:building_district})
             })
         let buildingName, buildingStreetName
         [buildingName, buildingStreetName] = value.address.split(",")
